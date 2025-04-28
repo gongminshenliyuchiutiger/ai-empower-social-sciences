@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="探索如何運用 Canva AI 與 EdCafe AI 等工具，賦能社會領域教學，提升效率與創意。由邱俐瑜分享。">
+    <title>AI賦能社會領域教學-Canva AI與EdCafe AI實戰應用 [暗黑模式] ✨</title> <!-- Updated Title -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="image/LiyuChillGuy(W).svg" type="image/svg+xml">
+    <style>
+        :root {
+            --brand-indigo: #818cf8; /* Slightly brighter for dark mode */
+            --brand-purple: #a78bfa; /* Slightly brighter */
+            --brand-pink:   #f472b6; /* Slightly brighter */
+            --brand-teal:   #5eead4; /* Slightly brighter */
+            --brand-yellow: #fde047; /* Slightly brighter */
+
+            /* --- Dark Theme Colors --- */
+            --bg-main: #111827;      /* gray-900 */
+            --bg-section: #1f2937;   /* gray-800 */
+            --bg-card: #374151;      /* gray-700 */
+            --bg-card-alt: #1f2937;  /* gray-800 */ /* For nested cards/areas */
+            --bg-light-accent: #4b5563; /* gray-600 - for lighter dark elements */
+
+            --text-main: #e5e7eb;      /* gray-200 */
+            --text-muted: #9ca3af;     /* gray-400 */
+            --text-heading: #f9fafb;   /* gray-50 */
+
+            --border-color: #4b5563;  /* gray-600 */
+            --border-color-light: #6b7280; /* gray-500 */
+
+            /* Gradients adjusted for dark */
+            --bg-section-grad-1: linear-gradient(180deg, rgba(31, 41, 55, 0.6) 0%, rgba(55, 48, 163, 0.3) 100%); /* Dark Gray to Dark Indigo Tint */
+            --bg-section-grad-2: linear-gradient(180deg, rgba(55, 65, 81, 0.6) 0%, rgba(131, 24, 67, 0.3) 100%); /* Dark Gray to Dark Pink Tint */
+
+            /* Shadows adjusted for dark */
+            --shadow-color-indigo: rgba(129, 140, 248, 0.25); /* Brighter indigo shadow */
+            --shadow-color-purple: rgba(167, 139, 250, 0.2); /* Brighter purple shadow */
+            --shadow-general: 0 4px 15px rgba(0,0,0,0.3); /* General dark shadow */
+            --shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Stronger hover shadow */
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            overflow-x: hidden;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+        }
+        /* --- Background Patterns (Adjusted for Dark) --- */
+        .bg-pattern-dots {
+            background-image: radial-gradient(var(--border-color-light) 1px, transparent 1px);
+            background-size: 15px 15px;
+            opacity: 0.1;
+        }
+        .bg-pattern-lines {
+             background-image: linear-gradient(rgba(167, 139, 250, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(167, 139, 250, 0.1) 1px, transparent 1px); /* Use brighter accent */
+             background-size: 20px 20px;
+             opacity: 0.3;
+        }
+         /* --- Gradients & Backgrounds --- */
+        .gradient-bg { background: linear-gradient(135deg, var(--brand-indigo) 0%, var(--brand-purple) 50%, var(--brand-pink) 100%); } /* Keep bright for hero */
+        .gradient-text { background: linear-gradient(to right, var(--brand-indigo), var(--brand-pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .section-bg-alt { background-color: var(--bg-section); } /* Use var for section bg */
+        .section-bg-grad-1 { background: var(--bg-section-grad-1); }
+        .section-bg-grad-2 { background: var(--bg-section-grad-2); }
+
+        /* --- Layout & Spacing --- */
+        .section { scroll-margin-top: 5rem; padding-top: 5rem; padding-bottom: 5rem; position: relative; }
+        #agenda { padding-top: 3rem; }
+        .section-header { display: flex; justify-content: center; align-items: center; margin-bottom: 3rem; position: relative;}
+        .section-title { text-align: center; color: var(--text-heading); } /* Ensure heading color */
+
+        /* --- Card Styling (Adjusted for Dark) --- */
+        .card {
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            background-color: var(--bg-card); /* Dark card bg */
+            border: 1px solid var(--border-color); /* Dark border */
+            position: relative;
+            box-shadow: var(--shadow-general); /* Dark shadow */
+        }
+         /* Gradient border appears on hover */
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--brand-indigo), var(--brand-purple), var(--brand-pink));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+        .card:hover::after { opacity: 1; }
+        .card:hover {
+            transform: translateY(-12px) scale(1.04);
+            box-shadow: 0 25px 50px -12px var(--shadow-color-indigo); /* Use updated shadow var */
+            background-color: var(--bg-light-accent); /* Slightly lighten on hover */
+        }
+        .card .card-icon-container {
+            transition: transform 0.3s ease;
+        }
+        .card:hover .card-icon-container {
+            transform: rotate(-15deg) scale(1.1);
+        }
+
+        /* --- Agenda List Styling (Adjusted for Dark) --- */
+        .agenda-item {
+            transition: all 0.3s ease-out;
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            background-color: var(--bg-light-accent); /* Use lighter dark */
+            color: var(--text-main);
+        }
+        .agenda-item::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%;
+            background: linear-gradient(90deg, rgba(129, 140, 248, 0.15) 0%, rgba(167, 139, 250, 0.1) 100%); /* Use brighter tints */
+            transition: width 0.4s ease; z-index: 0; border-radius: 0 0.5rem 0.5rem 0;
+         }
+        .agenda-item:hover::before { width: 100%; }
+        .agenda-item > * { position: relative; z-index: 1; }
+        .agenda-item:hover {
+            border-left-color: var(--brand-purple);
+            transform: translateX(8px);
+            box-shadow: 0 4px 10px rgba(167, 139, 250, 0.15); /* Use brighter shadow color */
+            background-color: transparent; /* Let gradient show */
+        }
+        .agenda-item .font-bold { transition: color 0.3s; }
+        .agenda-item:hover .font-bold { color: var(--brand-purple); }
+        /* Agenda number circles - using Tailwind directly now */
+
+        /* --- Animations --- */
+        /* Animations remain largely the same, but ensure colors stand out */
+        @keyframes floating { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(129, 140, 248, 0.5); } 50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(129, 140, 248, 0); } } /* Use brighter pulse */
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes glow { from { box-shadow: 0 0 10px -5px var(--brand-indigo); } to { box-shadow: 0 0 30px 10px rgba(129, 140, 248, 0.5); } } /* Use brighter glow */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bobbing { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes confetti-burst { 0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; } 100% { transform: translateY(-150px) scale(1) rotate(360deg); opacity: 0; } }
+        @keyframes mascot-enter { from { transform: translateY(-100%) scale(0.5); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+        .floating { animation: floating 3.5s ease-in-out infinite; }
+        .pulse-btn { animation: pulse 2.5s infinite 1s; }
+        .rotate-slow { animation: rotate 35s linear infinite; }
+        .glow-hero-btn { animation: glow 2.5s ease-in-out infinite alternate; }
+        .bobbing-mascot { animation: bobbing 4s ease-in-out infinite; }
+        .mascot-entry { animation: mascot-enter 0.8s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+        .shimmer-text { background: linear-gradient(90deg, var(--brand-indigo), var(--brand-pink), var(--brand-teal), var(--brand-indigo)); background-size: 300% auto; /* Text color transparent is handled by gradient-text class */ animation: shimmer 4s linear infinite; }
+
+
+        /* --- Scroll Reveal --- */
+        /* Logic remains the same */
+        .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s cubic-bezier(0.33, 1, 0.68, 1), transform 0.8s cubic-bezier(0.33, 1, 0.68, 1); will-change: opacity, transform; }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+        .reveal-stagger > * { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; will-change: opacity, transform; }
+        .reveal-stagger.in-view > * { opacity: 1; transform: translateY(0); transition-delay: calc(0.12s * var(--stagger-index, 0)); }
+        .agenda-reveal > li { opacity: 0; transform: translateX(-30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; will-change: opacity, transform; }
+        .agenda-reveal.in-view > li { opacity: 1; transform: translateX(0); transition-delay: calc(0.08s * var(--stagger-index, 0)); }
+
+        /* --- Progress Bar & Tabs (Adjusted for Dark) --- */
+        .progress-container { position: fixed; top: 0; left: 0; z-index: 100; width: 100%; height: 5px; background: transparent; pointer-events: none; }
+        .progress-bar { height: 100%; background: linear-gradient(to right, var(--brand-indigo), var(--brand-pink)); width: 0%; transition: width 0.15s linear; border-radius: 0 3px 3px 0; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.6s ease-in-out; }
+        .canva-tab { transition: all 0.3s ease; position: relative; color: var(--text-muted); /* Default tab color */ }
+        .canva-tab::after { content:''; position: absolute; bottom: -1px; left: 0; width: 0; height: 3px; background: var(--brand-purple); transition: width 0.3s ease; }
+        .canva-tab[aria-selected="true"] { transform: translateY(-2px); color: var(--brand-indigo); /* Selected color */ }
+        .canva-tab[aria-selected="true"]::after { width: 100%; }
+        .canva-tab:not([aria-selected="true"]):hover { color: var(--text-main); } /* Hover color for inactive tabs */
+
+
+        /* --- Modal (Adjusted for Dark) --- */
+        .modal-overlay {
+            position: fixed; inset: 0; background-color: rgba(17, 24, 39, 0.85); /* gray-900/85 */
+            display: flex; align-items: center; justify-content: center; z-index: 1000;
+            opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0s linear 0.35s; backdrop-filter: blur(5px);
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; transition: opacity 0.35s ease; }
+        .modal-content {
+            background: var(--bg-section); /* Dark modal bg */
+            color: var(--text-main); /* Light text */
+            padding: 1.5rem 2rem; border-radius: 1.25rem; max-width: 52rem; width: 90%; max-height: 90vh; overflow-y: auto;
+            transform: scale(0.9) translateY(30px); transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); /* Darker shadow */
+            border-top: 4px solid var(--brand-indigo);
+        }
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+        #modalBody h5 { font-weight: 600; color: var(--brand-purple); margin-top: 1rem; margin-bottom: 0.5rem; }
+        #modalBody code {
+             display: block; background-color: var(--bg-main); /* Darker code bg */
+             padding: 0.5rem 0.75rem; border-radius: 6px; margin: 0.25rem 0; font-size: 0.85rem;
+             color: var(--brand-indigo); /* Bright code text */
+             border: 1px solid var(--border-color); /* Dark border */
+             white-space: pre-wrap; word-break: break-all;
+        }
+        #modalBody hr { border-color: var(--border-color); margin: 1rem 0; }
+        #modalBody ul, #modalBody ol { padding-left: 1.5rem; margin-top: 0.5rem; }
+        #modalBody li { margin-bottom: 0.25rem; }
+
+        /* --- Demo Area (Adjusted for Dark) --- */
+        .demo-area {
+            min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            transition: background-color 0.3s ease; overflow: hidden;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card-alt); /* Darker area bg */
+            padding: 1.5rem; border-radius: 1rem; position: relative;
+        }
+        .demo-area::after { /* Loading spinner */
+            content: ''; position: absolute; width: 40px; height: 40px;
+            border: 4px solid rgba(129, 140, 248, 0.3); /* Lighter base border */
+            border-left-color: var(--brand-indigo); /* Bright active part */
+            border-radius: 50%; animation: spin 1s linear infinite; opacity: 0; transition: opacity 0.3s ease; z-index: 10; pointer-events: none;
+        }
+        .demo-area.loading::after { opacity: 1; }
+        .demo-area.loading > *:not(p.text-gray-400) { opacity: 0.3; } /* Keep placeholder text visible */
+        .demo-area svg, .demo-area img { /* Ensure SVGs/images are visible */
+            max-width: 95%; max-height: 180px; width: auto; object-fit: contain; border-radius: 0.5rem; margin-bottom: 1rem;
+            transition: transform 0.4s ease;
+            /* Add a subtle border if needed for dark images */
+            /* border: 1px solid var(--border-color-light); */
+        }
+        .demo-area:hover svg, .demo-area:hover img { transform: scale(1.08); }
+        .demo-area p { width: 95%; word-break: break-word; font-size: 0.875rem; color: var(--text-muted); }
+        .demo-area .simulated-text {
+            font-size: 0.875rem; line-height: 1.6; text-align: left; padding: 1rem; width: 100%;
+            background: var(--bg-section); /* Dark text area */
+            color: var(--text-main); /* Light text */
+            border-radius: 0.75rem;
+            border: 1px dashed var(--brand-purple); /* Use brand color for dash */
+            max-height: 220px; overflow-y: auto;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .demo-area .simulated-text strong { color: var(--brand-indigo); font-weight: 600; }
+        .demo-area .simulated-text hr { border-color: var(--border-color); margin: 0.75rem 0; }
+        .demo-area .simulated-text ul, .demo-area .simulated-text ol { margin-left: 1.25rem; margin-top: 0.5rem; padding-left: 0.5rem; }
+        .demo-area .simulated-text code {
+            background-color: var(--bg-light-accent); /* Slightly lighter dark code */
+            padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.8rem;
+            color: var(--brand-teal); /* Use another bright accent */
+        }
+
+        /* --- Prompt Example Hover (Adjusted for Dark) --- */
+        .prompt-example, .image-prompt-example, .design-example {
+            transition: all 0.25s ease;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card-alt); /* Match demo area inner bg */
+            color: var(--text-main);
+        }
+        .prompt-example:hover, .image-prompt-example:hover, .design-example:hover {
+            background-color: var(--bg-light-accent); /* Lighter dark on hover */
+            transform: translateX(4px) scale(1.01);
+            border-color: var(--brand-indigo);
+            box-shadow: 3px 3px 8px rgba(129, 140, 248, 0.15); /* Use brighter shadow color */
+        }
+        /* Ensure code inside examples uses light text */
+         .prompt-example code, .image-prompt-example code, .design-example code {
+            color: var(--text-muted);
+         }
+        .prompt-example:hover code, .image-prompt-example:hover code, .design-example:hover code {
+            color: var(--text-main);
+        }
+
+
+        /* --- Mascot Styles --- */
+        .mascot-fixed { /* Shadow might need adjustment */
+            position: fixed; bottom: 15px; right: 15px; width: 75px; height: auto; z-index: 55;
+            transition: transform 0.3s ease-out; cursor: pointer;
+        }
+        .mascot-fixed img {
+             width: 100%; height: auto;
+             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)); /* Slightly stronger shadow */
+             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: bottom center;
+        }
+         .mascot-fixed:hover img { transform: scale(1.2) rotate(8deg); }
+         .mascot-fixed.clicked img { animation: mascot-jump 0.5s ease-out; }
+         .mascot-hero { position: absolute; bottom: 10%; left: 5%; width: 120px; z-index: 15; opacity: 0; }
+         @keyframes mascot-jump { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.3) rotate(-10deg) translateY(-25px); } }
+
+        /* --- Confetti Styles --- */
+        /* Colors are defined in JS, ensure they are bright */
+        .confetti-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1001; overflow: hidden; }
+        .confetti { position: absolute; width: 10px; height: 15px; background-color: var(--color); opacity: 0; animation: confetti-burst 1.8s cubic-bezier(0.1, 1, 0.7, 1) forwards; }
+        .confetti.triangle { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom-width: 10px; border-bottom-style: solid; border-bottom-color: var(--color); background-color: transparent !important; }
+        .confetti.circle { width: 8px; height: 8px; border-radius: 50%; }
+
+        /* --- Section Focus Mode Styles (Adjusted for Dark) --- */
+        .section-focus-overlay {
+            position: fixed; inset: 0;
+            background-color: rgba(17, 24, 39, 0.9); /* Darker overlay */
+            opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+            z-index: 70; cursor: pointer;
+        }
+        body.section-focused .section-focus-overlay { opacity: 1; visibility: visible; transition: opacity 0.4s ease; }
+        body.section-focused { overflow: hidden; }
+        body.section-focused .section.is-focused {
+            z-index: 80;
+            transform: scale(1.03);
+            /* White glow might be too much, try brand color glow or darker shadow */
+            box-shadow: 0 0 0 10px rgba(55, 65, 81, 0.5), 0 30px 60px -15px rgba(0, 0, 0, 0.5); /* Darker glow/shadow */
+            transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s;
+             border-radius: 1.25rem;
+        }
+        body.section-focused .section:not(.is-focused) {
+             opacity: 0.2; /* Reduce opacity more */
+             filter: blur(4px); /* Increase blur */
+             transform: scale(0.98);
+             pointer-events: none;
+             transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+        }
+        .section-focus-trigger {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            background-color: rgba(55, 65, 81, 0.7); /* Dark semi-transparent bg */
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.1); /* Light border */
+            border-radius: 9999px; padding: 0.5rem;
+            color: var(--brand-indigo); /* Bright icon color */
+            cursor: pointer; transition: all 0.2s ease; opacity: 0.7; z-index: 10;
+        }
+        .section-focus-trigger:hover {
+            background-color: rgba(75, 85, 99, 0.9); /* Darker hover bg */
+            color: var(--brand-purple);
+            transform: scale(1.1); opacity: 1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .section-focus-close-btn { position: absolute; top: 1rem; right: 1rem; z-index: 85; }
+
+        /* --- Footer --- */
+        /* Already dark, looks good. Ensure link colors contrast */
+        .footer-link { @apply text-indigo-300 hover:text-white transition-colors duration-200 underline decoration-indigo-400/50 hover:decoration-white/80 underline-offset-4; }
+        .footer-icon { transition: transform 0.3s ease; display: inline-block; }
+        .footer-icon:hover { transform: scale(1.2) rotate(10deg); }
+        /* Footer pattern adjusted earlier */
+
+        /* --- Reduced Motion --- */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .floating, .pulse-btn, .rotate-slow, .glow-hero-btn, .bobbing-mascot, .shimmer-text, .card:hover, .agenda-item, .tab-content.active, .reveal, .reveal-stagger > *, .agenda-reveal > li, .mascot-fixed:hover img, .mascot-fixed.clicked img, .mascot-entry, .confetti, .section.is-focused, .section:not(.is-focused) { animation: none !important; transition: none !important; }
+            .reveal, .reveal-stagger > *, .agenda-reveal > li { opacity: 1 !important; transform: none !important; }
+            .card:hover { transform: none; box-shadow: var(--shadow-general); } /* Use default dark shadow */
+            .card::after { opacity: 0 !important; }
+            .progress-bar { transition: none; }
+            .modal-overlay, .modal-content { transition: none; }
+            .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+            .mascot-fixed:hover img { transform: none; }
+            .section.is-focused { transform: none !important; box-shadow: 0 0 0 10px rgba(55, 65, 81, 0.5), 0 30px 60px -15px rgba(0, 0, 0, 0.5) !important; } /* Dark focus shadow */
+            .section:not(.is-focused) { opacity: 1 !important; filter: none !important; transform: none !important; }
+        }
+        /* --- Tooltip & Focus --- */
+        .tool-tip { position: relative; cursor: pointer; display: inline-block; }
+        .tool-tip .tooltip-text {
+             visibility: hidden; width: 200px;
+             background-color: var(--brand-indigo); color: var(--text-heading); /* Ensure light text */
+             text-align: center; border-radius: 6px; padding: 8px; position: absolute; z-index: 50; bottom: 125%; left: 50%; margin-left: -100px;
+             opacity: 0; transition: opacity 0.3s; pointer-events: none; font-size: 0.75rem; line-height: 1.25;
+        }
+        .tool-tip .tooltip-text::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: var(--brand-indigo) transparent transparent transparent; }
+        .tool-tip:hover .tooltip-text, .tool-tip:focus .tooltip-text { visibility: visible; opacity: 1; }
+        *:focus-visible {
+            /* Orange is high contrast, keep for now, or switch to a light blue */
+            outline: 3px solid #60a5fa; /* Light Blue */
+            outline-offset: 2px; border-radius: 4px;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.5);
+        }
+        *:focus:not(:focus-visible) { outline: none; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200"> <!-- Changed body bg and text -->
+    <!-- Progress Bar -->
+    <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+     <!-- Confetti Container -->
+     <div id="confetti-container" class="confetti-container"></div>
+     <!-- Fixed Mascot -->
+     <div class="mascot-fixed bobbing-mascot" id="fixed-mascot-container">
+        <img id="fixed-mascot" src="image/LiyuChillGuy(W).svg" alt="吉祥物 Liyu">
+     </div>
+
+    <!-- Hero Section -->
+    <header class="gradient-bg text-white relative overflow-hidden pb-12"> <!-- gradient-bg still works well -->
+        <div class="absolute inset-0 z-0 opacity-60 mix-blend-overlay">
+             <!-- Adjusted opacities/colors for dark if needed, but overlay might handle it -->
+            <div class="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full filter blur-2xl animate-pulse delay-100"></div>
+            <div class="absolute bottom-10 right-5 w-56 h-56 bg-white/10 rounded-2xl filter blur-3xl rotate-slow"></div>
+            <div class="absolute top-1/3 right-1/4 w-24 h-24 border-2 border-white/15 rounded-full animate-ping opacity-50"></div>
+            <div class="absolute bottom-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-white/10 to-white/0 rounded-full filter blur-xl rotate-slow animation-delay-2000"></div>
+        </div>
+         <!-- Hero Mascot -->
+        <div class="mascot-hero mascot-entry">
+             <img src="image/LiyuChillGuy(W).svg" alt="Liyu Mascot">
+        </div>
+        <div class="container mx-auto px-4 py-24 md:py-32 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                 <div class="mb-6 reveal">
+                    <!-- Hero icon SVG colors might need tweaking if they look dull -->
+                    <svg id="hero-icon" class="w-24 h-24 mx-auto transition-transform duration-500 ease-out hover:scale-110 hover:rotate-[15deg] cursor-pointer" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%"><stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:0.6" /><stop offset="100%" style="stop-color:rgb(255,255,255);stop-opacity:0.1" /></radialGradient> </defs> <circle cx="100" cy="100" r="80" fill="url(#grad1)"/> <circle cx="100" cy="100" r="60" fill="white" opacity="0.3"/> <path class="pulse-btn" d="M65,85 Q100,65 135,85 L135,115 Q100,135 65,115 Z" fill="white" opacity="0.6"/> <path d="M70,70 L90,50 L110,70 L130,50" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/> </svg>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight reveal text-gray-50" style="--stagger-index: 1;">AI賦能社會領域教學</h1> <!-- Ensure bright text -->
+                <p class="text-xl md:text-3xl mb-8 font-light reveal text-gray-200" style="--stagger-index: 2;">Canva AI 與 EdCafe AI 實戰應用</p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-4 reveal" style="--stagger-index: 3;">
+                    <div class="bg-gray-900/30 backdrop-blur-sm rounded-lg px-6 py-3 hover:bg-gray-900/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"> <!-- Darker transparent bg -->
+                        <p class="text-lg text-gray-100">日期：114年4月30日(三和國中場)｜時間：1400-1600</p>
+                    </div>
+                </div>
+                <div class="mt-12 reveal" style="--stagger-index: 4;">
+                     <a href="#agenda" id="exploreBtn" class="inline-block bg-indigo-500 text-white hover:bg-indigo-600 font-medium py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 glow-hero-btn"> <!-- Changed button style -->
+                        分享人：邱俐瑜
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-24">
+             <!-- Changed fill color to match dark body background -->
+             <svg class="w-full h-full text-gray-900 fill-current" viewBox="0 0 1440 100" preserveAspectRatio="none"> <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,64C960,64,1056,64,1152,74.7C1248,85,1344,107,1392,117.3L1440,128L1440,101L0,101Z"></path> </svg>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-[60] bg-gray-900/95 shadow-lg backdrop-blur-sm"> <!-- Dark nav bg, stronger shadow -->
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-3">
+                <div class="text-xl font-bold gradient-text">
+                   AI賦能社會領域教學｜邱俐瑜
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#agenda" class="text-gray-300 hover:text-indigo-400 transition-colors nav-link px-1 py-1 relative group"><span class="relative z-10">演講大綱</span><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span></a>
+                    <a href="#why-now" class="text-gray-300 hover:text-indigo-400 transition-colors nav-link px-1 py-1 relative group"><span class="relative z-10">為什麼是現在</span><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span></a>
+                    <a href="#ai-potential" class="text-gray-300 hover:text-indigo-400 transition-colors nav-link px-1 py-1 relative group"><span class="relative z-10">AI 潛力</span><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span></a>
+                    <a href="#canva-ai" class="text-gray-300 hover:text-indigo-400 transition-colors nav-link px-1 py-1 relative group"><span class="relative z-10">Canva AI</span><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span></a>
+                    <a href="#edcafe-ai" class="text-gray-300 hover:text-indigo-400 transition-colors nav-link px-1 py-1 relative group"><span class="relative z-10">EdCafe AI</span><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span></a>
+                </div>
+                <button id="mobile-menu-button" aria-label="開啟選單" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded p-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden py-2 absolute top-full left-0 w-full bg-gray-900 shadow-lg border-t border-gray-700 transition-all duration-300 ease-out transform origin-top scale-y-0 opacity-0"> <!-- Dark mobile menu -->
+                <a href="#agenda" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">演講大綱</a>
+                <a href="#why-now" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">為什麼是現在</a>
+                <a href="#ai-potential" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">AI 潛力</a>
+                <a href="#canva-ai" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">Canva AI</a>
+                <a href="#edcafe-ai" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">EdCafe AI</a>
+            </div>
+        </div>
+    </nav>
+
+     <!-- Section Focus Overlay -->
+     <div id="section-focus-overlay" class="section-focus-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 relative">
+
+        <!-- Agenda Section -->
+        <section id="agenda" class="section max-w-5xl mx-auto mb-16 md:mb-24 section-bg-alt rounded-2xl shadow-xl"> <!-- Dark section bg, shadow -->
+            <div class="section-header reveal">
+                <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">演講大綱</h2>
+                <button class="section-focus-trigger" aria-label="聚焦此區塊">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg>
+                </button>
+            </div>
+            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">今天我們將探討 AI 如何革新社會領域教學，並實際體驗兩款強大工具</p>
+            <div class="reveal" style="--stagger-index: 2;">
+                 <div class="gradient-bg px-6 py-4 rounded-t-2xl"> <h2 class="text-2xl font-bold text-white">Agenda</h2> </div>
+                <div class="p-6 bg-gray-700 rounded-b-2xl"> <!-- Darker list background -->
+                     <ul class="space-y-3 agenda-reveal">
+                        <!-- Agenda items - Adjusted background/text using Tailwind -->
+                        <li class="agenda-item" style="--stagger-index: 0;"> <span class="bg-indigo-800 text-indigo-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">1</span> <span><span class="font-medium">為什麼是現在？</span> AI 時代對教育的影響與契機</span> </li>
+                        <li class="agenda-item" style="--stagger-index: 1;"> <span class="bg-purple-800 text-purple-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">2</span> <span><span class="font-medium">AI 能為社會領域做什麼？</span> 簡介 AI 在教學上的潛力</span> </li>
+                        <li class="agenda-item" style="--stagger-index: 2;"> <span class="bg-pink-800 text-pink-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">3</span> <span><span class="font-medium">教學好夥伴 (一)：Canva AI</span> - 整合設計與內容生成</span> </li>
+                        <li class="agenda-item" style="--stagger-index: 3;"> <span class="bg-indigo-800 text-indigo-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">4</span> <span><span class="font-medium">Canva AI 實戰應用 Show Time!</span> (Magic Write, Text to Image, Magic Design)</span> </li>
+                        <li class="agenda-item" style="--stagger-index: 4;"> <span class="bg-purple-800 text-purple-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">5</span> <span><span class="font-medium">教學好夥伴 (二)：EdCafe AI</span> - 專為教育設計的 AI 助手</span> </li>
+                        <li class="agenda-item" style="--stagger-index: 5;"> <span class="bg-pink-800 text-pink-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">6</span> <span><span class="font-medium">EdCafe AI 實戰應用 Show Time!</span> (教案設計、評量工具、差異化教學)</span> </li>
+                        <li class="agenda-item" style="--stagger-index: 6;"> <span class="bg-indigo-800 text-indigo-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">7</span> <span><span class="font-medium">教學案例分享：</span> 雙劍合璧！Canva AI + EdCafe AI 設計一堂課</span> </li>
+                        <li class="agenda-item" style="--stagger-index: 7;"> <span class="bg-purple-800 text-purple-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">8</span> <span><span class="font-medium">教學考量與倫理：</span> 擁抱 AI，但保持清醒</span> </li>
+                        <li class="agenda-item" style="--stagger-index: 8;"> <span class="bg-pink-800 text-pink-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">9</span> <span><span class="font-medium">總結與 Q&A</span></span> </li>
+                     </ul>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Why Now Section -->
+        <section id="why-now" class="section max-w-5xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-grad-1 rounded-2xl"> <!-- Use dark gradient -->
+            <div class="absolute inset-0 bg-pattern-dots mix-blend-overlay"></div>
+            <!-- Blobs: Use brighter colors with lower opacity for dark mode -->
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-indigo-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+            <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-pink-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+
+            <div class="section-header reveal">
+                <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">為什麼是現在？</h2>
+                 <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+            </div>
+             <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">AI 時代的教育契機</p>
+
+            <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-8 mb-12 relative z-10 reveal" style="--stagger-index: 2;"> <!-- Dark transparent bg -->
+                 <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                        <h3 class="text-2xl font-bold mb-6 text-indigo-300">AI 浪潮來襲，教育如何應對？</h3> <!-- Lighter heading -->
+                        <div class="space-y-4 reveal-stagger">
+                            <div class="flex items-start" style="--stagger-index: 0;">
+                                <div class="flex-shrink-0 bg-indigo-900 p-2 rounded-full mr-4 mt-1 transform hover:scale-110 transition-transform"><svg class="w-5 h-5 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div> <!-- Dark icon bg, light icon -->
+                                <p class="text-gray-300">AI 技術快速發展，已滲透各行各業 (例：ChatGPT, Midjourney)。</p>
+                            </div>
+                            <div class="flex items-start" style="--stagger-index: 1;">
+                                <div class="flex-shrink-0 bg-purple-900 p-2 rounded-full mr-4 mt-1 transform hover:scale-110 transition-transform"><svg class="w-5 h-5 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></div>
+                                <p class="text-gray-300">學生未來將生活在 AI 無所不在的世界，需培養相關素養 (批判思考、資訊判讀、人機協作)。</p>
+                            </div>
+                            <div class="flex items-start" style="--stagger-index: 2;">
+                                <div class="flex-shrink-0 bg-pink-900 p-2 rounded-full mr-4 mt-1 transform hover:scale-110 transition-transform"><svg class="w-5 h-5 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg></div>
+                                <p class="text-gray-300">對教師而言，AI 不是取代者，而是 <span class="font-bold text-indigo-400 tool-tip">賦能者<span class="tooltip-text">Enabler: 提供能力或工具，使某事成為可能或更容易。</span></span>：提升效率、激發創意、輔助教學。</p>
+                            </div>
+                             <div class="flex items-start" style="--stagger-index: 3;">
+                                <div class="flex-shrink-0 bg-teal-900 p-2 rounded-full mr-4 mt-1 transform hover:scale-110 transition-transform"><svg class="w-5 h-5 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                                <p class="text-gray-300">社會領域是培養公民素養、歷史思維、地理觀的關鍵，AI 能提供新視角與工具。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 md:pl-8 flex justify-center items-center mt-8 md:mt-0">
+                        <div class="relative reveal" style="--stagger-index: 3;">
+                            <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full opacity-20 filter blur-2xl"></div> <!-- Use brighter base for blur -->
+                            <div class="floating relative">
+                                <!-- SVG colors are mostly white/yellow, should be fine on dark -->
+                                <svg class="w-64 h-64 md:w-72 md:h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <filter id="glow-filter" x="-50%" y="-50%" width="200%" height="200%"> <feGaussianBlur stdDeviation="5" result="coloredBlur"/> <feMerge> <feMergeNode in="coloredBlur"/> <feMergeNode in="SourceGraphic"/> </feMerge> </filter> </defs> <g> <circle cx="100" cy="100" r="75" fill="#818cf8" opacity="0.1"/> <path d="M100,30 A70,70 0 1,1 100, 170 A70,70 0 1,1 100,30 Z M100,50 A50,50 0 1,0 100,150 A50,50 0 1,0 100,50 Z" fill="#a78bfa" opacity="0.2"/> <path d="M100 50 C 80 50, 70 60, 70 75 C 70 95, 85 105, 100 125 C 115 105, 130 95, 130 75 C 130 60, 120 50, 100 50 Z" fill="white" opacity="0.7" filter="url(#glow-filter)"/> <rect x="95" y="120" width="10" height="20" rx="3" fill="white" opacity="0.6"/> <line x1="100" y1="125" x2="100" y2="140" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/> <circle cx="100" cy="75" r="8" fill="var(--brand-yellow)" opacity="0.9" class="pulse-btn" style="animation-delay: 0.5s;"/> <!-- Use bright yellow var --> </g> </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center reveal" style="--stagger-index: 3;">
+                <div class="bg-gray-800 rounded-lg p-6 max-w-3xl transform hover:scale-[1.02] transition-transform duration-300 shadow-lg hover:shadow-indigo-900/50"> <!-- Dark bg, adjust shadow color -->
+                    <p class="text-center text-indigo-200 font-medium text-lg"> <!-- Lighter text -->
+                        今天我們將介紹兩款強大的 AI 工具：
+                        <span class="inline-block whitespace-nowrap"> <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer" class="font-bold bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text hover:brightness-110 transition-all">Canva AI</a> </span> <!-- Keep bright links -->
+                        <span class="mx-1 text-gray-400">和</span>
+                        <span class="inline-block whitespace-nowrap"> <a href="https://www.edcafetw.com/" target="_blank" rel="noopener noreferrer" class="font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text hover:brightness-110 transition-all">EdCafe AI</a> </span>
+                    </p>
+                     <div class="mt-4 flex justify-center">
+                         <button id="showToolsBtn" class="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition-all duration-300 focus-visible:ring-4 focus-visible:ring-indigo-500 transform hover:-translate-y-0.5 hover:shadow-lg pulse-btn">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2 transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" /> </svg>
+                             深入了解這兩款工具
+                         </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Potential Section -->
+        <section id="ai-potential" class="section max-w-6xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-alt rounded-2xl shadow-xl"> <!-- Dark section bg, pattern, blobs adjusted -->
+             <div class="absolute inset-0 bg-pattern-lines mix-blend-soft-light"></div>
+             <div class="absolute top-20 right-0 w-72 h-72 bg-purple-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+             <div class="absolute bottom-20 left-0 w-72 h-72 bg-indigo-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+
+            <div class="section-header reveal">
+                 <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">AI 能為社會領域做什麼？</h2>
+                  <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+             </div>
+             <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">探索 AI 在社會課堂的潛力與應用</p>
+
+             <div class="relative z-10 reveal" style="--stagger-index: 2;">
+                 <h3 class="text-2xl font-semibold mb-8 text-center text-indigo-300">AI 在社會課堂的潛力</h3> <!-- Lighter heading -->
+                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 reveal-stagger p-6 md:p-0">
+                    <!-- Potential Cards - Updated BG, Text, Icons -->
+                    <div class="card bg-gray-800 p-6 group" style="--stagger-index: 0;"> <!-- Dark card bg -->
+                         <div class="card-icon-container bg-indigo-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg> </div>
+                         <h4 class="font-medium text-xl mb-3 text-indigo-300">內容生成</h4>
+                         <p class="text-gray-400 text-sm">快速產出教學大綱、學習單、討論題目、不同觀點的文本。</p>
+                         <div class="mt-4"> <button class="show-example-btn bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors focus-visible:ring-4 focus-visible:ring-indigo-500 transform hover:scale-105 active:scale-95" data-example="content" data-title="範例：內容生成"> 查看範例 </button> </div>
+                    </div>
+                     <div class="card bg-gray-800 p-6 group" style="--stagger-index: 1;">
+                         <div class="card-icon-container bg-purple-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg> </div>
+                         <h4 class="font-medium text-xl mb-3 text-purple-300">資料處理</h4>
+                         <p class="text-gray-400 text-sm">摘要複雜文章、比較歷史文件、分析數據趨勢 (需謹慎)。</p>
+                         <div class="mt-4"> <button class="show-example-btn bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition-colors focus-visible:ring-4 focus-visible:ring-purple-500 transform hover:scale-105 active:scale-95" data-example="data" data-title="範例：資料處理"> 查看範例 </button> </div>
+                    </div>
+                    <div class="card bg-gray-800 p-6 group" style="--stagger-index: 2;">
+                         <div class="card-icon-container bg-pink-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> </div>
+                         <h4 class="font-medium text-xl mb-3 text-pink-300">視覺化</h4>
+                         <p class="text-gray-400 text-sm">將文字描述轉化為圖像 (歷史場景、地理景觀、抽象概念)。</p>
+                         <div class="mt-4"> <button class="show-example-btn bg-pink-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-pink-700 transition-colors focus-visible:ring-4 focus-visible:ring-pink-500 transform hover:scale-105 active:scale-95" data-example="visual" data-title="範例：視覺化"> 查看範例 </button> </div>
+                    </div>
+                     <div class="card bg-gray-800 p-6 group" style="--stagger-index: 3;">
+                         <div class="card-icon-container bg-teal-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg> </div>
+                         <h4 class="font-medium text-xl mb-3 text-teal-300">個性化學習</h4>
+                         <p class="text-gray-400 text-sm">(潛力) 提供不同難度的資料或問題，適應學生個別需求。</p>
+                         <div class="mt-4"> <button class="show-example-btn bg-teal-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-teal-700 transition-colors focus-visible:ring-4 focus-visible:ring-teal-500 transform hover:scale-105 active:scale-95" data-example="personalized" data-title="範例：個性化學習"> 查看範例 </button> </div>
+                    </div>
+                    <div class="card bg-gray-800 p-6 group" style="--stagger-index: 4;">
+                         <div class="card-icon-container bg-purple-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg> </div>
+                         <h4 class="font-medium text-xl mb-3 text-purple-300">教學流程輔助</h4>
+                         <p class="text-gray-400 text-sm">協助設計教案、活動流程、評量規準，提升教學品質。</p>
+                         <div class="mt-4"> <button class="show-example-btn bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition-colors focus-visible:ring-4 focus-visible:ring-purple-500 transform hover:scale-105 active:scale-95" data-example="teaching" data-title="範例：教學流程輔助"> 查看範例 </button> </div>
+                    </div>
+                     <div class="card bg-gray-800 p-6 group" style="--stagger-index: 5;">
+                         <div class="card-icon-container bg-pink-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> </div>
+                         <h4 class="font-medium text-xl mb-3 text-pink-300">提升效率</h4>
+                         <p class="text-gray-400 text-sm">節省備課、製作教材的時間，讓教師專注於教學互動與指導。</p>
+                         <div class="mt-4"> <button class="show-example-btn bg-pink-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-pink-700 transition-colors focus-visible:ring-4 focus-visible:ring-pink-500 transform hover:scale-105 active:scale-95" data-example="efficiency" data-title="範例：提升效率"> 查看範例 </button> </div>
+                    </div>
+                    <div class="card bg-gray-800 p-6 group" style="--stagger-index: 6;">
+                         <div class="card-icon-container bg-indigo-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V6a2 2 0 012-2h8z M7 8H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l4-4h8"></path></svg> </div>
+                         <h4 class="font-medium text-xl mb-3 text-indigo-300">生成多元觀點</h4>
+                         <p class="text-gray-400 text-sm">針對爭議性議題，生成不同立場的論點，培養學生思辨能力。</p>
+                         <div class="mt-4"> <button class="show-example-btn bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors focus-visible:ring-4 focus-visible:ring-indigo-500 transform hover:scale-105 active:scale-95" data-example="perspectives" data-title="範例：生成多元觀點"> 查看範例 </button> </div>
+                    </div>
+                     <div class="card bg-gray-800 p-6 group" style="--stagger-index: 7;">
+                         <div class="card-icon-container bg-purple-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> </div>
+                         <h4 class="font-medium text-xl mb-3 text-purple-300">創建角色扮演場景</h4>
+                         <p class="text-gray-400 text-sm">設計歷史人物對話、模擬法庭等情境，增加學習代入感。</p>
+                         <div class="mt-4"> <button class="show-example-btn bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition-colors focus-visible:ring-4 focus-visible:ring-purple-500 transform hover:scale-105 active:scale-95" data-example="roleplay" data-title="範例：創建角色扮演場景"> 查看範例 </button> </div>
+                    </div>
+                 </div>
+                 <div class="mt-12 p-6 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-inner reveal" style="--stagger-index: 3;"> <!-- Dark gradient -->
+                     <p class="text-center font-medium text-lg text-indigo-200">無論是 <span class="font-bold text-indigo-400">視覺設計、內容生成</span> 還是 <span class="font-bold text-purple-400">教學流程規劃</span>， AI 都能提供協助。 </p>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Canva AI Section -->
+        <section id="canva-ai" class="section max-w-5xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-grad-2 rounded-2xl"> <!-- Dark gradient, patterns, blobs -->
+             <div class="absolute inset-0 bg-pattern-dots mix-blend-overlay opacity-50"></div>
+             <div class="absolute top-20 right-0 w-72 h-72 bg-pink-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+             <div class="absolute bottom-20 left-0 w-72 h-72 bg-purple-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+
+             <div class="section-header reveal">
+                 <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">教學好夥伴 (一)：Canva AI</h2>
+                 <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+             </div>
+              <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">整合設計與內容生成的全方位工具</p>
+
+            <!-- Intro Card -->
+             <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden mb-12 relative z-10 reveal" style="--stagger-index: 2;"> <!-- Dark transparent bg -->
+                 <div class="p-6 md:p-8">
+                     <div class="flex flex-col md:flex-row items-center">
+                         <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                             <h3 class="text-2xl font-bold mb-6 text-indigo-300">認識你的設計夥伴 - Canva AI</h3>
+                             <p class="mb-4 text-gray-300">Canva：大家熟悉的設計平臺，提供豐富模板與易用介面。</p>
+                             <p class="mb-6 text-gray-300">Canva AI (Magic Studio)：將 AI 功能無縫整合到設計流程中。</p>
+                             <h4 class="font-medium text-lg mt-6 mb-3 text-gray-200">對老師的優勢：</h4>
+                             <ul class="space-y-3 text-gray-300 reveal-stagger">
+                                 <li class="flex items-start" style="--stagger-index: 0;">
+                                     <div class="flex-shrink-0 bg-indigo-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                     <span><strong>一站式完成：</strong> 從內容生成到視覺設計，無需切換多個工具。</span>
+                                 </li>
+                                 <li class="flex items-start" style="--stagger-index: 1;">
+                                     <div class="flex-shrink-0 bg-purple-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                     <span><strong>操作直觀：</strong> 介面友好，學習曲線平緩。</span>
+                                 </li>
+                                  <li class="flex items-start" style="--stagger-index: 2;">
+                                     <div class="flex-shrink-0 bg-pink-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                     <span><strong>整合既有資源：</strong> 可搭配 Canva 豐富的模板、圖庫使用。</span>
+                                 </li>
+                                 <li class="flex items-start" style="--stagger-index: 3;">
+                                     <div class="flex-shrink-0 bg-teal-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                     <span><strong>免費教育版：</strong> Canva for Education 提供許多免費功能。</span>
+                                 </li>
+                             </ul>
+                         </div>
+                         <div class="md:w-1/2 md:pl-8 flex justify-center items-center mt-8 md:mt-0">
+                             <div class="relative reveal" style="--stagger-index: 3;">
+                                 <div class="absolute inset-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-full opacity-30 filter blur-2xl"></div> <!-- Brighter blur -->
+                                 <div class="floating relative">
+                                    <!-- Canva SVG -->
+                                    <svg class="w-64 h-64 md:w-72 md-h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <linearGradient id="canvaGrad" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" style="stop-color:var(--brand-indigo); stop-opacity:1" /> <stop offset="100%" style="stop-color:var(--brand-purple); stop-opacity:1" /> </linearGradient> <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%"> <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> <feOffset dx="2" dy="2" result="offsetblur"/> <feComponentTransfer> <feFuncA type="linear" slope="0.3"/> </feComponentTransfer> <feMerge> <feMergeNode/> <feMergeNode in="SourceGraphic"/> </feMerge> </filter> </defs> <g filter="url(#dropShadow)"> <path d="M50,30 H150 C161.046,30 170,38.954 170,50 V150 C170,161.046 161.046,170 150,170 H50 C38.954,170 30,161.046 30,150 V50 C30,38.954 38.954,30 50,30 Z" fill="url(#canvaGrad)" /> <path d="M85 70 L115 100 M105 60 L125 80" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/> <!-- Darker stroke --> <circle cx="110" cy="55" r="8" fill="#1f2937"/> <circle cx="75" cy="110" r="5" fill="#1f2937" opacity="0.8" class="pulse-btn" style="animation-delay: 0.2s;"/> <polygon points="125,80 135,75 130,85" fill="#1f2937" opacity="0.8"/> <text x="100" y="145" font-family="'Noto Sans TC', sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#f9fafb">Canva</text> <!-- Light text --> </g> </svg>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canva AI Features Tabs -->
+             <div class="bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative z-10 reveal" style="--stagger-index: 3;"> <!-- Dark tab container -->
+                 <div class="gradient-bg px-6 py-4"> <h3 class="text-xl font-bold text-white">Canva AI 實戰應用 Show Time!</h3> </div>
+                 <div class="p-6">
+                    <div class="flex flex-wrap border-b border-gray-700 mb-6 -mx-1" role="tablist" aria-label="Canva AI 功能"> <!-- Dark border -->
+                        <!-- Tabs: text color adjusted via CSS -->
+                        <button class="canva-tab text-lg px-4 sm:px-6 py-3 font-medium text-indigo-400 flex-1 sm:flex-none text-center" data-tab="magic-write" role="tab" aria-selected="true" aria-controls="magic-write-content"> Magic Write </button>
+                        <button class="canva-tab text-lg px-4 sm:px-6 py-3 font-medium text-gray-400 hover:text-indigo-400 flex-1 sm:flex-none text-center" data-tab="text-to-image" role="tab" aria-selected="false" aria-controls="text-to-image-content"> Text to Image </button>
+                        <button class="canva-tab text-lg px-4 sm:px-6 py-3 font-medium text-gray-400 hover:text-indigo-400 flex-1 sm:flex-none text-center" data-tab="magic-design" role="tab" aria-selected="false" aria-controls="magic-design-content"> Magic Design </button>
+                    </div>
+                    <div id="canva-tab-content-container">
+                        <div id="magic-write-content" class="tab-content active" role="tabpanel" aria-labelledby="magic-write-tab">
+                             <div class="flex flex-col md:flex-row gap-8">
+                                <div class="md:w-1/2">
+                                    <h4 class="font-medium text-xl mb-4 text-indigo-300">Magic Write：你的靈感助推器 & 文本小助手</h4>
+                                    <p class="mb-4 text-gray-300 text-sm">輸入指令 (Prompt)，AI 生成文字內容。</p>
+                                    <div class="mb-6 space-y-4">
+                                        <h5 class="font-medium text-indigo-300 mb-1">社會領域應用：</h5>
+                                        <div>
+                                            <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-indigo-800 text-indigo-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">1</span> 備課發想： </h6>
+                                            <div class="ml-8 space-y-2">
+                                                 <!-- Prompt Examples: Darker BG/Border, lighter text -->
+                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer prompt-example border border-gray-600" data-target="magic-write-demo" data-prompt="請提供 5 個關於「臺灣日治時期的社會變遷」的探究式學習問題，適合國中生程度。"> <code class="text-sm text-gray-400">「給我 5 個關於[臺灣日治時期]的探究式學習問題」</code> </div>
+                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer prompt-example border border-gray-600" data-target="magic-write-demo" data-prompt="針對「全球化對在地文化的影響」議題，設計一個課堂辯論的正反方主要論點綱要。"> <code class="text-sm text-gray-400">「針對[全球化議題]，設計一個課堂辯論的正反方論點」</code> </div>
+                                            </div>
+                                        </div>
+                                         <div>
+                                             <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-purple-800 text-purple-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">2</span> 教材製作： </h6>
+                                             <div class="ml-8 space-y-2">
+                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer prompt-example border border-gray-600" data-target="magic-write-demo" data-prompt="請將以下關於「社會福利制度演變」的段落（假設貼入文字）改寫成更簡潔、適合國中生理解的文字，約 150 字。"> <code class="text-sm text-gray-400">「摘要這段關於[社會福利制度]的文字...」</code> </div>
+                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer prompt-example border border-gray-600" data-target="magic-write-demo" data-prompt="請產生 5 個關於「中華民國憲法保障的基本權利」的選擇題，包含正確答案和三個誘答選項。"> <code class="text-sm text-gray-400">「產生 5 個關於[基本權利]的選擇題」</code> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 bg-gray-900 p-6 rounded-xl border border-indigo-800"> <!-- Darker demo container -->
+                                    <div class="mb-4 flex items-center">
+                                        <div class="flex-shrink-0 bg-indigo-900 p-2 rounded-full mr-3"><svg class="w-6 h-6 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg></div>
+                                        <h5 class="font-medium text-lg text-gray-200">Magic Write 實際效果</h5>
+                                    </div>
+                                    <div id="magic-write-demo" class="demo-area bg-gray-800 p-4 rounded-lg shadow-inner overflow-auto"> <!-- Dark demo area -->
+                                         <p class="text-gray-400 px-4">點擊左側範例 Prompt 查看 Magic Write 生成結果 (此處為模擬效果)。</p>
+                                    </div>
+                                     <div class="mt-4 bg-yellow-900/30 border-l-4 border-yellow-500 p-3 rounded"> <!-- Dark yellow alert -->
+                                        <p class="text-xs text-yellow-200"><strong>提醒：</strong> AI 生成內容需 <strong class="font-semibold text-yellow-100">審核、修改、確認</strong> 正確性與適切性。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="text-to-image-content" class="tab-content" role="tabpanel" aria-labelledby="text-to-image-tab">
+                             <div class="flex flex-col md:flex-row gap-8">
+                                <div class="md:w-1/2">
+                                    <h4 class="font-medium text-xl mb-4 text-purple-300">Text to Image：化文字為神奇圖像</h4>
+                                    <p class="mb-4 text-gray-300 text-sm">輸入文字描述，AI 生成對應圖片。</p>
+                                    <div class="mb-6 space-y-4">
+                                        <h5 class="font-medium text-purple-300 mb-1">社會領域應用：</h5>
+                                        <div>
+                                            <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-purple-800 text-purple-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">1</span> 視覺化歷史場景/人物： </h6>
+                                            <div class="ml-8 space-y-2">
+                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer image-prompt-example border border-gray-600" data-target="text-to-image-demo" data-theme="history" data-prompt="19世紀的倫敦街景，石板路，馬車，穿著維多利亞時期服裝的行人，背景有大笨鐘，霧濛濛的天氣，寫實風格插畫"> <code class="text-sm text-gray-400">「想像畫：19世紀的倫ڈن街景...」</code> </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-pink-800 text-pink-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">2</span> 具象化抽象概念： </h6>
+                                            <div class="ml-8 space-y-2">
+                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer image-prompt-example border border-gray-600" data-target="text-to-image-demo" data-theme="concept" data-prompt="象徵「文化霸權」的圖像：一個巨大的麥克風或電視螢幕籠罩著縮小的、多樣的文化符號，風格：概念藝術"> <code class="text-sm text-gray-400">「用圖像表達『文化霸權』的概念」</code> </div>
+                                            </div>
+                                        </div>
+                                         <div>
+                                            <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-teal-800 text-teal-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">3</span> 地理景觀模擬： </h6>
+                                            <div class="ml-8 space-y-2">
+                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer image-prompt-example border border-gray-600" data-target="text-to-image-demo" data-theme="geography" data-prompt="中國南方喀斯特地形地貌，石灰岩峰林聳立，下方有河流和溶洞入口，鬱鬱蔥蔥的植被，風格：風景攝影"> <code class="text-sm text-gray-400">「畫出[喀斯特地形]的樣貌...」</code> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 bg-gray-900 p-6 rounded-xl border border-purple-800">
+                                    <div class="mb-4 flex items-center">
+                                        <div class="flex-shrink-0 bg-purple-900 p-2 rounded-full mr-3"><svg class="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+                                        <h5 class="font-medium text-lg text-gray-200">Text to Image 實際效果</h5>
+                                    </div>
+                                     <div id="text-to-image-demo" class="demo-area bg-gray-800 p-4 rounded-lg shadow-inner">
+                                         <p class="text-gray-400 px-4">點擊左側範例 Prompt 查看 AI 生成圖像 (此處為 SVG 模擬效果)。</p>
+                                     </div>
+                                     <div class="mt-4 bg-yellow-900/30 border-l-4 border-yellow-500 p-3 rounded">
+                                         <h6 class="font-medium mb-1 text-xs text-yellow-200">提醒：</h6>
+                                         <ul class="space-y-1 text-xs text-yellow-300 list-disc list-inside">
+                                            <li><strong>Prompt 很重要：</strong> 描述越具體，風格越清晰，效果越好。</li>
+                                            <li><strong>非完全精確：</strong> AI 對細節還原可能不準確，需告知學生。</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="magic-design-content" class="tab-content" role="tabpanel" aria-labelledby="magic-design-tab">
+                            <div class="flex flex-col md:flex-row gap-8">
+                                <div class="md:w-1/2">
+                                    <h4 class="font-medium text-xl mb-4 text-pink-300">Magic Design：一鍵生成精美簡報與素材</h4>
+                                    <p class="mb-4 text-gray-300 text-sm">輸入主題或上傳文件，AI 自動生成多款設計模板 (簡報、海報等)。</p>
+                                    <div class="mb-6 space-y-4">
+                                        <h5 class="font-medium text-pink-300 mb-1">社會領域應用：</h5>
+                                        <div>
+                                            <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-pink-800 text-pink-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">1</span> 快速製作教學簡報： </h6>
+                                            <div class="ml-8 space-y-2">
+                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer design-example border border-gray-600" data-target="magic-design-demo" data-design-type="presentation"> <code class="text-sm text-gray-400">「關於[工業革命影響]的教學簡報」</code> </div>
+                                                 <p class="text-gray-400 text-xs mt-1">老師修改文字、替換圖片，快速完成。</p>
+                                            </div>
+                                        </div>
+                                         <div>
+                                             <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-indigo-800 text-indigo-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">2</span> 設計課堂海報/資訊圖表： </h6>
+                                             <div class="ml-8 space-y-2">
+                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer design-example border border-gray-600" data-target="magic-design-demo" data-design-type="poster"> <code class="text-sm text-gray-400">「製作一張介紹[聯合國主要機構]的海報」</code> </div>
+                                            </div>
+                                        </div>
+                                         <div>
+                                             <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-purple-800 text-purple-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">3</span> 學生專題報告： </h6>
+                                             <p class="ml-8 text-gray-300 text-sm">鼓勵學生使用 Magic Design 製作報告，提升視覺表現力。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 bg-gray-900 p-6 rounded-xl border border-pink-800">
+                                    <div class="mb-4 flex items-center">
+                                        <div class="flex-shrink-0 bg-pink-900 p-2 rounded-full mr-3"><svg class="w-6 h-6 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg></div>
+                                        <h5 class="font-medium text-lg text-gray-200">Magic Design 實際效果</h5>
+                                    </div>
+                                    <div id="magic-design-demo" class="demo-area bg-gray-800 p-4 rounded-lg shadow-inner">
+                                         <p class="text-gray-400 px-4">點擊左側範例查看 Magic Design 效果 (此處為 SVG 模擬效果)。</p>
+                                    </div>
+                                     <div class="mt-4 bg-yellow-900/30 border-l-4 border-yellow-500 p-3 rounded">
+                                         <p class="text-xs text-yellow-200"><strong>提醒：</strong> AI 設計是 <strong class="font-semibold text-yellow-100">起點</strong>，不是終點。仍需教師專業判斷進行微調。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- EdCafe AI Section -->
+        <section id="edcafe-ai" class="section max-w-6xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-alt rounded-2xl shadow-xl"> <!-- Dark bg, patterns, blobs -->
+              <div class="absolute inset-0 bg-pattern-lines mix-blend-soft-light opacity-30"></div>
+              <div class="absolute top-20 right-0 w-72 h-72 bg-indigo-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+             <div class="absolute bottom-20 left-0 w-72 h-72 bg-pink-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+
+             <div class="section-header reveal">
+                <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">教學好夥伴 (二)：EdCafe AI</h2>
+                 <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+             </div>
+              <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">專為臺灣教育情境設計的 AI 教學輔助平臺</p>
+
+             <!-- Intro Card -->
+              <div class="bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden mb-12 relative z-10 reveal" style="--stagger-index: 2;"> <!-- Dark transparent bg -->
+                  <div class="p-6 md:p-8">
+                      <div class="flex flex-col md:flex-row items-center">
+                          <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                              <h3 class="text-2xl font-bold mb-6 text-indigo-300">認識你的教學顧問 - EdCafe AI</h3>
+                              <p class="mb-4 text-gray-300">EdCafe AI：<strong>專為臺灣教育情境設計</strong> 的 AI 教學輔助平臺。</p>
+                              <p class="mb-6 text-gray-300"><strong>核心理念：</strong> 節省教師重複性工作時間，專注教學核心與師生互動。</p>
+                              <h4 class="font-medium text-lg mt-6 mb-3 text-gray-200">對老師的優勢：</h4>
+                              <ul class="space-y-3 text-gray-300 reveal-stagger">
+                                  <li class="flex items-start" style="--stagger-index: 0;">
+                                      <div class="flex-shrink-0 bg-indigo-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                      <span><strong>貼近教學現場：</strong> 功能設計更符合 K-12 教師日常需求 (教案、學習單、評量)。</span>
+                                  </li>
+                                  <li class="flex items-start" style="--stagger-index: 1;">
+                                      <div class="flex-shrink-0 bg-purple-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                      <span><strong>支援繁體中文與在地化內容：</strong> 對臺灣社會、歷史、教育用語理解度高。</span>
+                                  </li>
+                                  <li class="flex items-start" style="--stagger-index: 2;">
+                                      <div class="flex-shrink-0 bg-pink-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                      <span><strong>強調教學法整合：</strong> 考量教學策略 (提問層次、差異化)。</span>
+                                  </li>
+                                   <li class="flex items-start" style="--stagger-index: 3;">
+                                      <div class="flex-shrink-0 bg-teal-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                      <span><strong>多元教學工具生成：</strong> 專注於教學文件與活動設計。</span>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="md:w-1/2 md:pl-8 flex justify-center items-center mt-8 md:mt-0">
+                              <div class="relative reveal" style="--stagger-index: 3;">
+                                  <div class="absolute inset-0 bg-gradient-to-bl from-purple-600 to-pink-600 rounded-full opacity-30 filter blur-2xl"></div> <!-- Brighter blur -->
+                                  <div class="floating relative">
+                                      <!-- Edcafe SVG -->
+                                       <svg class="w-64 h-64 md:w-72 md:h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <linearGradient id="edcafeGrad" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" style="stop-color:var(--brand-purple); stop-opacity:1" /> <stop offset="100%" style="stop-color:var(--brand-pink); stop-opacity:1" /> </linearGradient> <filter id="dropShadowEdcafe" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dx="2" dy="2" result="offsetblur"/><feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter> </defs> <g filter="url(#dropShadowEdcafe)"> <path d="M40 60 H160 L150 150 Q100 180 50 150 Z" fill="url(#edcafeGrad)" /> <path d="M160 70 Q180 80 180 100 T 160 130" stroke="#a78bfa" stroke-width="10" fill="none" stroke-linecap="round"/> <path d="M80 50 Q 85 40 90 50 T 100 50" stroke="var(--text-muted)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7" style="animation: steam 2s linear infinite;"/> <!-- Use muted text for steam --> <path d="M110 45 Q 115 35 120 45 T 130 45" stroke="var(--text-muted)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7" style="animation: steam 2s linear infinite 0.5s;"/> <text x="100" y="110" font-family="'Noto Sans TC', sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1e1b4b">EdCafe</text> <!-- Darker text on bright bg --> </g> <style> @keyframes steam { 0% { transform: translateY(0); opacity: 0.7; } 100% { transform: translateY(-15px); opacity: 0; } } </style> </svg>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="mt-6 p-4 bg-gradient-to-r from-gray-700 to-gray-600 rounded-xl shadow-inner"> <!-- Dark gradient -->
+                          <p class="text-indigo-200 text-sm md:text-base"><strong>對比：</strong> 相較於 Canva AI 整合於設計平臺，EdCafe AI 更專注於 <strong class="font-semibold text-gray-100">教學內容與流程</strong> 的生成，並針對臺灣教育情境優化。</p>
+                      </div>
+                  </div>
+              </div>
+
+             <!-- EdCafe Features Card -->
+              <div class="bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative z-10 reveal" style="--stagger-index: 3;"> <!-- Dark card -->
+                  <div class="gradient-bg px-6 py-4"> <h3 class="text-xl font-bold text-white">EdCafe AI 實戰應用 Show Time!</h3> </div>
+                  <div class="p-6">
+                      <h4 class="font-medium text-xl mb-6 text-center text-indigo-300 reveal">EdCafe AI：你的備課神隊友</h4>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 reveal-stagger">
+                          <!-- Feature Cards: Darker BG, adjusted icons/text -->
+                          <div class="card bg-gray-900 p-6 group" style="--stagger-index: 0;"> <!-- Even darker card bg -->
+                             <div class="card-icon-container bg-indigo-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg> </div>
+                             <h5 class="font-medium text-lg text-indigo-300 mb-3">教案設計助手</h5>
+                             <ul class="space-y-2 text-gray-400 text-xs md:text-sm">
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-indigo-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>根據課綱目標生成完整教案</span></li>
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-indigo-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>提供多元教學策略建議</span></li>
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-indigo-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>設計符合學習目標的活動</span></li>
+                             </ul>
+                             <div class="mt-4"> <button class="edcafe-feature-btn bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors focus-visible:ring-4 focus-visible:ring-indigo-500 transform hover:scale-105 active:scale-95" data-feature="lesson-plan" data-title="EdCafe 範例：教案設計"> 查看範例 </button> </div>
+                         </div>
+                          <div class="card bg-gray-900 p-6 group" style="--stagger-index: 1;">
+                             <div class="card-icon-container bg-purple-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg> </div>
+                             <h5 class="font-medium text-lg text-purple-300 mb-3">評量工具產生器</h5>
+                             <ul class="space-y-2 text-gray-400 text-xs md:text-sm">
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-purple-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>生成選擇、填充、問答題</span></li>
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-purple-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>設計學習單、思考單</span></li>
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-purple-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>產生評量規準 (Rubrics)</span></li>
+                             </ul>
+                             <div class="mt-4"> <button class="edcafe-feature-btn bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition-colors focus-visible:ring-4 focus-visible:ring-purple-500 transform hover:scale-105 active:scale-95" data-feature="assessment" data-title="EdCafe 範例：評量工具"> 查看範例 </button> </div>
+                         </div>
+                          <div class="card bg-gray-900 p-6 group" style="--stagger-index: 2;">
+                             <div class="card-icon-container bg-pink-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V6a2 2 0 012-2h8z M7 8H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l4-4h8"></path></svg> </div>
+                             <h5 class="font-medium text-lg text-pink-300 mb-3">差異化教學輔助</h5>
+                             <ul class="space-y-2 text-gray-400 text-xs md:text-sm">
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-pink-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>依難易度調整文本或問題</span></li>
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-pink-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>提供不同學習風格的活動建議</span></li>
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-pink-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>針對特定需求生成輔助材料</span></li>
+                             </ul>
+                             <div class="mt-4"> <button class="edcafe-feature-btn bg-pink-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-pink-700 transition-colors focus-visible:ring-4 focus-visible:ring-pink-500 transform hover:scale-105 active:scale-95" data-feature="differentiation" data-title="EdCafe 範例：差異化教學"> 查看範例 </button> </div>
+                         </div>
+                          <div class="card bg-gray-900 p-6 group" style="--stagger-index: 3;">
+                             <div class="card-icon-container bg-teal-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg> </div>
+                             <h5 class="font-medium text-lg text-teal-300 mb-3">詞彙表/概念解釋</h5>
+                             <ul class="space-y-2 text-gray-400 text-xs md:text-sm">
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-teal-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>生成特定主題關鍵詞彙表</span></li>
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-teal-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>提供詞彙的簡明解釋</span></li>
+                                 <li class="flex items-start"><svg class="w-4 h-4 text-teal-400 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>輔助學生理解複雜概念</span></li>
+                             </ul>
+                             <div class="mt-4"> <button class="edcafe-feature-btn bg-teal-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-teal-700 transition-colors focus-visible:ring-4 focus-visible:ring-teal-500 transform hover:scale-105 active:scale-95" data-feature="glossary" data-title="EdCafe 範例：詞彙表/概念解釋"> 查看範例 </button> </div>
+                         </div>
+                      </div>
+                      <div class="mt-8 bg-gray-700 p-6 rounded-lg border border-gray-600 reveal" style="--stagger-index: 4;"> <!-- Darker info box -->
+                         <h5 class="font-semibold text-center text-gray-200">還有更多功能...</h5>
+                         <p class="text-center text-gray-400 mt-2 text-sm md:text-base">例如：生成課堂討論題、提供教學反思點、創建學習遊戲點子等。</p>
+                         <div class="text-center mt-4">
+                            <a href="https://www.edcafetw.com/" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 font-medium underline underline-offset-4 transition-colors group inline-flex items-center">
+                                前往 EdCafe AI 探索更多
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /> </svg>
+                            </a>
+                        </div>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Case Study Section -->
+        <section id="case-study" class="section max-w-5xl mx-auto mb-16 md:mb-24 reveal section-bg-grad-1 rounded-2xl"> <!-- Dark gradient -->
+             <div class="section-header">
+                <h2 class="section-title text-3xl md:text-4xl font-bold gradient-text inline-block">教學案例分享</h2>
+                <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+             </div>
+             <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">雙劍合璧：Canva AI + EdCafe AI 設計一堂課</p>
+             <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-8 reveal" style="--stagger-index: 2;"> <!-- Dark transparent bg -->
+                 <h3 class="text-xl font-semibold text-center mb-6 text-indigo-300">主題：臺灣的多元文化與族群互動</h3>
+                 <ol class="list-decimal list-inside space-y-4 text-gray-300">
+                    <li> <strong><span class="text-purple-400">目標設定 (EdCafe AI 輔助):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>學生能說出臺灣主要族群及其文化特色。</li> <li>學生能分析不同族群互動的歷史經驗。</li> <li>學生能運用 AI 工具呈現對多元文化的理解。</li> <li>(使用 EdCafe AI 輸入課綱關鍵字，獲取教學目標建議並修改)</li> </ul> </li>
+                    <li> <strong><span class="text-indigo-400">引起動機 (Canva AI 輔助):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>使用 Canva AI (Text to Image) 生成「融合不同文化元素的臺灣街景」圖片，引發討論。</li> <li class="text-gray-500"><code class="text-xs">Prompt 範例: 臺灣夜市街景，融合原住民圖騰、閩南紅磚廟宇元素、客家藍染布料、現代霓虹燈招牌，風格：宮崎駿動畫風格</code></li> <li>提問：圖片中看到哪些文化元素？它們如何共存？</li> </ul> </li>
+                    <li> <strong><span class="text-purple-400">發展活動 (EdCafe AI + Canva AI):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>**分組研究：** 各組分配一個族群 (如：閩南、客家、外省、原住民各族、新住民)。</li> <li>**資料整理 (EdCafe AI):** 提供各族群相關文本，要求 EdCafe AI 摘要重點、生成閱讀理解問題，或提供關鍵詞彙表 (使用 `glossary` 功能)。</li> <li>**觀點呈現 (Canva AI):** 要求學生使用 Canva (Magic Write) 撰寫介紹文案，並用 (Text to Image) 生成代表性圖像，最後用 (Magic Design) 製作小組介紹海報或簡報。</li> <li>**多元觀點討論 (EdCafe AI / Magic Write):** 針對歷史上的族群衝突事件，使用 AI 生成不同立場的簡短論點 (參考 `perspectives` 範例)，引導學生討論。</li> </ul> </li>
+                    <li> <strong><span class="text-indigo-400">綜合活動與評量 (Canva AI + EdCafe AI):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>**成果分享：** 各組展示 Canva 製作的成果。</li> <li>**概念整合 (EdCafe AI):** 使用 EdCafe AI 生成學習單，包含配合題、簡答題，檢核學習成效 (參考 `assessment` 範例)。</li> <li>**創意延伸 (Canva AI):** 鼓勵學生用 Canva AI 設計一個象徵「臺灣多元文化融合」的標誌或圖像。</li> </ul> </li>
+                 </ol>
+                 <p class="mt-6 text-center text-sm text-gray-500">(以上為結合兩工具的教學流程構想)</p>
+             </div>
+        </section>
+
+        <!-- Ethics Section -->
+         <section id="ethics" class="section max-w-5xl mx-auto mb-16 md:mb-24 reveal section-bg-alt rounded-2xl shadow-xl"> <!-- Dark section bg -->
+             <div class="section-header">
+                 <h2 class="section-title text-3xl md:text-4xl font-bold gradient-text inline-block">教學考量與倫理</h2>
+                  <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+             </div>
+             <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">擁抱 AI，但保持清醒</p>
+             <div class="p-6 md:p-8 space-y-5 reveal" style="--stagger-index: 2;">
+                 <!-- Dark yellow alert box -->
+                 <div class="bg-yellow-900/30 border-l-4 border-yellow-500 text-yellow-200 p-4 rounded-md flex items-start shadow-sm hover:shadow-md transition-shadow" role="alert">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M8.257 3.099c.636-1.107 2.15-1.107 2.786 0l5.376 9.311c.632 1.097-.16 2.488-1.393 2.488H4.274c-1.233 0-2.025-1.391-1.393-2.488l5.376-9.311zM10 6a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 6zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /> </svg>
+                     <div>
+                         <p class="font-bold">重要提醒</p>
+                         <p class="text-sm">AI 是輔助工具，非最終決策者。教師的專業判斷、課程設計理念和對學生的了解至關重要。</p>
+                     </div>
+                 </div>
+                 <!-- List items: Adjust text colors for contrast -->
+                 <ul class="list-none space-y-4 text-gray-300 pl-2">
+                     <li class="flex items-start"><span class="mr-3 text-red-400 font-bold text-xl">!</span><div><strong>內容準確性：</strong> AI 可能產生錯誤或有偏見的資訊 (Hallucination)，務必 <strong class="text-red-400 underline decoration-wavy">審核、查證、修改</strong>。特別是歷史事件、數據、法律條文等。</div></li>
+                     <li class="flex items-start"><span class="mr-3 text-blue-400 font-bold text-xl">©</span><div><strong>版權問題：</strong> AI 生成圖像或文本的版權歸屬複雜，教學使用建議選擇<strong class="text-blue-400">明確授權</strong>的平臺或謹慎用於<strong class="text-blue-400">內部教學、非商業用途</strong>，並標註來源。</div></li>
+                     <li class="flex items-start"><span class="mr-3 text-red-400 font-bold text-xl">🔒</span><div><strong>學生數據隱私：</strong> 使用 AI 工具處理學生資料 (如批改作文、學習分析) 時，需遵守個資法規定，優先選擇<strong class="text-red-400">注重隱私保護</strong>、<strong class="text-red-400">資料不回傳訓練</strong>的平臺。</div></li>
+                     <li class="flex items-start"><span class="mr-3 text-green-400 font-bold text-xl">🤔</span><div><strong>過度依賴與思辨能力：</strong> 避免讓 AI 取代教師的思考與創造力，或學生的自主學習過程。應引導學生<strong class="text-green-400">學習如何下有效的指令 (Prompt Engineering)</strong>，並<strong class="text-green-400">批判性地評估</strong> AI 生成的結果。</div></li>
+                     <li class="flex items-start"><span class="mr-3 text-orange-400 font-bold text-xl">💻</span><div><strong>數位落差：</strong> 考慮 AI 工具的取得性 (軟硬體、網路、帳號付費)，規劃配套措施，避免加劇數位落差。</div></li>
+                     <li class="flex items-start"><span class="mr-3 text-purple-400 font-bold text-xl">Bias</span><div><strong>演算法偏見：</strong> 了解 AI 模型可能存在的偏見 (訓練資料造成)，並在教學中<strong class="text-purple-400">提醒學生注意</strong>，培養媒體素養。</div></li>
+                 </ul>
+             </div>
+         </section>
+
+        <!-- Summary & Q&A Section -->
+         <section id="summary-qa" class="section max-w-5xl mx-auto mb-16 md:mb-24 reveal section-bg-grad-2 rounded-2xl"> <!-- Dark gradient -->
+            <div class="section-header">
+                 <h2 class="section-title text-3xl md:text-4xl font-bold gradient-text inline-block">總結與 Q&A</h2>
+                 <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+             </div>
+              <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-8 space-y-6 reveal" style="--stagger-index: 1;"> <!-- Dark transparent bg -->
+                   <p class="text-lg text-center text-gray-200 leading-relaxed">AI 為社會領域教學帶來巨大潛力，能<span class="font-semibold text-indigo-400">提升效率</span>、<span class="font-semibold text-purple-400">激發創意</span>、<span class="font-semibold text-pink-400">輔助差異化教學</span>。關鍵在於<strong class="text-green-400">善用工具 (成為好的 Prompt 設計者)</strong>，並保有教師的<strong class="text-red-400">專業判斷、倫理意識</strong>與<strong class="text-blue-400">人文關懷</strong>。</p>
+                   <div class="text-center pt-6 border-t border-gray-700"> <!-- Dark border -->
+                       <h3 class="text-2xl font-semibold text-indigo-300 mb-4">Q&A 時間</h3>
+                       <p class="text-gray-400 mb-6">感謝您的參與，歡迎提問交流！</p>
+                        <svg class="w-16 h-16 mx-auto text-indigo-400 animate-pulse" style="animation-duration: 1.5s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                   </div>
+              </div>
+         </section>
+
+    </main>
+
+     <!-- Example Modal Structure (Handled by CSS Vars) -->
+    <div id="exampleModal" class="modal-overlay" aria-hidden="true"> <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle"> <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-700"> <h3 id="modalTitle" class="text-xl font-bold text-indigo-300">範例</h3> <button id="closeModal" class="text-gray-500 hover:text-gray-300 transition-colors p-1 rounded-full hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500" aria-label="關閉視窗"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path> </svg> </button> </div> <div id="modalBody" class="mt-4 max-h-[65vh] overflow-y-auto text-gray-300 pr-3 text-sm md:text-base space-y-4"> <p>範例內容載入中...</p> </div> <div class="mt-6 pt-4 border-t border-gray-700 flex justify-end"> <button id="closeModalBtn" class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition-colors focus-visible:ring-4 focus-visible:ring-indigo-500 transform hover:scale-105 active:scale-95 duration-200"> 關閉 </button> </div> </div> </div>
+
+    <footer class="bg-gray-900 text-gray-400 py-10 mt-16 relative overflow-hidden"> <!-- Footer is already dark -->
+         <div class="absolute inset-0 opacity-5"> <!-- Reduced pattern opacity --> <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="footerPattern" patternUnits="userSpaceOnUse" width="60" height="60" patternTransform="scale(1) rotate(30)"><path d="M10 10h40v40h-40z" stroke="#fff" stroke-width="0.2" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100%" height="100%" fill="url(#footerPattern)"/></svg> </div>
+         <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="mb-4 flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-8">
+                 <!-- Footer links use bright text -->
+                 <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer" class="footer-link group inline-flex items-center"> Canva 官網 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg> </a>
+                 <a href="https://www.edcafetw.com/" target="_blank" rel="noopener noreferrer" class="footer-link group inline-flex items-center"> EdCafe AI 臺灣 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg> </a>
+            </div>
+             <div class="my-6 flex justify-center items-center space-x-2">
+                 <img src="image/LiyuChillGuy(W).svg" alt="Liyu Chill Guy Mascot Footer" class="w-8 h-8 footer-icon">
+                 <p class="text-sm text-gray-400">Copyright © Liyuchiutiger Gongminshen</p>
+             </div>
+            <p class="text-xs opacity-60">分享人：邱俐瑜</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Variable Declarations ---
+            const progressBar = document.getElementById('progressBar');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const exploreBtn = document.getElementById('exploreBtn');
+            const showToolsBtn = document.getElementById('showToolsBtn');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const fixedMascotContainer = document.getElementById('fixed-mascot-container');
+            const heroIcon = document.getElementById('hero-icon');
+            const confettiContainer = document.getElementById('confetti-container');
+            const modal = document.getElementById('exampleModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const closeModal = document.getElementById('closeModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const showExampleBtns = document.querySelectorAll('.show-example-btn');
+            const edcafeFeatureBtns = document.querySelectorAll('.edcafe-feature-btn');
+            const canvaTabs = document.querySelectorAll('.canva-tab');
+            const canvaTabContents = document.querySelectorAll('#canva-ai .tab-content');
+            const promptExamples = document.querySelectorAll('.prompt-example');
+            const imagePromptExamples = document.querySelectorAll('.image-prompt-example');
+            const designExamples = document.querySelectorAll('.design-example');
+            const sectionFocusTriggers = document.querySelectorAll('.section-focus-trigger');
+            const sectionFocusOverlay = document.getElementById('section-focus-overlay');
+            const allSections = document.querySelectorAll('section');
+            let lastFocusedElement = null;
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // --- Initialization Functions ---
+            function initProgressBar() { window.addEventListener('scroll', updateProgressBar, { passive: true }); updateProgressBar(); }
+            function initMobileMenu() { if (mobileMenuButton && mobileMenu) { mobileMenu.classList.add('transition-all', 'duration-300', 'ease-out', 'transform', 'origin-top'); mobileMenuButton.addEventListener('click', toggleMobileMenu); } }
+            function initSmoothScroll() { [exploreBtn, showToolsBtn].forEach(btn => { if (btn) { btn.addEventListener('click', (e) => { e.preventDefault(); smoothScrollTo(btn === exploreBtn ? 'agenda' : 'ai-potential'); }); } }); navLinks.forEach(link => { link.addEventListener('click', (e) => { const href = link.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); smoothScrollTo(href.substring(1)); } }); }); }
+            function initScrollReveal() { if (!prefersReducedMotion) { const revealElements = document.querySelectorAll('.reveal'); const staggerContainers = document.querySelectorAll('.reveal-stagger, .agenda-reveal'); const observerCallback = (entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); const parent = entry.target.closest('.reveal-stagger, .agenda-reveal'); if (parent && !parent.classList.contains('in-view')) { parent.classList.add('in-view'); parent.querySelectorAll(':scope > *').forEach((child, childIndex) => { child.style.setProperty('--stagger-index', childIndex); }); } else if (entry.target.matches('.reveal-stagger > *, .agenda-reveal > li')) { const childIndex = Array.from(entry.target.parentNode.children).indexOf(entry.target); entry.target.style.setProperty('--stagger-index', childIndex); } } }); }; const observerOptions = { threshold: 0.1 }; const observer = new IntersectionObserver(observerCallback, observerOptions); revealElements.forEach(el => observer.observe(el)); staggerContainers.forEach(el => observer.observe(el)); } else { document.querySelectorAll('.reveal, .reveal-stagger, .agenda-reveal, .reveal-stagger > *, .agenda-reveal > li').forEach(el => el.classList.add('in-view')); } }
+            function initModals() { [...showExampleBtns, ...edcafeFeatureBtns].forEach(btn => { btn.addEventListener('click', () => { const exampleKey = btn.dataset.example || btn.dataset.feature; const title = btn.dataset.title || '範例'; const content = exampleContent[exampleKey] || '<p>抱歉，找不到此範例內容。</p>'; openModal(title, content); }); }); if (closeModal) closeModal.addEventListener('click', closeModalAction); if (closeModalBtn) closeModalBtn.addEventListener('click', closeModalAction); if (modal) { modal.addEventListener('click', (e) => { if (e.target === modal) closeModalAction(); }); } window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal && modal.classList.contains('active')) closeModalAction(); }); }
+            function initCanvaTabs() {
+                 canvaTabs.forEach(tab => {
+                     tab.addEventListener('click', () => {
+                         const targetTabId = tab.dataset.tab;
+                         canvaTabs.forEach(t => {
+                             const isSelected = t === tab;
+                             t.setAttribute('aria-selected', isSelected);
+                         });
+                         canvaTabContents.forEach(content => { content.classList.toggle('active', content.id === `${targetTabId}-content`); });
+                     });
+                 });
+            }
+            function initDemoAreas() { promptExamples.forEach(btn => { btn.addEventListener('click', () => { const targetId = btn.dataset.target; const promptText = btn.dataset.prompt || btn.querySelector('code').textContent; let simulatedResponse = `<p><strong>模擬指令:</strong> ${promptText}</p><hr><p>這是根據指令「${promptText.substring(0, 30)}...」模擬生成的文字結果。實際由 AI 生成的內容會更完整和具體。</p>`; if (promptText.includes("選擇題")) { simulatedResponse += `<ol><li>題目一... (A)... (B)... (C)... (D)...</li><li>題目二...</li></ol>`; } else if (promptText.includes("探究式學習問題")) { simulatedResponse += `<ul><li>模擬問題 1?</li><li>模擬問題 2?</li><li>模擬問題 3?</li></ul>`; } showDemoResult(targetId, simulatedResponse, true); }); }); imagePromptExamples.forEach(btn => { btn.addEventListener('click', () => { const targetId = btn.dataset.target; const theme = btn.dataset.theme || 'default'; const promptText = btn.dataset.prompt || btn.querySelector('code').textContent; const svgHtml = generateSvgDemo(theme); const finalHtml = `${svgHtml}<p class="text-xs text-gray-500 mt-1 px-2">模擬自 Prompt: ${promptText}</p>`; showDemoResult(targetId, finalHtml); }); }); designExamples.forEach(btn => { btn.addEventListener('click', () => { const targetId = btn.dataset.target; const designType = btn.dataset.designType || 'default'; const promptText = btn.querySelector('code').textContent; const svgHtml = generateSvgDemo(designType); const finalHtml = `${svgHtml}<p class="text-xs text-gray-500 mt-1 px-2">模擬設計 for: ${promptText}</p>`; showDemoResult(targetId, finalHtml); }); }); }
+            function initMascotAndConfetti() { if (fixedMascotContainer) { fixedMascotContainer.addEventListener('click', () => { fixedMascotContainer.classList.add('clicked'); triggerConfetti(fixedMascotContainer.getBoundingClientRect()); setTimeout(() => { fixedMascotContainer.classList.remove('clicked'); }, 500); }); } if (heroIcon) { heroIcon.addEventListener('click', () => { triggerConfetti(heroIcon.getBoundingClientRect()); heroIcon.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'; heroIcon.style.transform = 'scale(1.3) rotate(360deg)'; setTimeout(() => { heroIcon.style.transform = 'scale(1) rotate(0deg)'; }, 500); }); } }
+            function initSectionFocus() { sectionFocusTriggers.forEach(button => { button.addEventListener('click', (e) => { e.stopPropagation(); const section = button.closest('section'); if (section && !section.classList.contains('is-focused')) { focusSection(section); } }); }); if (sectionFocusOverlay) { sectionFocusOverlay.addEventListener('click', unfocusAllSections); } window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('section-focused')) { unfocusAllSections(); } }); }
+
+            // --- Helper Functions ---
+            function updateProgressBar() { const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight; const scrolled = window.scrollY; progressBar.style.width = scrollableHeight > 0 ? `${(scrolled / scrollableHeight) * 100}%` : '0%'; }
+            function toggleMobileMenu() { const isExpanded = mobileMenu.classList.contains('active'); if (!isExpanded) { mobileMenu.classList.remove('hidden'); requestAnimationFrame(() => { mobileMenu.classList.add('active', 'scale-y-100', 'opacity-100'); mobileMenu.classList.remove('scale-y-0', 'opacity-0'); }); } else { mobileMenu.classList.remove('active', 'scale-y-100', 'opacity-100'); mobileMenu.classList.add('scale-y-0', 'opacity-0'); mobileMenu.addEventListener('transitionend', () => { if (!mobileMenu.classList.contains('active')) mobileMenu.classList.add('hidden'); }, { once: true }); } mobileMenuButton.setAttribute('aria-expanded', !isExpanded); mobileMenuButton.innerHTML = !isExpanded ? `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>` : `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>`; mobileMenuButton.setAttribute('aria-label', !isExpanded ? '關閉選單' : '開啟選單'); }
+            function smoothScrollTo(elementId) { const targetElement = document.getElementById(elementId); if (targetElement) { targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); if (mobileMenu && mobileMenu.classList.contains('active')) { toggleMobileMenu(); } } }
+            function openModal(title, content) { if (modal && modalTitle && modalBody) { lastFocusedElement = document.activeElement; modalTitle.textContent = title; modalBody.innerHTML = content; modal.classList.add('active'); modal.removeAttribute('aria-hidden'); document.body.style.overflow = 'hidden'; const focusableContent = modal.querySelector('h3, h5, p, button:not(#closeModalBtn)'); if (focusableContent) { focusableContent.focus(); } else { closeModal.focus(); } } }
+            function closeModalAction() { if (modal) { modal.classList.remove('active'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; setTimeout(() => { modalBody.innerHTML = '<p>範例內容載入中...</p>'; if (lastFocusedElement) { lastFocusedElement.focus(); lastFocusedElement = null; } }, 300); } }
+            function generateSvgDemo(themeOrType) {
+                let svgContent = ''; const width = 250; const height = 150;
+                const darkFill = '#4b5563'; // gray-600
+                const midFill = '#6b7280'; // gray-500
+                const lightFill = '#9ca3af'; // gray-400
+                const textFill = '#e5e7eb'; // gray-200
+                const accent1 = getComputedStyle(document.documentElement).getPropertyValue('--brand-indigo').trim();
+                const accent2 = getComputedStyle(document.documentElement).getPropertyValue('--brand-purple').trim();
+                const accent3 = getComputedStyle(document.documentElement).getPropertyValue('--brand-teal').trim();
+
+                switch (themeOrType) {
+                    case 'history': svgContent = `<rect width="${width}" height="${height}" fill="${darkFill}"/><rect x="30" y="50" width="40" height="100" fill="${midFill}"/><rect x="90" y="70" width="50" height="80" fill="${lightFill}"/><rect x="160" y="40" width="30" height="110" fill="${midFill}"/><line x1="0" y1="${height - 10}" x2="${width}" y2="${height - 10}" stroke="#111827" stroke-width="5"/><circle cx="200" cy="30" r="15" fill="${lightFill}" opacity="0.5"/><text x="${width/2}" y="20" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">歷史場景</text>`; break;
+                    case 'concept': svgContent = `<rect width="${width}" height="${height}" fill="${midFill}"/><circle cx="${width/2}" cy="${height/2}" r="40" fill="${accent2}" opacity="0.6"/><circle cx="50" cy="40" r="10" fill="${accent1}" opacity="0.8"/><rect x="180" y="100" width="20" height="20" fill="${accent3}" opacity="0.7"/><polygon points="100,120 120,140 80,140" fill="${lightFill}"/><text x="${width/2}" y="20" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">抽象概念</text>`; break;
+                    case 'geography': svgContent = `<rect width="${width}" height="${height}" fill="${darkFill}"/><polygon points="30,120 70,50 110,120" fill="${midFill}"/><polygon points="100,120 140,60 180,120" fill="#52525b"/><polygon points="170,120 200,70 230,120" fill="${midFill}"/><path d="M0 ${height-20} C 80 ${height-40}, 170 ${height}, ${width} ${height-15}" stroke="${accent3}" stroke-width="8" fill="none" opacity="0.7"/><text x="${width/2}" y="20" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">地理景觀</text>`; break;
+                    case 'presentation': svgContent = `<rect width="${width}" height="${height}" fill="${darkFill}"/><rect x="20" y="20" width="${width - 40}" height="20" fill="${accent1}"/><rect x="20" y="50" width="${width * 0.6}" height="10" fill="${lightFill}"/><rect x="20" y="70" width="${width * 0.7}" height="10" fill="${lightFill}"/><rect x="20" y="90" width="${width * 0.5}" height="10" fill="${lightFill}"/><text x="${width/2}" y="${height - 15}" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">簡報模板</text>`; break;
+                    case 'poster': const posterWidth = 180; const posterHeight = 250; svgContent = `<rect width="${posterWidth}" height="${posterHeight}" fill="${darkFill}"/><rect x="20" y="20" width="${posterWidth - 40}" height="30" fill="${accent2}"/><circle cx="${posterWidth/2}" cy="100" r="30" fill="${accent3}" opacity="0.6"/><rect x="30" y="150" width="${posterWidth - 60}" height="15" fill="${lightFill}"/><rect x="30" y="175" width="${posterWidth - 60}" height="15" fill="${lightFill}"/> <text x="${posterWidth/2}" y="${posterHeight - 15}" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">海報模板</text>`; return `<svg viewBox="0 0 ${posterWidth} ${posterHeight}" width="${posterWidth}" height="${posterHeight}" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`;
+                    default: svgContent = `<rect width="${width}" height="${height}" fill="${darkFill}"/><line x1="0" y1="0" x2="${width}" y2="${height}" stroke="${midFill}" stroke-width="2"/><line x1="0" y1="${height}" x2="${width}" y2="0" stroke="${midFill}" stroke-width="2"/><text x="${width/2}" y="${height/2}" font-family="sans-serif" font-size="12" fill="${textFill}" text-anchor="middle" dy=".3em">模擬 SVG</text>`;
+                }
+                 return `<svg viewBox="0 0 ${width} ${height}" width="90%" height="auto" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`;
+            }
+            function showDemoResult(targetId, contentHtml, isText = false) { const demoArea = document.getElementById(targetId); if (demoArea) { demoArea.classList.add('loading'); demoArea.innerHTML = ''; setTimeout(() => { demoArea.innerHTML = isText ? `<div class="simulated-text">${contentHtml}</div>` : contentHtml; demoArea.classList.remove('loading'); }, 600 + Math.random() * 400); } }
+            function triggerConfetti(elementRect) { if (!confettiContainer || prefersReducedMotion) return; const colors = ['#818cf8', '#a78bfa', '#f472b6', '#fb7185', '#c084fc', '#fde047', '#5eead4']; const numConfetti = 40; const startX = elementRect.left + elementRect.width / 2; const startY = elementRect.top + elementRect.height / 2; for (let i = 0; i < numConfetti; i++) { const confetti = document.createElement('div'); const shape = Math.random() > 0.7 ? 'triangle' : (Math.random() > 0.5 ? 'circle' : ''); confetti.className = `confetti ${shape}`; const color = colors[Math.floor(Math.random() * colors.length)]; confetti.style.setProperty('--color', color); confetti.style.left = `${startX + (Math.random() - 0.5) * 60}px`; confetti.style.top = `${startY + (Math.random() - 0.5) * 40}px`; const delay = Math.random() * 0.3; const duration = Math.random() * 1 + 1.5; confetti.style.animationDelay = `${delay}s`; confetti.style.animationDuration = `${duration}s`; confetti.style.transform = `rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.5 + 0.5})`; confettiContainer.appendChild(confetti); setTimeout(() => { confetti.remove(); }, (delay + duration) * 1000 + 200); } }
+            function focusSection(sectionElement) { if (!sectionElement || document.body.classList.contains('section-focused')) return; const offset = 50; const bodyRect = document.body.getBoundingClientRect().top; const elementRect = sectionElement.getBoundingClientRect().top; const elementPosition = elementRect - bodyRect; const offsetPosition = elementPosition - offset; window.scrollTo({ top: offsetPosition, behavior: 'smooth' }); setTimeout(() => { document.body.classList.add('section-focused'); sectionElement.classList.add('is-focused'); }, 300); }
+            function unfocusAllSections() { document.body.classList.remove('section-focused'); allSections.forEach(sec => { sec.classList.remove('is-focused'); }); }
+
+             // --- Example Content Definition (Continued) ---
+            const exampleContent = {
+                // ... (content, data, visual, personalized, teaching, efficiency, perspectives, roleplay examples from previous step) ...
+                content: `<h5>指令範例 1：生成探究問題</h5><code>請針對國中社會科「臺灣清治時期的社會生活」單元，生成 5 個不同層次的探究式學習問題 (包含事實、比較、因果、評價等層次)。</code><hr><h5>AI 可能的回應：</h5><ol><li><strong>事實：</strong>清代臺灣有哪些主要的移民族群？他們主要分布在哪裡？</li><li><strong>比較：</strong>比較「漳泉械鬥」與「原漢衝突」的發生原因與影響有何異同？</li><li><strong>因果：</strong>「開港通商」對臺灣的經濟與社會結構帶來哪些主要的改變？</li><li><strong>假設：</strong>如果清廷沒有實施「渡臺禁令」，臺灣的社會發展可能會有什麼不同？</li><li><strong>評價：</strong>你認為清代臺灣社會的「分類械鬥」現象，反映了當時社會的哪些問題？應如何評價？</li></ol><p class="mt-3 text-xs text-gray-500">(此為模擬回應，實際輸出會更詳細)</p>`,
+                data: `<h5>指令範例 1：摘要與改寫</h5><code>請將以下這段關於「權力分立」的學術文字，改寫成適合國中生理解的 100 字摘要：<br/>[貼入原始文字...]</code><hr><h5>AI 可能的回應：</h5><p>「權力分立」就像把政府的大權力分成三份：立法（制定法律）、行政（執行法律和政策）、司法（審理案件），由不同部門負責。這樣可以互相監督、限制，防止任何一個部門權力過大、亂來，保障人民的權利和自由。這也是現代民主國家重要的制度設計。</p><hr><h5>指令範例 2：比較文件</h5><code>請比較《世界人權宣言》第 1 條與《中華民國憲法》第 7 條，在內容上有何相似之處？</code><hr><h5>AI 可能的回應：</h5><p>兩者都強調了「人生而平等」的核心概念。《世界人權宣言》第 1 條指出「人人生而自由，在尊嚴和權利上一律平等」；《中華民國憲法》第 7 條規定「中華民國人民，無分男女、宗教、種族、階級、黨派，在法律上一律平等」。雖然文字表述不同，但都揭示了普世的平等價值觀。</p><p class="mt-3 text-xs text-gray-500">(此為模擬回應)</p>`,
+                visual: `<h5>指令範例 (Text-to-Image)：</h5><code>畫一個臺灣高山茶園的景象，有採茶人在霧氣繚繞的山坡上工作，背景是層疊的山巒，風格：水彩畫</code><hr><h5>AI 可能的回應：</h5><p>(此處應顯示由 AI 生成的圖片，目前以 SVG 模擬替代)</p><div class="flex justify-center my-4 bg-gray-700 p-2 rounded">${generateSvgDemo('geography')}</div><p class="mt-3 text-xs text-gray-500">(此為 SVG 模擬回應，實際圖片需由 Canva AI 等工具生成)</p>`,
+                personalized: `<h5>情境：</h5><p>學生在學習「供需法則」時，對於價格如何影響供給量和需求量感到困惑。</p><hr><h5>AI 可能的輔助：</h5><ul class="list-disc list-inside space-y-1"><li><strong>多重解釋：</strong> 提供文字解釋、圖表說明，甚至生成一個簡單的市場互動小故事。</li><li><strong>分層練習：</strong><br> - <span class="text-teal-400">基礎：</span>「當口罩價格上漲時，你想買的數量會增加還是減少？為什麼？」<br> - <span class="text-orange-400">進階：</span>「如果政府宣布下個月要補助買電動車，這個月的電動車市場供需曲線會如何變化？畫圖說明。」</li><li><strong>類比說明：</strong>「想像一下演唱會門票，如果票價很低，想買的人就多 (需求高)；如果票價很高，想買的人就少 (需求低)。反過來，如果票價高，願意賣票的黃牛就多 (供給高)。」</li></ul><p class="mt-3 text-xs text-gray-500">(此為模擬回應)</p>`,
+                teaching: `<h5>指令範例 (EdCafe AI)：</h5><code>針對國中社會科「公民的權利與義務」單元，設計一個包含「引起動機、發展活動、綜合活動」的 45 分鐘教案，需包含至少一種合作學習策略，並列出所需教材。</code><hr><h5>AI 可能的回應 (摘要)：</h5><ul class="list-disc list-inside space-y-1"><li><strong>主題：</strong> 公民的權利與義務</li><li><strong>教學目標：</strong> [AI 生成目標...]</li><li><strong>引起動機 (5min)：</strong> 播放新聞片段 (如集會遊行、納稅新聞)，提問「這些活動和我們有什麼關係？」</li><li><strong>發展活動 (25min)：</strong><br> - <span class="text-indigo-400">權利講解：</span> 教師簡介憲法基本權利 (平等、自由、受益、參政)。<br> - <span class="text-purple-400">合作學習 (Jigsaw II)：</span> 將學生分組，每組再細分專家小組研究不同權利，回原組分享。<br> - <span class="text-indigo-400">義務講解：</span> 教師說明納稅、服兵役、受國民教育等義務。<br> - <span class="text-pink-400">權利義務配對遊戲：</span> (AI 可生成卡牌內容)。</li><li><strong>綜合活動 (10min)：</strong> 師生討論權利與義務的關係，完成 EdCafe AI 生成的重點整理學習單。</li><li><strong>所需教材：</strong> 新聞影片、權利義務卡牌 (AI 生成)、學習單 (AI 生成)。</li></ul><p class="mt-3 text-xs text-gray-500">(此為模擬回應)</p>`,
+                efficiency: `<h5>情境：</h5><p>老師需要快速製作一份關於「臺灣常見的自然災害」的圖文簡報，包含颱風、地震、土石流。</p><hr><h5>AI 的幫助：</h5><ol class="list-decimal list-inside space-y-1"><li><strong>(EdCafe AI / Magic Write) 生成大綱/內容：</strong> 指令 <code>生成一份關於臺灣常見自然災害(颱風、地震、土石流)的簡報大綱，包含成因、影響、防災措施。</code> AI 生成結構化內容。</li><li><strong>(Canva Magic Design) 生成簡報：</strong> 將 AI 生成的文字內容貼入 Canva Magic Design，或直接輸入主題 <code>臺灣常見自然災害與防災</code>，AI 自動生成多款包含相關圖片和版面的簡報模板。</li><li><strong>(Canva Text to Image) 補充圖片：</strong> 若模板圖片不夠，可用 Text to Image 生成特定災害場景圖片，如 <code>土石流沖毀道路的畫面，寫實風格</code>。</li></ol><p class="mt-2"><strong>結果：</strong> 老師只需進行內容審閱、圖片微調和設計風格選擇，即可在短時間內完成一份視覺豐富的簡報，節省大量搜尋圖片和排版的時間。</p><p class="mt-3 text-xs text-gray-500">(此為模擬回應)</p>`,
+                perspectives: `<h5>指令範例：</h5><code>針對「是否應對進口奢侈品課徵更高的關稅」此議題，分別生成支持與反對立場的主要論點各三項。</code><hr><h5>AI 可能的回應：</h5><p class="font-semibold text-green-400">支持提高關稅：</p><ul class="list-disc list-inside space-y-1 mb-3"><li><strong>保護國內產業：</strong> 提高進口成本，鼓勵消費者購買國貨，促進本土品牌發展。</li><li><strong>增加國家稅收：</strong> 關稅收入可用於公共建設或社會福利。</li><li><strong>縮小貧富差距：</strong> 奢侈品多為富人消費，高關稅可抑制過度消費，具財富重分配效果。</li></ul><p class="font-semibold text-red-400">反對提高關稅：</p><ul class="list-disc list-inside space-y-1"><li><strong>引發貿易報復：</strong> 可能導致他國也對我國出口商品提高關稅，損害出口產業。</li><li><strong>損害消費者選擇：</strong> 限制消費者購買外國商品的自由，選擇變少。</li><li><strong>走私問題惡化：</strong> 過高關稅可能刺激走私行為，反而減少稅收。</li></ul><p class="mt-3 text-xs text-gray-500">(此為模擬回應，可用於課堂討論或辯論準備)</p>`,
+                roleplay: `<h5>指令範例 1：歷史人物對話</h5><code>請生成一段鄭成功與荷蘭長官揆一在熱蘭遮城談判投降條件的模擬對話，體現雙方立場與當時情境。</code><hr><h5>指令範例 2：模擬法庭</h5><code>設定一個模擬法庭場景：原告是一位因工廠排放廢水導致農田受汙染的農民，被告是工廠老闆。請分別生成原告律師和被告律師的主要辯護論點概要。</code><hr><h5>指令範例 3：國際會議</h5><code>模擬一場聯合國氣候變遷會議，請生成代表「已開發國家」和「開發中國家」的代表，針對減碳責任分配的發言稿概要。</code><hr><p class="mt-3 text-xs text-gray-500">(AI 可根據指令生成相應的角色劇本或論點，增加學習代入感)</p>`,
+
+                'lesson-plan': `<h5>指令範例 (EdCafe AI)：</h5><code>請為國中社會設計一節 45 分鐘教案，主題是「臺灣的選舉制度」，教學目標包含認識選舉原則、了解主要選舉類型，並設計一個課堂活動。</code><hr><h5>AI 可能的回應 (摘要)：</h5><ul class="list-disc list-inside space-y-1"><li><strong>主題：</strong> 臺灣的選舉制度</li><li><strong>適用年級：</strong> 國中</li><li><strong>教學目標：</strong><br> 1. 學生能說出選舉的四大原則(普通、平等、直接、無記名)。<br> 2. 學生能列舉臺灣常見的公職人員選舉類型(總統、立委、地方首長/民代)。<br> 3. 學生能體會公平選舉的重要性。</li><li><strong>教學流程建議：</strong><br> - <strong>引起動機 (5min)：</strong> 提問學生是否看過投票？或展示選舉新聞圖片，引導思考「選賢與能」。<br> - <strong>發展活動 (30min)：</strong><br>   (1) <span class="text-indigo-400">選舉原則講解：</span> 教師透過舉例說明四原則。(AI 可提供範例)<br>   (2) <span class="text-purple-400">選舉類型介紹：</span> 簡介總統、立委、縣市長等選舉。(AI 可生成簡介卡)<br>   (3) <span class="text-pink-400">模擬投票活動：</span> 設計一個簡單的班級事務投票(如：午餐水果選擇)，讓學生實際體驗投票流程，強調秘密投票。</li><li><strong>綜合活動 (10min)：</strong> 討論模擬投票的發現，教師總結選舉制度的功能與重要性。 EdCafe AI 可生成隨堂測驗題。</li></ul><p class="mt-3 text-xs text-gray-500">(此為 EdCafe AI 可能產出的內容概要)</p>`, // Completing this entry
+                'assessment': `<h5>指令範例 (EdCafe AI)：</h5><code>針對國中公民「法律基本概念」單元，生成包含 3 題選擇題、2 題是非題、1 題簡答題的隨堂評量卷。</code><hr><h5>AI 可能的回應 (摘要)：</h5><p><strong>選擇題：</strong></p><ol class="list-decimal list-inside space-y-1"><li>下列何者是規範人與人之間權利義務關係最主要的法律？ (A)憲法 <span class="text-teal-400">(B)民法</span> (C)刑法 (D)行政法。</li><li>國家制定用以處罰犯罪行為的法律稱為？ (A)民法 (B)行政法 <span class="text-teal-400">(C)刑法</span> (D)憲法。</li><li>(更多選擇題...)</li></ol><p class="mt-2"><strong>是非題：</strong></p><ol class="list-decimal list-inside space-y-1"><li>( <span class="text-teal-400">O</span> ) 我國法律規定，年滿 18 歲即為成年。</li><li>( <span class="text-teal-400">O</span> ) 在法院判決確定前，應推定被告無罪。</li></ol><p class="mt-2"><strong>簡答題：</strong></p><p>請簡述「法律之前人人平等」的意義。(AI 提供參考答案...)</p><hr><h5>指令範例 2：學習單</h5><code>設計一份關於「全球暖化」的學習單，包含事實查找、原因分析、影響評估、解決方案思考等區塊。</code><p class="mt-3 text-xs text-gray-500">(AI 可快速生成多種類型的評量工具)</p>`,
+                'differentiation': `<h5>情境：</h5><p>教授「美國獨立戰爭」時，班級學生程度差異較大。</p><hr><h5>AI 可能的輔助 (EdCafe AI)：</h5><ul class="list-disc list-inside space-y-2"><li><strong>文本分級：</strong> 輸入獨立宣言段落，要求 AI 產生三種不同閱讀水平的版本：<br> - <span class="text-teal-400">基礎版：</span> 使用更簡單詞彙，句子較短。<br> - <span class="text-gray-300">標準版：</span> 符合課本程度。<br> - <span class="text-orange-400">進階版：</span> 加入更多背景知識或註釋。</li><li><strong>任務分層：</strong><br> - <span class="text-teal-400">A組 (基礎)：</span> 繪製獨立戰爭時間線，標示關鍵事件。<br> - <span class="text-gray-300">B組 (標準)：</span> 分析獨立戰爭爆發的主要原因 (至少三點)。<br> - <span class="text-orange-400">C組 (進階)：</span> 比較美國獨立宣言與法國人權宣言的異同，並評價其歷史意義。</li><li><strong>評量調整：</strong> 針對不同程度學生，生成不同難度的測驗題目。</li></ul><p class="mt-3 text-xs text-gray-500">(AI 能協助教師快速產生差異化的教學材料與活動)</p>`,
+                 'glossary': `<h5>指令範例 (EdCafe AI)：</h5><code>請針對國中社會科「經濟學基礎」單元，生成包含 5 個關鍵詞彙及其簡要解釋的詞彙表。</code><hr><h5>AI 可能的回應：</h5><ol class="list-decimal list-inside space-y-2"><li><strong class="text-indigo-400">稀少性 (Scarcity)：</strong> 指人類的慾望無窮，但用來滿足慾望的資源(如時間、金錢、天然資源)卻是有限的狀況。這是經濟學研究的基本前提。</li><li><strong class="text-purple-400">機會成本 (Opportunity Cost)：</strong> 當你為了做某個選擇而必須放棄的其他選擇中，價值最高的那一個。例如，選擇看電影的機會成本可能是放棄念書的時間。</li><li><strong class="text-pink-400">供給 (Supply)：</strong> 在特定時間和價格下，生產者願意且能夠提供 商品或服務的數量。通常價格越高，供給量越多。</li><li><strong class="text-teal-400">需求 (Demand)：</strong> 在特定時間和價格下，消費者願意且能夠購買 商品或服務的數量。通常價格越高，需求量越少。</li><li><strong class="text-yellow-400">市場均衡 (Market Equilibrium)：</strong> 市場上的供給量等於需求量的狀態，此時決定的價格稱為均衡價格，數量稱為均衡數量。</li></ol><p class="mt-3 text-xs text-gray-500">(AI 可快速整理特定主題的關鍵概念)</p>`
+            };
+
+            // --- Run Initializations ---
+            initProgressBar();
+            initMobileMenu();
+            initSmoothScroll();
+            initScrollReveal();
+            initModals();
+            initCanvaTabs();
+            initDemoAreas();
+            initMascotAndConfetti();
+            initSectionFocus();
+
+        }); // End DOMContentLoaded
+    </script>
+
+</body>
+</html>
