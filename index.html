@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="探索如何運用 Canva AI 與 EdCafe AI 等工具，賦能社會領域教學，提升效率與創意。由邱俐瑜分享。">
-    <title>AI賦能社會領域教學-Canva AI與EdCafe AI實戰應用✨</title> <!-- Updated Title -->
+    <meta name="description" content="探索如何運用 Canva AI、EdCafe AI 與 Napkin AI 等工具，賦能社會領域教學，提升效率與創意。由邱俐瑜分享。">
+    <title>AI賦能社會領域教學-Canva/EdCafe/Napkin AI實戰應用✨</title> <!-- Updated Title -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" href="image/LiyuChillGuy(W).svg" type="image/svg+xml">
@@ -15,6 +15,8 @@
             --brand-pink:   #f472b6; /* Slightly brighter */
             --brand-teal:   #5eead4; /* Slightly brighter */
             --brand-yellow: #fde047; /* Slightly brighter */
+            --brand-green:  #4ade80; /* Added for Napkin */
+            --brand-orange: #fb923c; /* Added for Napkin */
 
             /* --- Dark Theme Colors --- */
             --bg-main: #111827;      /* gray-900 */
@@ -31,8 +33,10 @@
             --border-color-light: #6b7280; /* gray-500 */
 
             /* Gradients adjusted for dark */
-            --bg-section-grad-1: linear-gradient(180deg, rgba(31, 41, 55, 0.6) 0%, rgba(55, 48, 163, 0.3) 100%); /* Dark Gray to Dark Indigo Tint */
-            --bg-section-grad-2: linear-gradient(180deg, rgba(55, 65, 81, 0.6) 0%, rgba(131, 24, 67, 0.3) 100%); /* Dark Gray to Dark Pink Tint */
+            --bg-section-grad-1: linear-gradient(180deg, rgba(31, 41, 55, 0.7) 0%, rgba(55, 48, 163, 0.4) 100%); /* Dark Gray to Dark Indigo Tint */
+            --bg-section-grad-2: linear-gradient(180deg, rgba(55, 65, 81, 0.7) 0%, rgba(131, 24, 67, 0.4) 100%); /* Dark Gray to Dark Pink Tint */
+            --bg-section-grad-3: linear-gradient(180deg, rgba(31, 41, 55, 0.7) 0%, rgba(4, 120, 87, 0.4) 100%); /* Dark Gray to Dark Teal/Green Tint */
+
 
             /* Shadows adjusted for dark */
             --shadow-color-indigo: rgba(129, 140, 248, 0.25); /* Brighter indigo shadow */
@@ -64,9 +68,16 @@
         .section-bg-alt { background-color: var(--bg-section); } /* Use var for section bg */
         .section-bg-grad-1 { background: var(--bg-section-grad-1); }
         .section-bg-grad-2 { background: var(--bg-section-grad-2); }
+        .section-bg-grad-3 { background: var(--bg-section-grad-3); } /* Added for Napkin */
 
         /* --- Layout & Spacing --- */
-        .section { scroll-margin-top: 5rem; padding-top: 5rem; padding-bottom: 5rem; position: relative; }
+        .section {
+            scroll-margin-top: 5rem;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            position: relative;
+            transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, z-index 0s linear 0.4s;
+        }
         #agenda { padding-top: 3rem; }
         .section-header { display: flex; justify-content: center; align-items: center; margin-bottom: 3rem; position: relative;}
         .section-title { text-align: center; color: var(--text-heading); } /* Ensure heading color */
@@ -120,6 +131,8 @@
             border-radius: 0.75rem;
             background-color: var(--bg-light-accent); /* Use lighter dark */
             color: var(--text-main);
+            /* display: flex;  Ensure flex display */
+            /* align-items: flex-start; Vertically align items at the start */
         }
         .agenda-item::before {
             content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%;
@@ -136,7 +149,20 @@
         }
         .agenda-item .font-bold { transition: color 0.3s; }
         .agenda-item:hover .font-bold { color: var(--brand-purple); }
-        /* Agenda number circles - using Tailwind directly now */
+        .agenda-item-number {
+            flex-shrink: 0; /* Prevent number from shrinking */
+            width: 2rem; height: 2rem; /* Tailwind w-8 h-8 */
+            border-radius: 9999px; /* Tailwind rounded-full */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem; /* Tailwind mr-4 */
+            font-weight: 700; /* Tailwind font-bold */
+        }
+        .agenda-item-text {
+            flex-grow: 1; /* Allow text to take remaining space */
+        }
+
 
         /* --- Animations --- */
         /* Animations remain largely the same, but ensure colors stand out */
@@ -148,14 +174,18 @@
         @keyframes bobbing { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
         @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         @keyframes confetti-burst { 0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; } 100% { transform: translateY(-150px) scale(1) rotate(360deg); opacity: 0; } }
-        @keyframes mascot-enter { from { transform: translateY(-100%) scale(0.5); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+        /* @keyframes mascot-enter { from { transform: translateY(-100%) scale(0.5); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } } */
+        @keyframes spin { to { transform: rotate(360deg); } } /* For loader */
+        @keyframes steam { 0% { transform: translateY(0) scale(1); opacity: 0.7; } 100% { transform: translateY(-15px) scale(0.8); opacity: 0; } } /* Steam for Edcafe */
+        @keyframes napkin-link { 0% { stroke-dashoffset: 30; } 100% { stroke-dashoffset: 0; } } /* Napkin linking lines */
+
 
         .floating { animation: floating 3.5s ease-in-out infinite; }
         .pulse-btn { animation: pulse 2.5s infinite 1s; }
         .rotate-slow { animation: rotate 35s linear infinite; }
         .glow-hero-btn { animation: glow 2.5s ease-in-out infinite alternate; }
         .bobbing-mascot { animation: bobbing 4s ease-in-out infinite; }
-        .mascot-entry { animation: mascot-enter 0.8s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+        /* .mascot-entry { animation: mascot-enter 0.8s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; } */ /* Removed as mascot is always fixed */
         .shimmer-text { background: linear-gradient(90deg, var(--brand-indigo), var(--brand-pink), var(--brand-teal), var(--brand-indigo)); background-size: 300% auto; /* Text color transparent is handled by gradient-text class */ animation: shimmer 4s linear infinite; }
 
 
@@ -207,6 +237,14 @@
         #modalBody hr { border-color: var(--border-color); margin: 1rem 0; }
         #modalBody ul, #modalBody ol { padding-left: 1.5rem; margin-top: 0.5rem; }
         #modalBody li { margin-bottom: 0.25rem; }
+        #modalBody .napkin-node { /* Style for Napkin example */
+            background-color: var(--bg-light-accent);
+            border: 1px solid var(--brand-green);
+            border-radius: 8px; padding: 0.5rem 0.8rem; margin: 0.5rem 0;
+            font-size: 0.9em;
+        }
+        #modalBody .napkin-link { color: var(--brand-orange); font-style: italic; }
+
 
         /* --- Demo Area (Adjusted for Dark) --- */
         .demo-area {
@@ -251,23 +289,26 @@
         }
 
         /* --- Prompt Example Hover (Adjusted for Dark) --- */
-        .prompt-example, .image-prompt-example, .design-example {
+        .prompt-example, .image-prompt-example, .design-example, .napkin-example { /* Added napkin-example */
             transition: all 0.25s ease;
             border: 1px solid var(--border-color);
             background-color: var(--bg-card-alt); /* Match demo area inner bg */
             color: var(--text-main);
+            cursor: pointer; /* Add cursor */
         }
-        .prompt-example:hover, .image-prompt-example:hover, .design-example:hover {
+        .prompt-example:hover, .image-prompt-example:hover, .design-example:hover, .napkin-example:hover { /* Added napkin-example */
             background-color: var(--bg-light-accent); /* Lighter dark on hover */
             transform: translateX(4px) scale(1.01);
             border-color: var(--brand-indigo);
             box-shadow: 3px 3px 8px rgba(129, 140, 248, 0.15); /* Use brighter shadow color */
         }
         /* Ensure code inside examples uses light text */
-         .prompt-example code, .image-prompt-example code, .design-example code {
+         .prompt-example code, .image-prompt-example code, .design-example code, .napkin-example code { /* Added napkin-example */
             color: var(--text-muted);
+            display: block; /* Ensure code takes full width for click */
+            pointer-events: none; /* Prevent code from intercepting click */
          }
-        .prompt-example:hover code, .image-prompt-example:hover code, .design-example:hover code {
+        .prompt-example:hover code, .image-prompt-example:hover code, .design-example:hover code, .napkin-example:hover code { /* Added napkin-example */
             color: var(--text-main);
         }
 
@@ -276,6 +317,9 @@
         .mascot-fixed { /* Shadow might need adjustment */
             position: fixed; bottom: 15px; right: 15px; width: 75px; height: auto; z-index: 55;
             transition: transform 0.3s ease-out; cursor: pointer;
+            /* Ensure it's always visible, remove entry animation */
+             opacity: 1;
+             transform: translateY(0) scale(1);
         }
         .mascot-fixed img {
              width: 100%; height: auto;
@@ -284,7 +328,8 @@
         }
          .mascot-fixed:hover img { transform: scale(1.2) rotate(8deg); }
          .mascot-fixed.clicked img { animation: mascot-jump 0.5s ease-out; }
-         .mascot-hero { position: absolute; bottom: 10%; left: 5%; width: 120px; z-index: 15; opacity: 0; }
+         /* Hero mascot removed as fixed is persistent */
+         /* .mascot-hero { position: absolute; bottom: 10%; left: 5%; width: 120px; z-index: 15; opacity: 0; } */
          @keyframes mascot-jump { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.3) rotate(-10deg) translateY(-25px); } }
 
         /* --- Confetti Styles --- */
@@ -304,19 +349,21 @@
         body.section-focused .section-focus-overlay { opacity: 1; visibility: visible; transition: opacity 0.4s ease; }
         body.section-focused { overflow: hidden; }
         body.section-focused .section.is-focused {
-            z-index: 80;
+            z-index: 80 !important; /* Force higher z-index */
             transform: scale(1.03);
-            /* White glow might be too much, try brand color glow or darker shadow */
             box-shadow: 0 0 0 10px rgba(55, 65, 81, 0.5), 0 30px 60px -15px rgba(0, 0, 0, 0.5); /* Darker glow/shadow */
-            transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s;
-             border-radius: 1.25rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s linear 0s, opacity 0.4s ease, filter 0.4s ease; /* Added opacity/filter transition */
+            opacity: 1 !important; /* Ensure focused section is fully visible */
+            filter: none !important; /* Ensure focused section is not blurred */
+            border-radius: 1.25rem;
         }
         body.section-focused .section:not(.is-focused) {
-             opacity: 0.2; /* Reduce opacity more */
-             filter: blur(4px); /* Increase blur */
+             opacity: 0.2 !important; /* Reduce opacity more */
+             filter: blur(4px) !important; /* Increase blur */
              transform: scale(0.98);
              pointer-events: none;
-             transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+             z-index: 1 !important; /* Ensure non-focused are behind */
+             transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease, z-index 0s linear 0.4s;
         }
         .section-focus-trigger {
             position: absolute; top: 1.5rem; right: 1.5rem;
@@ -325,7 +372,7 @@
             border: 1px solid rgba(255,255,255,0.1); /* Light border */
             border-radius: 9999px; padding: 0.5rem;
             color: var(--brand-indigo); /* Bright icon color */
-            cursor: pointer; transition: all 0.2s ease; opacity: 0.7; z-index: 10;
+            cursor: pointer; transition: all 0.2s ease; opacity: 0.7; z-index: 10; /* Keep z-index relatively low within section */
         }
         .section-focus-trigger:hover {
             background-color: rgba(75, 85, 99, 0.9); /* Darker hover bg */
@@ -333,7 +380,7 @@
             transform: scale(1.1); opacity: 1;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
-        .section-focus-close-btn { position: absolute; top: 1rem; right: 1rem; z-index: 85; }
+        /* Close button removed, using overlay click */
 
         /* --- Footer --- */
         /* Already dark, looks good. Ensure link colors contrast */
@@ -345,16 +392,15 @@
         /* --- Reduced Motion --- */
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            .floating, .pulse-btn, .rotate-slow, .glow-hero-btn, .bobbing-mascot, .shimmer-text, .card:hover, .agenda-item, .tab-content.active, .reveal, .reveal-stagger > *, .agenda-reveal > li, .mascot-fixed:hover img, .mascot-fixed.clicked img, .mascot-entry, .confetti, .section.is-focused, .section:not(.is-focused) { animation: none !important; transition: none !important; }
+            .floating, .pulse-btn, .rotate-slow, .glow-hero-btn, .bobbing-mascot, .shimmer-text, .card:hover, .agenda-item, .tab-content.active, .reveal, .reveal-stagger > *, .agenda-reveal > li, .mascot-fixed:hover img, .mascot-fixed.clicked img, .mascot-entry, .confetti, .section.is-focused, .section:not(.is-focused), .section-focus-overlay, .modal-overlay, .modal-content, .napkin-node-link /* Added napkin link */ { animation: none !important; transition: none !important; }
             .reveal, .reveal-stagger > *, .agenda-reveal > li { opacity: 1 !important; transform: none !important; }
             .card:hover { transform: none; box-shadow: var(--shadow-general); } /* Use default dark shadow */
             .card::after { opacity: 0 !important; }
             .progress-bar { transition: none; }
-            .modal-overlay, .modal-content { transition: none; }
             .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
             .mascot-fixed:hover img { transform: none; }
-            .section.is-focused { transform: none !important; box-shadow: 0 0 0 10px rgba(55, 65, 81, 0.5), 0 30px 60px -15px rgba(0, 0, 0, 0.5) !important; } /* Dark focus shadow */
-            .section:not(.is-focused) { opacity: 1 !important; filter: none !important; transform: none !important; }
+            body.section-focused .section.is-focused { transform: none !important; box-shadow: 0 0 0 10px rgba(55, 65, 81, 0.5), 0 30px 60px -15px rgba(0, 0, 0, 0.5) !important; } /* Dark focus shadow */
+            body.section-focused .section:not(.is-focused) { opacity: 1 !important; filter: none !important; transform: none !important; }
         }
         /* --- Tooltip & Focus --- */
         .tool-tip { position: relative; cursor: pointer; display: inline-block; }
@@ -367,7 +413,6 @@
         .tool-tip .tooltip-text::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: var(--brand-indigo) transparent transparent transparent; }
         .tool-tip:hover .tooltip-text, .tool-tip:focus .tooltip-text { visibility: visible; opacity: 1; }
         *:focus-visible {
-            /* Orange is high contrast, keep for now, or switch to a light blue */
             outline: 3px solid #60a5fa; /* Light Blue */
             outline-offset: 2px; border-radius: 4px;
             box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.5);
@@ -375,7 +420,7 @@
         *:focus:not(:focus-visible) { outline: none; }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-200"> <!-- Changed body bg and text -->
+<body class="bg-gray-900 text-gray-200">
     <!-- Progress Bar -->
     <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
      <!-- Confetti Container -->
@@ -384,48 +429,44 @@
      <div class="mascot-fixed bobbing-mascot" id="fixed-mascot-container">
         <img id="fixed-mascot" src="image/LiyuChillGuy(W).svg" alt="吉祥物 Liyu">
      </div>
+     <!-- Section Focus Overlay -->
+     <div id="section-focus-overlay" class="section-focus-overlay"></div>
 
     <!-- Hero Section -->
-    <header class="gradient-bg text-white relative overflow-hidden pb-12"> <!-- gradient-bg still works well -->
+    <header class="gradient-bg text-white relative overflow-hidden pb-12">
         <div class="absolute inset-0 z-0 opacity-60 mix-blend-overlay">
-             <!-- Adjusted opacities/colors for dark if needed, but overlay might handle it -->
             <div class="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full filter blur-2xl animate-pulse delay-100"></div>
             <div class="absolute bottom-10 right-5 w-56 h-56 bg-white/10 rounded-2xl filter blur-3xl rotate-slow"></div>
             <div class="absolute top-1/3 right-1/4 w-24 h-24 border-2 border-white/15 rounded-full animate-ping opacity-50"></div>
             <div class="absolute bottom-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-white/10 to-white/0 rounded-full filter blur-xl rotate-slow animation-delay-2000"></div>
         </div>
-         <!-- Hero Mascot -->
-        <div class="mascot-hero mascot-entry">
-             <img src="image/LiyuChillGuy(W).svg" alt="Liyu Mascot">
-        </div>
+         <!-- Hero Mascot Removed: Fixed mascot is now persistent -->
         <div class="container mx-auto px-4 py-24 md:py-32 relative z-10">
             <div class="max-w-4xl mx-auto text-center">
                  <div class="mb-6 reveal">
-                    <!-- Hero icon SVG colors might need tweaking if they look dull -->
                     <svg id="hero-icon" class="w-24 h-24 mx-auto transition-transform duration-500 ease-out hover:scale-110 hover:rotate-[15deg] cursor-pointer" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%"><stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:0.6" /><stop offset="100%" style="stop-color:rgb(255,255,255);stop-opacity:0.1" /></radialGradient> </defs> <circle cx="100" cy="100" r="80" fill="url(#grad1)"/> <circle cx="100" cy="100" r="60" fill="white" opacity="0.3"/> <path class="pulse-btn" d="M65,85 Q100,65 135,85 L135,115 Q100,135 65,115 Z" fill="white" opacity="0.6"/> <path d="M70,70 L90,50 L110,70 L130,50" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/> </svg>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight reveal text-gray-50" style="--stagger-index: 1;">AI賦能社會領域教學</h1> <!-- Ensure bright text -->
-                <p class="text-xl md:text-3xl mb-8 font-light reveal text-gray-200" style="--stagger-index: 2;">Canva AI 與 EdCafe AI 實戰應用</p>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight reveal text-gray-50" style="--stagger-index: 1;">AI賦能社會領域教學</h1>
+                <p class="text-xl md:text-3xl mb-8 font-light reveal text-gray-200" style="--stagger-index: 2;">Canva AI / EdCafe AI / Napkin AI 實戰應用</p> <!-- Updated Subtitle -->
                 <div class="flex flex-col md:flex-row justify-center items-center gap-4 reveal" style="--stagger-index: 3;">
-                    <div class="bg-gray-900/30 backdrop-blur-sm rounded-lg px-6 py-3 hover:bg-gray-900/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"> <!-- Darker transparent bg -->
+                    <div class="bg-gray-900/30 backdrop-blur-sm rounded-lg px-6 py-3 hover:bg-gray-900/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
                         <p class="text-lg text-gray-100">日期：114年4月30日(三和國中場)｜時間：1400-1600</p>
                     </div>
                 </div>
                 <div class="mt-12 reveal" style="--stagger-index: 4;">
-                     <a href="#agenda" id="exploreBtn" class="inline-block bg-indigo-500 text-white hover:bg-indigo-600 font-medium py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 glow-hero-btn"> <!-- Changed button style -->
+                     <a href="#agenda" id="exploreBtn" class="inline-block bg-indigo-500 text-white hover:bg-indigo-600 font-medium py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 glow-hero-btn">
                         分享人：邱俐瑜
                     </a>
                 </div>
             </div>
         </div>
         <div class="absolute bottom-0 left-0 w-full h-24">
-             <!-- Changed fill color to match dark body background -->
              <svg class="w-full h-full text-gray-900 fill-current" viewBox="0 0 1440 100" preserveAspectRatio="none"> <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,80C672,64,768,64,864,64C960,64,1056,64,1152,74.7C1248,85,1344,107,1392,117.3L1440,128L1440,101L0,101Z"></path> </svg>
         </div>
     </header>
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-[60] bg-gray-900/95 shadow-lg backdrop-blur-sm"> <!-- Dark nav bg, stronger shadow -->
+    <nav class="sticky top-0 z-[60] bg-gray-900/95 shadow-lg backdrop-blur-sm">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between py-3">
                 <div class="text-xl font-bold gradient-text">
@@ -437,75 +478,75 @@
                     <a href="#ai-potential" class="text-gray-300 hover:text-indigo-400 transition-colors nav-link px-1 py-1 relative group"><span class="relative z-10">AI 潛力</span><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span></a>
                     <a href="#canva-ai" class="text-gray-300 hover:text-indigo-400 transition-colors nav-link px-1 py-1 relative group"><span class="relative z-10">Canva AI</span><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span></a>
                     <a href="#edcafe-ai" class="text-gray-300 hover:text-indigo-400 transition-colors nav-link px-1 py-1 relative group"><span class="relative z-10">EdCafe AI</span><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span></a>
+                    <a href="#napkin-ai" class="text-gray-300 hover:text-indigo-400 transition-colors nav-link px-1 py-1 relative group"><span class="relative z-10">Napkin AI</span><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-full"></span></a> <!-- Added Napkin Nav -->
                 </div>
                 <button id="mobile-menu-button" aria-label="開啟選單" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded p-1">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg>
                 </button>
             </div>
-            <div id="mobile-menu" class="hidden md:hidden py-2 absolute top-full left-0 w-full bg-gray-900 shadow-lg border-t border-gray-700 transition-all duration-300 ease-out transform origin-top scale-y-0 opacity-0"> <!-- Dark mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden py-2 absolute top-full left-0 w-full bg-gray-900 shadow-lg border-t border-gray-700 transition-all duration-300 ease-out transform origin-top scale-y-0 opacity-0">
                 <a href="#agenda" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">演講大綱</a>
                 <a href="#why-now" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">為什麼是現在</a>
                 <a href="#ai-potential" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">AI 潛力</a>
                 <a href="#canva-ai" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">Canva AI</a>
                 <a href="#edcafe-ai" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">EdCafe AI</a>
+                <a href="#napkin-ai" class="block py-2 px-4 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 nav-link rounded-md mx-2">Napkin AI</a> <!-- Added Napkin Nav -->
             </div>
         </div>
     </nav>
-
-     <!-- Section Focus Overlay -->
-     <div id="section-focus-overlay" class="section-focus-overlay"></div>
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 relative">
 
         <!-- Agenda Section -->
-        <section id="agenda" class="section max-w-5xl mx-auto mb-16 md:mb-24 section-bg-alt rounded-2xl shadow-xl"> <!-- Dark section bg, shadow -->
+        <section id="agenda" class="section max-w-5xl mx-auto mb-16 md:mb-24 section-bg-alt rounded-2xl shadow-xl" role="region" aria-labelledby="agenda-title">
             <div class="section-header reveal">
-                <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">演講大綱</h2>
-                <button class="section-focus-trigger" aria-label="聚焦此區塊">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg>
+                <h2 id="agenda-title" class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">演講大綱</h2>
+                <button class="section-focus-trigger" aria-label="聚焦 演講大綱 區塊">
+                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m7 1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v4m0 0h-4m4 0l-5-5"></path></svg> <!-- Corrected Icon -->
                 </button>
             </div>
-            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">今天我們將探討 AI 如何革新社會領域教學，並實際體驗兩款強大工具</p>
+            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">今天我們將探討 AI 如何革新社會領域教學，並實際體驗三款強大工具</p> <!-- Updated count -->
             <div class="reveal" style="--stagger-index: 2;">
                  <div class="gradient-bg px-6 py-4 rounded-t-2xl"> <h2 class="text-2xl font-bold text-white">Agenda</h2> </div>
-                <div class="p-6 bg-gray-700 rounded-b-2xl"> <!-- Darker list background -->
+                <div class="p-6 bg-gray-700 rounded-b-2xl">
                      <ul class="space-y-3 agenda-reveal">
-                        <!-- Agenda items - Adjusted background/text using Tailwind -->
-                        <li class="agenda-item" style="--stagger-index: 0;"> <span class="bg-indigo-800 text-indigo-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">1</span> <span><span class="font-medium">為什麼是現在？</span> AI 時代對教育的影響與契機</span> </li>
-                        <li class="agenda-item" style="--stagger-index: 1;"> <span class="bg-purple-800 text-purple-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">2</span> <span><span class="font-medium">AI 能為社會領域做什麼？</span> 簡介 AI 在教學上的潛力</span> </li>
-                        <li class="agenda-item" style="--stagger-index: 2;"> <span class="bg-pink-800 text-pink-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">3</span> <span><span class="font-medium">教學好夥伴 (一)：Canva AI</span> - 整合設計與內容生成</span> </li>
-                        <li class="agenda-item" style="--stagger-index: 3;"> <span class="bg-indigo-800 text-indigo-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">4</span> <span><span class="font-medium">Canva AI 實戰應用 Show Time!</span> (Magic Write, Text to Image, Magic Design)</span> </li>
-                        <li class="agenda-item" style="--stagger-index: 4;"> <span class="bg-purple-800 text-purple-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">5</span> <span><span class="font-medium">教學好夥伴 (二)：EdCafe AI</span> - 專為教育設計的 AI 助手</span> </li>
-                        <li class="agenda-item" style="--stagger-index: 5;"> <span class="bg-pink-800 text-pink-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">6</span> <span><span class="font-medium">EdCafe AI 實戰應用 Show Time!</span> (教案設計、評量工具、差異化教學)</span> </li>
-                        <li class="agenda-item" style="--stagger-index: 6;"> <span class="bg-indigo-800 text-indigo-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">7</span> <span><span class="font-medium">教學案例分享：</span> 雙劍合璧！Canva AI + EdCafe AI 設計一堂課</span> </li>
-                        <li class="agenda-item" style="--stagger-index: 7;"> <span class="bg-purple-800 text-purple-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">8</span> <span><span class="font-medium">教學考量與倫理：</span> 擁抱 AI，但保持清醒</span> </li>
-                        <li class="agenda-item" style="--stagger-index: 8;"> <span class="bg-pink-800 text-pink-100 w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center mr-4 font-bold">9</span> <span><span class="font-medium">總結與 Q&A</span></span> </li>
+                        <!-- Agenda items - Added flex items-start for layout -->
+                        <li class="agenda-item flex items-start" style="--stagger-index: 0;"> <span class="agenda-item-number bg-indigo-800 text-indigo-100">1</span> <span class="agenda-item-text"><span class="font-medium">為什麼是現在？</span> AI 時代對教育的影響與契機</span> </li>
+                        <li class="agenda-item flex items-start" style="--stagger-index: 1;"> <span class="agenda-item-number bg-purple-800 text-purple-100">2</span> <span class="agenda-item-text"><span class="font-medium">AI 能為社會領域做什麼？</span> 簡介 AI 在教學上的潛力</span> </li>
+                        <li class="agenda-item flex items-start" style="--stagger-index: 2;"> <span class="agenda-item-number bg-pink-800 text-pink-100">3</span> <span class="agenda-item-text"><span class="font-medium">教學好夥伴 (一)：Canva AI</span> - 整合設計與內容生成</span> </li>
+                        <li class="agenda-item flex items-start" style="--stagger-index: 3;"> <span class="agenda-item-number bg-indigo-800 text-indigo-100">4</span> <span class="agenda-item-text"><span class="font-medium">Canva AI 實戰應用 Show Time!</span> (Magic Write, Text to Image, Magic Design)</span> </li>
+                        <li class="agenda-item flex items-start" style="--stagger-index: 4;"> <span class="agenda-item-number bg-purple-800 text-purple-100">5</span> <span class="agenda-item-text"><span class="font-medium">教學好夥伴 (二)：EdCafe AI</span> - 專為教育設計的 AI 助手</span> </li>
+                        <li class="agenda-item flex items-start" style="--stagger-index: 5;"> <span class="agenda-item-number bg-pink-800 text-pink-100">6</span> <span class="agenda-item-text"><span class="font-medium">EdCafe AI 實戰應用 Show Time!</span> (教案設計、評量工具、差異化教學)</span> </li>
+                        <li class="agenda-item flex items-start" style="--stagger-index: 6;"> <span class="agenda-item-number bg-green-800 text-green-100">7</span> <span class="agenda-item-text"><span class="font-medium">教學好夥伴 (三)：Napkin AI</span> - 捕捉連結想法的第二大腦</span> </li> <!-- Added Napkin Agenda -->
+                        <li class="agenda-item flex items-start" style="--stagger-index: 7;"> <span class="agenda-item-number bg-orange-800 text-orange-100">8</span> <span class="agenda-item-text"><span class="font-medium">Napkin AI 應用場景探索</span> (靈感捕捉、知識連結)</span> </li> <!-- Added Napkin Agenda -->
+                        <li class="agenda-item flex items-start" style="--stagger-index: 8;"> <span class="agenda-item-number bg-indigo-800 text-indigo-100">9</span> <span class="agenda-item-text"><span class="font-medium">教學案例分享：</span> AI 組合拳！設計一堂整合式社會課</span> </li> <!-- Updated numbering -->
+                        <li class="agenda-item flex items-start" style="--stagger-index: 9;"> <span class="agenda-item-number bg-purple-800 text-purple-100">10</span> <span class="agenda-item-text"><span class="font-medium">教學考量與倫理：</span> 擁抱 AI，但保持清醒</span> </li> <!-- Updated numbering -->
+                        <li class="agenda-item flex items-start" style="--stagger-index: 10;"> <span class="agenda-item-number bg-pink-800 text-pink-100">11</span> <span class="agenda-item-text"><span class="font-medium">總結與 Q&A</span></span> </li> <!-- Updated numbering -->
                      </ul>
                  </div>
             </div>
         </section>
 
         <!-- Why Now Section -->
-        <section id="why-now" class="section max-w-5xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-grad-1 rounded-2xl"> <!-- Use dark gradient -->
+        <section id="why-now" class="section max-w-5xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-grad-1 rounded-2xl" role="region" aria-labelledby="why-now-title">
             <div class="absolute inset-0 bg-pattern-dots mix-blend-overlay"></div>
-            <!-- Blobs: Use brighter colors with lower opacity for dark mode -->
             <div class="absolute -top-20 -right-20 w-64 h-64 bg-indigo-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
             <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-pink-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
 
             <div class="section-header reveal">
-                <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">為什麼是現在？</h2>
-                 <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+                <h2 id="why-now-title" class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">為什麼是現在？</h2>
+                 <button class="section-focus-trigger" aria-label="聚焦 為什麼是現在 區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m7 1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v4m0 0h-4m4 0l-5-5"></path></svg> </button> <!-- Corrected Icon -->
             </div>
              <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">AI 時代的教育契機</p>
 
-            <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-8 mb-12 relative z-10 reveal" style="--stagger-index: 2;"> <!-- Dark transparent bg -->
+            <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-8 mb-12 relative z-10 reveal" style="--stagger-index: 2;">
                  <div class="flex flex-col md:flex-row items-center">
                     <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                        <h3 class="text-2xl font-bold mb-6 text-indigo-300">AI 浪潮來襲，教育如何應對？</h3> <!-- Lighter heading -->
+                        <h3 class="text-2xl font-bold mb-6 text-indigo-300">AI 浪潮來襲，教育如何應對？</h3>
                         <div class="space-y-4 reveal-stagger">
                             <div class="flex items-start" style="--stagger-index: 0;">
-                                <div class="flex-shrink-0 bg-indigo-900 p-2 rounded-full mr-4 mt-1 transform hover:scale-110 transition-transform"><svg class="w-5 h-5 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div> <!-- Dark icon bg, light icon -->
+                                <div class="flex-shrink-0 bg-indigo-900 p-2 rounded-full mr-4 mt-1 transform hover:scale-110 transition-transform"><svg class="w-5 h-5 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
                                 <p class="text-gray-300">AI 技術快速發展，已滲透各行各業 (例：ChatGPT, Midjourney)。</p>
                             </div>
                             <div class="flex items-start" style="--stagger-index: 1;">
@@ -524,10 +565,9 @@
                     </div>
                     <div class="md:w-1/2 md:pl-8 flex justify-center items-center mt-8 md:mt-0">
                         <div class="relative reveal" style="--stagger-index: 3;">
-                            <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full opacity-20 filter blur-2xl"></div> <!-- Use brighter base for blur -->
+                            <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full opacity-20 filter blur-2xl"></div>
                             <div class="floating relative">
-                                <!-- SVG colors are mostly white/yellow, should be fine on dark -->
-                                <svg class="w-64 h-64 md:w-72 md:h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <filter id="glow-filter" x="-50%" y="-50%" width="200%" height="200%"> <feGaussianBlur stdDeviation="5" result="coloredBlur"/> <feMerge> <feMergeNode in="coloredBlur"/> <feMergeNode in="SourceGraphic"/> </feMerge> </filter> </defs> <g> <circle cx="100" cy="100" r="75" fill="#818cf8" opacity="0.1"/> <path d="M100,30 A70,70 0 1,1 100, 170 A70,70 0 1,1 100,30 Z M100,50 A50,50 0 1,0 100,150 A50,50 0 1,0 100,50 Z" fill="#a78bfa" opacity="0.2"/> <path d="M100 50 C 80 50, 70 60, 70 75 C 70 95, 85 105, 100 125 C 115 105, 130 95, 130 75 C 130 60, 120 50, 100 50 Z" fill="white" opacity="0.7" filter="url(#glow-filter)"/> <rect x="95" y="120" width="10" height="20" rx="3" fill="white" opacity="0.6"/> <line x1="100" y1="125" x2="100" y2="140" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/> <circle cx="100" cy="75" r="8" fill="var(--brand-yellow)" opacity="0.9" class="pulse-btn" style="animation-delay: 0.5s;"/> <!-- Use bright yellow var --> </g> </svg>
+                                <svg class="w-64 h-64 md:w-72 md:h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <filter id="glow-filter" x="-50%" y="-50%" width="200%" height="200%"> <feGaussianBlur stdDeviation="5" result="coloredBlur"/> <feMerge> <feMergeNode in="coloredBlur"/> <feMergeNode in="SourceGraphic"/> </feMerge> </filter> </defs> <g> <circle cx="100" cy="100" r="75" fill="#818cf8" opacity="0.1"/> <path d="M100,30 A70,70 0 1,1 100, 170 A70,70 0 1,1 100,30 Z M100,50 A50,50 0 1,0 100,150 A50,50 0 1,0 100,50 Z" fill="#a78bfa" opacity="0.2"/> <path d="M100 50 C 80 50, 70 60, 70 75 C 70 95, 85 105, 100 125 C 115 105, 130 95, 130 75 C 130 60, 120 50, 100 50 Z" fill="white" opacity="0.7" filter="url(#glow-filter)"/> <rect x="95" y="120" width="10" height="20" rx="3" fill="white" opacity="0.6"/> <line x1="100" y1="125" x2="100" y2="140" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/> <circle cx="100" cy="75" r="8" fill="var(--brand-yellow)" opacity="0.9" class="pulse-btn" style="animation-delay: 0.5s;"/> </g> </svg>
                             </div>
                         </div>
                     </div>
@@ -535,40 +575,41 @@
             </div>
 
             <div class="flex justify-center reveal" style="--stagger-index: 3;">
-                <div class="bg-gray-800 rounded-lg p-6 max-w-3xl transform hover:scale-[1.02] transition-transform duration-300 shadow-lg hover:shadow-indigo-900/50"> <!-- Dark bg, adjust shadow color -->
-                    <p class="text-center text-indigo-200 font-medium text-lg"> <!-- Lighter text -->
-                        今天我們將介紹兩款強大的 AI 工具：
-                        <span class="inline-block whitespace-nowrap"> <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer" class="font-bold bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text hover:brightness-110 transition-all">Canva AI</a> </span> <!-- Keep bright links -->
-                        <span class="mx-1 text-gray-400">和</span>
-                        <span class="inline-block whitespace-nowrap"> <a href="https://www.edcafetw.com/" target="_blank" rel="noopener noreferrer" class="font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text hover:brightness-110 transition-all">EdCafe AI</a> </span>
-                    </p>
+                 <div class="bg-gray-800 rounded-lg p-6 max-w-4xl transform hover:scale-[1.02] transition-transform duration-300 shadow-lg hover:shadow-indigo-900/50">
+                     <p class="text-center text-indigo-200 font-medium text-lg">
+                         今天我們將介紹三款各具特色的 AI 工具：
+                         <span class="inline-block whitespace-nowrap"> <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer" class="font-bold bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text hover:brightness-110 transition-all">Canva AI</a> </span>,
+                         <span class="inline-block whitespace-nowrap"> <a href="https://www.edcafetw.com/" target="_blank" rel="noopener noreferrer" class="font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text hover:brightness-110 transition-all">EdCafe AI</a> </span>
+                         <span class="mx-1 text-gray-400">和</span>
+                         <span class="inline-block whitespace-nowrap"> <a href="https://www.napkin.ai/" target="_blank" rel="noopener noreferrer" class="font-bold bg-gradient-to-r from-green-400 to-teal-400 text-transparent bg-clip-text hover:brightness-110 transition-all">Napkin AI</a> </span>. <!-- Added Napkin Link -->
+                     </p>
                      <div class="mt-4 flex justify-center">
-                         <button id="showToolsBtn" class="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition-all duration-300 focus-visible:ring-4 focus-visible:ring-indigo-500 transform hover:-translate-y-0.5 hover:shadow-lg pulse-btn">
-                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2 transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" /> </svg>
-                             深入了解這兩款工具
-                         </button>
-                    </div>
-                </div>
-            </div>
+                          <button id="showToolsBtn" class="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition-all duration-300 focus-visible:ring-4 focus-visible:ring-indigo-500 transform hover:-translate-y-0.5 hover:shadow-lg pulse-btn group"> <!-- Added group -->
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2 transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 20 20" fill="currentColor"> <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" /> </svg>
+                              深入了解這些工具
+                          </button>
+                     </div>
+                 </div>
+             </div>
         </section>
 
         <!-- AI Potential Section -->
-        <section id="ai-potential" class="section max-w-6xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-alt rounded-2xl shadow-xl"> <!-- Dark section bg, pattern, blobs adjusted -->
+        <section id="ai-potential" class="section max-w-6xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-alt rounded-2xl shadow-xl" role="region" aria-labelledby="ai-potential-title">
              <div class="absolute inset-0 bg-pattern-lines mix-blend-soft-light"></div>
              <div class="absolute top-20 right-0 w-72 h-72 bg-purple-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
              <div class="absolute bottom-20 left-0 w-72 h-72 bg-indigo-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
 
             <div class="section-header reveal">
-                 <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">AI 能為社會領域做什麼？</h2>
-                  <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+                 <h2 id="ai-potential-title" class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">AI 能為社會領域做什麼？</h2>
+                  <button class="section-focus-trigger" aria-label="聚焦 AI 潛力 區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m7 1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v4m0 0h-4m4 0l-5-5"></path></svg> </button> <!-- Corrected Icon -->
              </div>
              <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">探索 AI 在社會課堂的潛力與應用</p>
 
              <div class="relative z-10 reveal" style="--stagger-index: 2;">
-                 <h3 class="text-2xl font-semibold mb-8 text-center text-indigo-300">AI 在社會課堂的潛力</h3> <!-- Lighter heading -->
+                 <h3 class="text-2xl font-semibold mb-8 text-center text-indigo-300">AI 在社會課堂的潛力</h3>
                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 reveal-stagger p-6 md:p-0">
-                    <!-- Potential Cards - Updated BG, Text, Icons -->
-                    <div class="card bg-gray-800 p-6 group" style="--stagger-index: 0;"> <!-- Dark card bg -->
+                    <!-- Potential Cards -->
+                    <div class="card bg-gray-800 p-6 group" style="--stagger-index: 0;">
                          <div class="card-icon-container bg-indigo-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg> </div>
                          <h4 class="font-medium text-xl mb-3 text-indigo-300">內容生成</h4>
                          <p class="text-gray-400 text-sm">快速產出教學大綱、學習單、討論題目、不同觀點的文本。</p>
@@ -617,26 +658,26 @@
                          <div class="mt-4"> <button class="show-example-btn bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition-colors focus-visible:ring-4 focus-visible:ring-purple-500 transform hover:scale-105 active:scale-95" data-example="roleplay" data-title="範例：創建角色扮演場景"> 查看範例 </button> </div>
                     </div>
                  </div>
-                 <div class="mt-12 p-6 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-inner reveal" style="--stagger-index: 3;"> <!-- Dark gradient -->
-                     <p class="text-center font-medium text-lg text-indigo-200">無論是 <span class="font-bold text-indigo-400">視覺設計、內容生成</span> 還是 <span class="font-bold text-purple-400">教學流程規劃</span>， AI 都能提供協助。 </p>
+                 <div class="mt-12 p-6 bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl shadow-inner reveal" style="--stagger-index: 3;">
+                     <p class="text-center font-medium text-lg text-indigo-200">無論是 <span class="font-bold text-indigo-400">視覺設計、內容生成</span>、<span class="font-bold text-purple-400">教學流程規劃</span> 還是 <span class="font-bold text-green-400">靈感連結</span>， AI 都能提供協助。 </p> <!-- Added Napkin concept -->
                  </div>
              </div>
         </section>
 
         <!-- Canva AI Section -->
-        <section id="canva-ai" class="section max-w-5xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-grad-2 rounded-2xl"> <!-- Dark gradient, patterns, blobs -->
+        <section id="canva-ai" class="section max-w-5xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-grad-2 rounded-2xl" role="region" aria-labelledby="canva-ai-title">
              <div class="absolute inset-0 bg-pattern-dots mix-blend-overlay opacity-50"></div>
              <div class="absolute top-20 right-0 w-72 h-72 bg-pink-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
              <div class="absolute bottom-20 left-0 w-72 h-72 bg-purple-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
 
              <div class="section-header reveal">
-                 <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">教學好夥伴 (一)：Canva AI</h2>
-                 <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+                 <h2 id="canva-ai-title" class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">教學好夥伴 (一)：Canva AI</h2>
+                 <button class="section-focus-trigger" aria-label="聚焦 Canva AI 區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m7 1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v4m0 0h-4m4 0l-5-5"></path></svg> </button> <!-- Corrected Icon -->
              </div>
               <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">整合設計與內容生成的全方位工具</p>
 
             <!-- Intro Card -->
-             <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden mb-12 relative z-10 reveal" style="--stagger-index: 2;"> <!-- Dark transparent bg -->
+             <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden mb-12 relative z-10 reveal" style="--stagger-index: 2;">
                  <div class="p-6 md:p-8">
                      <div class="flex flex-col md:flex-row items-center">
                          <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
@@ -665,10 +706,10 @@
                          </div>
                          <div class="md:w-1/2 md:pl-8 flex justify-center items-center mt-8 md:mt-0">
                              <div class="relative reveal" style="--stagger-index: 3;">
-                                 <div class="absolute inset-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-full opacity-30 filter blur-2xl"></div> <!-- Brighter blur -->
+                                 <div class="absolute inset-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-full opacity-30 filter blur-2xl"></div>
                                  <div class="floating relative">
                                     <!-- Canva SVG -->
-                                    <svg class="w-64 h-64 md:w-72 md-h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <linearGradient id="canvaGrad" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" style="stop-color:var(--brand-indigo); stop-opacity:1" /> <stop offset="100%" style="stop-color:var(--brand-purple); stop-opacity:1" /> </linearGradient> <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%"> <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> <feOffset dx="2" dy="2" result="offsetblur"/> <feComponentTransfer> <feFuncA type="linear" slope="0.3"/> </feComponentTransfer> <feMerge> <feMergeNode/> <feMergeNode in="SourceGraphic"/> </feMerge> </filter> </defs> <g filter="url(#dropShadow)"> <path d="M50,30 H150 C161.046,30 170,38.954 170,50 V150 C170,161.046 161.046,170 150,170 H50 C38.954,170 30,161.046 30,150 V50 C30,38.954 38.954,30 50,30 Z" fill="url(#canvaGrad)" /> <path d="M85 70 L115 100 M105 60 L125 80" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/> <!-- Darker stroke --> <circle cx="110" cy="55" r="8" fill="#1f2937"/> <circle cx="75" cy="110" r="5" fill="#1f2937" opacity="0.8" class="pulse-btn" style="animation-delay: 0.2s;"/> <polygon points="125,80 135,75 130,85" fill="#1f2937" opacity="0.8"/> <text x="100" y="145" font-family="'Noto Sans TC', sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#f9fafb">Canva</text> <!-- Light text --> </g> </svg>
+                                    <svg class="w-64 h-64 md:w-72 md-h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <linearGradient id="canvaGrad" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" style="stop-color:var(--brand-indigo); stop-opacity:1" /> <stop offset="100%" style="stop-color:var(--brand-purple); stop-opacity:1" /> </linearGradient> <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%"> <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> <feOffset dx="2" dy="2" result="offsetblur"/> <feComponentTransfer> <feFuncA type="linear" slope="0.3"/> </feComponentTransfer> <feMerge> <feMergeNode/> <feMergeNode in="SourceGraphic"/> </feMerge> </filter> </defs> <g filter="url(#dropShadow)"> <path d="M50,30 H150 C161.046,30 170,38.954 170,50 V150 C170,161.046 161.046,170 150,170 H50 C38.954,170 30,161.046 30,150 V50 C30,38.954 38.954,30 50,30 Z" fill="url(#canvaGrad)" /> <path d="M85 70 L115 100 M105 60 L125 80" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/> <circle cx="110" cy="55" r="8" fill="#1f2937"/> <circle cx="75" cy="110" r="5" fill="#1f2937" opacity="0.8" class="pulse-btn" style="animation-delay: 0.2s;"/> <polygon points="125,80 135,75 130,85" fill="#1f2937" opacity="0.8"/> <text x="100" y="145" font-family="'Noto Sans TC', sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#f9fafb">Canva</text> </g> </svg>
                                  </div>
                              </div>
                          </div>
@@ -677,14 +718,13 @@
             </div>
 
             <!-- Canva AI Features Tabs -->
-             <div class="bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative z-10 reveal" style="--stagger-index: 3;"> <!-- Dark tab container -->
+             <div class="bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative z-10 reveal" style="--stagger-index: 3;">
                  <div class="gradient-bg px-6 py-4"> <h3 class="text-xl font-bold text-white">Canva AI 實戰應用 Show Time!</h3> </div>
                  <div class="p-6">
-                    <div class="flex flex-wrap border-b border-gray-700 mb-6 -mx-1" role="tablist" aria-label="Canva AI 功能"> <!-- Dark border -->
-                        <!-- Tabs: text color adjusted via CSS -->
-                        <button class="canva-tab text-lg px-4 sm:px-6 py-3 font-medium text-indigo-400 flex-1 sm:flex-none text-center" data-tab="magic-write" role="tab" aria-selected="true" aria-controls="magic-write-content"> Magic Write </button>
-                        <button class="canva-tab text-lg px-4 sm:px-6 py-3 font-medium text-gray-400 hover:text-indigo-400 flex-1 sm:flex-none text-center" data-tab="text-to-image" role="tab" aria-selected="false" aria-controls="text-to-image-content"> Text to Image </button>
-                        <button class="canva-tab text-lg px-4 sm:px-6 py-3 font-medium text-gray-400 hover:text-indigo-400 flex-1 sm:flex-none text-center" data-tab="magic-design" role="tab" aria-selected="false" aria-controls="magic-design-content"> Magic Design </button>
+                    <div class="flex flex-wrap border-b border-gray-700 mb-6 -mx-1" role="tablist" aria-label="Canva AI 功能">
+                        <button class="canva-tab text-lg px-4 sm:px-6 py-3 font-medium flex-1 sm:flex-none text-center" data-tab="magic-write" role="tab" aria-selected="true" aria-controls="magic-write-content" id="magic-write-tab"> Magic Write </button>
+                        <button class="canva-tab text-lg px-4 sm:px-6 py-3 font-medium flex-1 sm:flex-none text-center" data-tab="text-to-image" role="tab" aria-selected="false" aria-controls="text-to-image-content" id="text-to-image-tab"> Text to Image </button>
+                        <button class="canva-tab text-lg px-4 sm:px-6 py-3 font-medium flex-1 sm:flex-none text-center" data-tab="magic-design" role="tab" aria-selected="false" aria-controls="magic-design-content" id="magic-design-tab"> Magic Design </button>
                     </div>
                     <div id="canva-tab-content-container">
                         <div id="magic-write-content" class="tab-content active" role="tabpanel" aria-labelledby="magic-write-tab">
@@ -697,29 +737,28 @@
                                         <div>
                                             <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-indigo-800 text-indigo-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">1</span> 備課發想： </h6>
                                             <div class="ml-8 space-y-2">
-                                                 <!-- Prompt Examples: Darker BG/Border, lighter text -->
-                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer prompt-example border border-gray-600" data-target="magic-write-demo" data-prompt="請提供 5 個關於「臺灣日治時期的社會變遷」的探究式學習問題，適合國中生程度。"> <code class="text-sm text-gray-400">「給我 5 個關於[臺灣日治時期]的探究式學習問題」</code> </div>
-                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer prompt-example border border-gray-600" data-target="magic-write-demo" data-prompt="針對「全球化對在地文化的影響」議題，設計一個課堂辯論的正反方主要論點綱要。"> <code class="text-sm text-gray-400">「針對[全球化議題]，設計一個課堂辯論的正反方論點」</code> </div>
+                                                <div class="prompt-example p-3 rounded-lg border border-gray-600" data-target="magic-write-demo" data-prompt="請提供 5 個關於「臺灣日治時期的社會變遷」的探究式學習問題，適合國中生程度。"> <code class="text-sm">「給我 5 個關於[臺灣日治時期]的探究式學習問題」</code> </div>
+                                                <div class="prompt-example p-3 rounded-lg border border-gray-600" data-target="magic-write-demo" data-prompt="針對「全球化對在地文化的影響」議題，設計一個課堂辯論的正反方主要論點綱要。"> <code class="text-sm">「針對[全球化議題]，設計一個課堂辯論的正反方論點」</code> </div>
                                             </div>
                                         </div>
                                          <div>
                                              <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-purple-800 text-purple-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">2</span> 教材製作： </h6>
                                              <div class="ml-8 space-y-2">
-                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer prompt-example border border-gray-600" data-target="magic-write-demo" data-prompt="請將以下關於「社會福利制度演變」的段落（假設貼入文字）改寫成更簡潔、適合國中生理解的文字，約 150 字。"> <code class="text-sm text-gray-400">「摘要這段關於[社會福利制度]的文字...」</code> </div>
-                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer prompt-example border border-gray-600" data-target="magic-write-demo" data-prompt="請產生 5 個關於「中華民國憲法保障的基本權利」的選擇題，包含正確答案和三個誘答選項。"> <code class="text-sm text-gray-400">「產生 5 個關於[基本權利]的選擇題」</code> </div>
+                                                <div class="prompt-example p-3 rounded-lg border border-gray-600" data-target="magic-write-demo" data-prompt="請將以下關於「社會福利制度演變」的段落（假設貼入文字）改寫成更簡潔、適合國中生理解的文字，約 150 字。"> <code class="text-sm">「摘要這段關於[社會福利制度]的文字...」</code> </div>
+                                                <div class="prompt-example p-3 rounded-lg border border-gray-600" data-target="magic-write-demo" data-prompt="請產生 5 個關於「中華民國憲法保障的基本權利」的選擇題，包含正確答案和三個誘答選項。"> <code class="text-sm">「產生 5 個關於[基本權利]的選擇題」</code> </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="md:w-1/2 bg-gray-900 p-6 rounded-xl border border-indigo-800"> <!-- Darker demo container -->
+                                <div class="md:w-1/2 bg-gray-900 p-6 rounded-xl border border-indigo-800">
                                     <div class="mb-4 flex items-center">
                                         <div class="flex-shrink-0 bg-indigo-900 p-2 rounded-full mr-3"><svg class="w-6 h-6 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg></div>
-                                        <h5 class="font-medium text-lg text-gray-200">Magic Write 實際效果</h5>
+                                        <h5 class="font-medium text-lg text-gray-200">Magic Write 實際效果 (模擬)</h5>
                                     </div>
-                                    <div id="magic-write-demo" class="demo-area bg-gray-800 p-4 rounded-lg shadow-inner overflow-auto"> <!-- Dark demo area -->
+                                    <div id="magic-write-demo" class="demo-area bg-gray-800 p-4 rounded-lg shadow-inner overflow-auto">
                                          <p class="text-gray-400 px-4">點擊左側範例 Prompt 查看 Magic Write 生成結果 (此處為模擬效果)。</p>
                                     </div>
-                                     <div class="mt-4 bg-yellow-900/30 border-l-4 border-yellow-500 p-3 rounded"> <!-- Dark yellow alert -->
+                                     <div class="mt-4 bg-yellow-900/30 border-l-4 border-yellow-500 p-3 rounded">
                                         <p class="text-xs text-yellow-200"><strong>提醒：</strong> AI 生成內容需 <strong class="font-semibold text-yellow-100">審核、修改、確認</strong> 正確性與適切性。</p>
                                     </div>
                                 </div>
@@ -735,19 +774,19 @@
                                         <div>
                                             <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-purple-800 text-purple-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">1</span> 視覺化歷史場景/人物： </h6>
                                             <div class="ml-8 space-y-2">
-                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer image-prompt-example border border-gray-600" data-target="text-to-image-demo" data-theme="history" data-prompt="19世紀的倫敦街景，石板路，馬車，穿著維多利亞時期服裝的行人，背景有大笨鐘，霧濛濛的天氣，寫實風格插畫"> <code class="text-sm text-gray-400">「想像畫：19世紀的倫ڈن街景...」</code> </div>
+                                                <div class="image-prompt-example p-3 rounded-lg border border-gray-600" data-target="text-to-image-demo" data-theme="history" data-prompt="19世紀的倫敦街景，石板路，馬車，穿著維多利亞時期服裝的行人，背景有大笨鐘，霧濛濛的天氣，寫實風格插畫"> <code class="text-sm">「想像畫：19世紀的倫敦街景...」</code> </div>
                                             </div>
                                         </div>
                                         <div>
                                             <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-pink-800 text-pink-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">2</span> 具象化抽象概念： </h6>
                                             <div class="ml-8 space-y-2">
-                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer image-prompt-example border border-gray-600" data-target="text-to-image-demo" data-theme="concept" data-prompt="象徵「文化霸權」的圖像：一個巨大的麥克風或電視螢幕籠罩著縮小的、多樣的文化符號，風格：概念藝術"> <code class="text-sm text-gray-400">「用圖像表達『文化霸權』的概念」</code> </div>
+                                                <div class="image-prompt-example p-3 rounded-lg border border-gray-600" data-target="text-to-image-demo" data-theme="concept" data-prompt="象徵「文化霸權」的圖像：一個巨大的麥克風或電視螢幕籠罩著縮小的、多樣的文化符號，風格：概念藝術"> <code class="text-sm">「用圖像表達『文化霸權』的概念」</code> </div>
                                             </div>
                                         </div>
                                          <div>
                                             <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-teal-800 text-teal-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">3</span> 地理景觀模擬： </h6>
                                             <div class="ml-8 space-y-2">
-                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer image-prompt-example border border-gray-600" data-target="text-to-image-demo" data-theme="geography" data-prompt="中國南方喀斯特地形地貌，石灰岩峰林聳立，下方有河流和溶洞入口，鬱鬱蔥蔥的植被，風格：風景攝影"> <code class="text-sm text-gray-400">「畫出[喀斯特地形]的樣貌...」</code> </div>
+                                                <div class="image-prompt-example p-3 rounded-lg border border-gray-600" data-target="text-to-image-demo" data-theme="geography" data-prompt="中國南方喀斯特地形地貌，石灰岩峰林聳立，下方有河流和溶洞入口，鬱鬱蔥蔥的植被，風格：風景攝影"> <code class="text-sm">「畫出[喀斯特地形]的樣貌...」</code> </div>
                                             </div>
                                         </div>
                                     </div>
@@ -755,7 +794,7 @@
                                 <div class="md:w-1/2 bg-gray-900 p-6 rounded-xl border border-purple-800">
                                     <div class="mb-4 flex items-center">
                                         <div class="flex-shrink-0 bg-purple-900 p-2 rounded-full mr-3"><svg class="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
-                                        <h5 class="font-medium text-lg text-gray-200">Text to Image 實際效果</h5>
+                                        <h5 class="font-medium text-lg text-gray-200">Text to Image 實際效果 (模擬)</h5>
                                     </div>
                                      <div id="text-to-image-demo" class="demo-area bg-gray-800 p-4 rounded-lg shadow-inner">
                                          <p class="text-gray-400 px-4">點擊左側範例 Prompt 查看 AI 生成圖像 (此處為 SVG 模擬效果)。</p>
@@ -780,14 +819,14 @@
                                         <div>
                                             <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-pink-800 text-pink-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">1</span> 快速製作教學簡報： </h6>
                                             <div class="ml-8 space-y-2">
-                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer design-example border border-gray-600" data-target="magic-design-demo" data-design-type="presentation"> <code class="text-sm text-gray-400">「關於[工業革命影響]的教學簡報」</code> </div>
+                                                <div class="design-example p-3 rounded-lg border border-gray-600" data-target="magic-design-demo" data-design-type="presentation"> <code class="text-sm">「關於[工業革命影響]的教學簡報」</code> </div>
                                                  <p class="text-gray-400 text-xs mt-1">老師修改文字、替換圖片，快速完成。</p>
                                             </div>
                                         </div>
                                          <div>
                                              <h6 class="font-medium mb-2 flex items-center text-base text-gray-200"> <span class="bg-indigo-800 text-indigo-100 w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mr-2 text-sm font-bold">2</span> 設計課堂海報/資訊圖表： </h6>
                                              <div class="ml-8 space-y-2">
-                                                <div class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer design-example border border-gray-600" data-target="magic-design-demo" data-design-type="poster"> <code class="text-sm text-gray-400">「製作一張介紹[聯合國主要機構]的海報」</code> </div>
+                                                <div class="design-example p-3 rounded-lg border border-gray-600" data-target="magic-design-demo" data-design-type="poster"> <code class="text-sm">「製作一張介紹[聯合國主要機構]的海報」</code> </div>
                                             </div>
                                         </div>
                                          <div>
@@ -799,7 +838,7 @@
                                 <div class="md:w-1/2 bg-gray-900 p-6 rounded-xl border border-pink-800">
                                     <div class="mb-4 flex items-center">
                                         <div class="flex-shrink-0 bg-pink-900 p-2 rounded-full mr-3"><svg class="w-6 h-6 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg></div>
-                                        <h5 class="font-medium text-lg text-gray-200">Magic Design 實際效果</h5>
+                                        <h5 class="font-medium text-lg text-gray-200">Magic Design 實際效果 (模擬)</h5>
                                     </div>
                                     <div id="magic-design-demo" class="demo-area bg-gray-800 p-4 rounded-lg shadow-inner">
                                          <p class="text-gray-400 px-4">點擊左側範例查看 Magic Design 效果 (此處為 SVG 模擬效果)。</p>
@@ -816,19 +855,19 @@
         </section>
 
         <!-- EdCafe AI Section -->
-        <section id="edcafe-ai" class="section max-w-6xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-alt rounded-2xl shadow-xl"> <!-- Dark bg, patterns, blobs -->
+        <section id="edcafe-ai" class="section max-w-6xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-alt rounded-2xl shadow-xl" role="region" aria-labelledby="edcafe-ai-title">
               <div class="absolute inset-0 bg-pattern-lines mix-blend-soft-light opacity-30"></div>
               <div class="absolute top-20 right-0 w-72 h-72 bg-indigo-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
              <div class="absolute bottom-20 left-0 w-72 h-72 bg-pink-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
 
              <div class="section-header reveal">
-                <h2 class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">教學好夥伴 (二)：EdCafe AI</h2>
-                 <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+                <h2 id="edcafe-ai-title" class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block">教學好夥伴 (二)：EdCafe AI</h2>
+                 <button class="section-focus-trigger" aria-label="聚焦 EdCafe AI 區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m7 1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v4m0 0h-4m4 0l-5-5"></path></svg> </button> <!-- Corrected Icon -->
              </div>
               <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">專為臺灣教育情境設計的 AI 教學輔助平臺</p>
 
              <!-- Intro Card -->
-              <div class="bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden mb-12 relative z-10 reveal" style="--stagger-index: 2;"> <!-- Dark transparent bg -->
+              <div class="bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden mb-12 relative z-10 reveal" style="--stagger-index: 2;">
                   <div class="p-6 md:p-8">
                       <div class="flex flex-col md:flex-row items-center">
                           <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
@@ -857,28 +896,28 @@
                           </div>
                           <div class="md:w-1/2 md:pl-8 flex justify-center items-center mt-8 md:mt-0">
                               <div class="relative reveal" style="--stagger-index: 3;">
-                                  <div class="absolute inset-0 bg-gradient-to-bl from-purple-600 to-pink-600 rounded-full opacity-30 filter blur-2xl"></div> <!-- Brighter blur -->
+                                  <div class="absolute inset-0 bg-gradient-to-bl from-purple-600 to-pink-600 rounded-full opacity-30 filter blur-2xl"></div>
                                   <div class="floating relative">
-                                      <!-- Edcafe SVG -->
-                                       <svg class="w-64 h-64 md:w-72 md:h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <linearGradient id="edcafeGrad" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" style="stop-color:var(--brand-purple); stop-opacity:1" /> <stop offset="100%" style="stop-color:var(--brand-pink); stop-opacity:1" /> </linearGradient> <filter id="dropShadowEdcafe" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dx="2" dy="2" result="offsetblur"/><feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter> </defs> <g filter="url(#dropShadowEdcafe)"> <path d="M40 60 H160 L150 150 Q100 180 50 150 Z" fill="url(#edcafeGrad)" /> <path d="M160 70 Q180 80 180 100 T 160 130" stroke="#a78bfa" stroke-width="10" fill="none" stroke-linecap="round"/> <path d="M80 50 Q 85 40 90 50 T 100 50" stroke="var(--text-muted)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7" style="animation: steam 2s linear infinite;"/> <!-- Use muted text for steam --> <path d="M110 45 Q 115 35 120 45 T 130 45" stroke="var(--text-muted)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7" style="animation: steam 2s linear infinite 0.5s;"/> <text x="100" y="110" font-family="'Noto Sans TC', sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1e1b4b">EdCafe</text> <!-- Darker text on bright bg --> </g> <style> @keyframes steam { 0% { transform: translateY(0); opacity: 0.7; } 100% { transform: translateY(-15px); opacity: 0; } } </style> </svg>
+                                      <!-- Edcafe SVG with steam -->
+                                       <svg class="w-64 h-64 md:w-72 md:h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <linearGradient id="edcafeGrad" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" style="stop-color:var(--brand-purple); stop-opacity:1" /> <stop offset="100%" style="stop-color:var(--brand-pink); stop-opacity:1" /> </linearGradient> <filter id="dropShadowEdcafe" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dx="2" dy="2" result="offsetblur"/><feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter> </defs> <g filter="url(#dropShadowEdcafe)"> <path d="M40 60 H160 L150 150 Q100 180 50 150 Z" fill="url(#edcafeGrad)" /> <path d="M160 70 Q180 80 180 100 T 160 130" stroke="#a78bfa" stroke-width="10" fill="none" stroke-linecap="round"/> <path d="M80 50 Q 85 40 90 50 T 100 50" stroke="var(--text-muted)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7" style="animation: steam 2s linear infinite;"/> <path d="M110 45 Q 115 35 120 45 T 130 45" stroke="var(--text-muted)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7" style="animation: steam 2s linear infinite 0.5s;"/> <text x="100" y="110" font-family="'Noto Sans TC', sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1e1b4b">EdCafe</text> </g> </svg>
                                   </div>
                               </div>
                           </div>
                       </div>
-                      <div class="mt-6 p-4 bg-gradient-to-r from-gray-700 to-gray-600 rounded-xl shadow-inner"> <!-- Dark gradient -->
+                      <div class="mt-6 p-4 bg-gradient-to-r from-gray-700 to-gray-600 rounded-xl shadow-inner">
                           <p class="text-indigo-200 text-sm md:text-base"><strong>對比：</strong> 相較於 Canva AI 整合於設計平臺，EdCafe AI 更專注於 <strong class="font-semibold text-gray-100">教學內容與流程</strong> 的生成，並針對臺灣教育情境優化。</p>
                       </div>
                   </div>
               </div>
 
              <!-- EdCafe Features Card -->
-              <div class="bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative z-10 reveal" style="--stagger-index: 3;"> <!-- Dark card -->
+              <div class="bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative z-10 reveal" style="--stagger-index: 3;">
                   <div class="gradient-bg px-6 py-4"> <h3 class="text-xl font-bold text-white">EdCafe AI 實戰應用 Show Time!</h3> </div>
                   <div class="p-6">
                       <h4 class="font-medium text-xl mb-6 text-center text-indigo-300 reveal">EdCafe AI：你的備課神隊友</h4>
                       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 reveal-stagger">
-                          <!-- Feature Cards: Darker BG, adjusted icons/text -->
-                          <div class="card bg-gray-900 p-6 group" style="--stagger-index: 0;"> <!-- Even darker card bg -->
+                          <!-- Feature Cards -->
+                          <div class="card bg-gray-900 p-6 group" style="--stagger-index: 0;">
                              <div class="card-icon-container bg-indigo-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg> </div>
                              <h5 class="font-medium text-lg text-indigo-300 mb-3">教案設計助手</h5>
                              <ul class="space-y-2 text-gray-400 text-xs md:text-sm">
@@ -919,7 +958,7 @@
                              <div class="mt-4"> <button class="edcafe-feature-btn bg-teal-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-teal-700 transition-colors focus-visible:ring-4 focus-visible:ring-teal-500 transform hover:scale-105 active:scale-95" data-feature="glossary" data-title="EdCafe 範例：詞彙表/概念解釋"> 查看範例 </button> </div>
                          </div>
                       </div>
-                      <div class="mt-8 bg-gray-700 p-6 rounded-lg border border-gray-600 reveal" style="--stagger-index: 4;"> <!-- Darker info box -->
+                      <div class="mt-8 bg-gray-700 p-6 rounded-lg border border-gray-600 reveal" style="--stagger-index: 4;">
                          <h5 class="font-semibold text-center text-gray-200">還有更多功能...</h5>
                          <p class="text-center text-gray-400 mt-2 text-sm md:text-base">例如：生成課堂討論題、提供教學反思點、創建學習遊戲點子等。</p>
                          <div class="text-center mt-4">
@@ -933,30 +972,130 @@
              </div>
         </section>
 
+        <!-- Napkin AI Section -->
+        <section id="napkin-ai" class="section max-w-6xl mx-auto mb-16 md:mb-24 relative overflow-hidden section-bg-grad-3 rounded-2xl shadow-xl" role="region" aria-labelledby="napkin-ai-title"> <!-- New Gradient -->
+            <div class="absolute inset-0 bg-pattern-dots mix-blend-overlay opacity-30"></div>
+            <div class="absolute top-20 right-0 w-72 h-72 bg-green-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+            <div class="absolute bottom-20 left-0 w-72 h-72 bg-orange-500 rounded-full opacity-10 filter blur-3xl -z-10"></div>
+
+            <div class="section-header reveal">
+                <h2 id="napkin-ai-title" class="section-title text-3xl md:text-5xl font-bold gradient-text inline-block" style="background: linear-gradient(to right, var(--brand-green), var(--brand-teal)); -webkit-background-clip: text; background-clip: text;">教學好夥伴 (三)：Napkin AI</h2> <!-- New Title -->
+                <button class="section-focus-trigger" aria-label="聚焦 Napkin AI 區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m7 1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v4m0 0h-4m4 0l-5-5"></path></svg> </button> <!-- Corrected Icon -->
+            </div>
+            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">你的第二大腦，捕捉與連結教學靈感碎片</p> <!-- New Subtitle -->
+
+            <!-- Intro Card -->
+            <div class="bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden mb-12 relative z-10 reveal" style="--stagger-index: 2;">
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                            <h3 class="text-2xl font-bold mb-6 text-green-300">認識你的靈感網絡 - Napkin AI</h3> <!-- New Color -->
+                            <p class="mb-4 text-gray-300">Napkin AI：一個<strong class="text-green-400">極簡的筆記工具</strong>，專注於<strong class="text-green-400">捕捉想法</strong>並<strong class="text-green-400">自動連結相關概念</strong>。</p>
+                            <p class="mb-6 text-gray-300"><strong>核心理念：</strong> 將零散的筆記視為網絡節點，透過 AI 找出隱藏關聯，激發新洞見 (Networked Thought)。</p>
+                            <h4 class="font-medium text-lg mt-6 mb-3 text-gray-200">對老師的優勢：</h4>
+                            <ul class="space-y-3 text-gray-300 reveal-stagger">
+                                <li class="flex items-start" style="--stagger-index: 0;">
+                                    <div class="flex-shrink-0 bg-green-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                    <span><strong>隨手捕捉靈感：</strong> 快速記錄教學點子、學生觀察、讀書心得，不怕遺失。</span>
+                                </li>
+                                <li class="flex items-start" style="--stagger-index: 1;">
+                                    <div class="flex-shrink-0 bg-orange-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                    <span><strong>自動建立連結：</strong> AI 分析筆記內容，自動鏈接相關主題，看見跨領域/跨單元的可能。</span>
+                                </li>
+                                <li class="flex items-start" style="--stagger-index: 2;">
+                                    <div class="flex-shrink-0 bg-teal-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                    <span><strong>促進教學反思：</strong> 回顧連結的筆記，發現教學模式、學生學習困難點或自己的思考盲點。</span>
+                                </li>
+                                 <li class="flex items-start" style="--stagger-index: 3;">
+                                    <div class="flex-shrink-0 bg-yellow-900 p-1.5 rounded-full mr-3 mt-1"><svg class="w-4 h-4 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>
+                                    <span><strong>簡潔無干擾：</strong> 介面專注於寫作與連結，減少整理分類的負擔。</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8 flex justify-center items-center mt-8 md:mt-0">
+                            <div class="relative reveal" style="--stagger-index: 3;">
+                                <div class="absolute inset-0 bg-gradient-to-br from-green-600 to-orange-600 rounded-full opacity-30 filter blur-2xl"></div>
+                                <div class="floating relative">
+                                    <!-- Napkin SVG -->
+                                    <svg class="w-64 h-64 md:w-72 md:h-72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <defs> <filter id="dropShadowNapkin" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="4"/><feOffset dx="3" dy="3" result="offsetblur"/><feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter> <linearGradient id="napkinGrad" x1="0%" y1="0%" x2="100%" y2="100%"> <stop offset="0%" stop-color="var(--brand-green)" /> <stop offset="100%" stop-color="var(--brand-teal)" /> </linearGradient> </defs> <g filter="url(#dropShadowNapkin)"> <rect x="50" y="50" width="100" height="100" rx="10" fill="var(--bg-card)" stroke="var(--brand-green)" stroke-width="2"/> <circle cx="70" cy="70" r="8" fill="var(--brand-orange)"/> <circle cx="130" cy="70" r="8" fill="var(--brand-teal)"/> <circle cx="70" cy="130" r="8" fill="var(--brand-yellow)"/> <circle cx="130" cy="130" r="8" fill="var(--brand-green)"/> <line x1="70" y1="70" x2="130" y2="130" stroke="var(--brand-orange)" stroke-width="1.5" stroke-dasharray="4 2" class="napkin-node-link"/> <line x1="130" y1="70" x2="70" y2="130" stroke="var(--brand-teal)" stroke-width="1.5" stroke-dasharray="4 2" class="napkin-node-link"/> <text x="100" y="170" font-family="'Noto Sans TC', sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="var(--text-muted)">Napkin</text> </g> <style> .napkin-node-link { animation: napkin-link 2s linear infinite alternate; } </style> </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-gradient-to-r from-gray-700 to-gray-600 rounded-xl shadow-inner">
+                         <p class="text-green-200 text-sm md:text-base"><strong>對比：</strong> 與 Canva/EdCafe 的<strong class="font-semibold text-gray-100">內容生成</strong>不同，Napkin AI 更像<strong class="font-semibold text-gray-100">思維整理與連結</strong>工具，適合<strong class="font-semibold text-gray-100">長期積累</strong>教學智慧。</p>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Napkin Features Card -->
+            <div class="bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative z-10 reveal" style="--stagger-index: 3;">
+                <div class="gradient-bg px-6 py-4" style="background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-teal) 100%);"> <h3 class="text-xl font-bold text-white">Napkin AI 應用場景探索</h3> </div>
+                <div class="p-6">
+                     <h4 class="font-medium text-xl mb-6 text-center text-green-300 reveal">Napkin AI：你的靈感催化劑</h4>
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 reveal-stagger">
+                         <!-- Feature Cards -->
+                         <div class="card bg-gray-900 p-6 group" style="--stagger-index: 0;">
+                             <div class="card-icon-container bg-green-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg> </div>
+                             <h5 class="font-medium text-lg text-green-300 mb-3">靈感捕捉</h5>
+                             <p class="text-gray-400 text-sm mb-4">快速記錄閃現的教學點子、課堂觀察、會議筆記、閱讀心得。</p>
+                             <div class="napkin-example p-3 rounded-lg border border-gray-600 text-xs" data-feature="napkin-capture" data-title="Napkin 範例：靈感捕捉"><code>可以設計一個「模擬聯合國」活動討論氣候變遷議題。</code></div>
+                             <div class="mt-4"> <button class="napkin-feature-btn bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition-colors focus-visible:ring-4 focus-visible:ring-green-500 transform hover:scale-105 active:scale-95" data-feature="napkin-capture" data-title="Napkin 範例：靈感捕捉"> 查看範例 </button> </div>
+                         </div>
+                         <div class="card bg-gray-900 p-6 group" style="--stagger-index: 1;">
+                             <div class="card-icon-container bg-orange-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg> </div>
+                             <h5 class="font-medium text-lg text-orange-300 mb-3">知識連結</h5>
+                             <p class="text-gray-400 text-sm mb-4">AI 自動分析筆記內容，找出相關的舊筆記，呈現潛在的關聯。</p>
+                              <div class="napkin-example p-3 rounded-lg border border-gray-600 text-xs" data-feature="napkin-connect" data-title="Napkin 範例：知識連結"><code>輸入「公民不服從」，Napkin 可能會自動連結到之前記錄的「甘地」或「美國民權運動」。</code></div>
+                             <div class="mt-4"> <button class="napkin-feature-btn bg-orange-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-orange-700 transition-colors focus-visible:ring-4 focus-visible:ring-orange-500 transform hover:scale-105 active:scale-95" data-feature="napkin-connect" data-title="Napkin 範例：知識連結"> 查看範例 </button> </div>
+                         </div>
+                         <div class="card bg-gray-900 p-6 group" style="--stagger-index: 2;">
+                             <div class="card-icon-container bg-teal-900 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4"> <svg class="w-8 h-8 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg> </div>
+                             <h5 class="font-medium text-lg text-teal-300 mb-3">主題探索與反思</h5>
+                             <p class="text-gray-400 text-sm mb-4">透過連結的筆記網絡，探索特定主題的不同面向，或反思教學實踐。</p>
+                             <div class="napkin-example p-3 rounded-lg border border-gray-600 text-xs" data-feature="napkin-explore" data-title="Napkin 範例：主題探索"><code>檢視所有關於「差異化教學」的筆記，看看實施了哪些策略，效果如何。</code></div>
+                             <div class="mt-4"> <button class="napkin-feature-btn bg-teal-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-teal-700 transition-colors focus-visible:ring-4 focus-visible:ring-teal-500 transform hover:scale-105 active:scale-95" data-feature="napkin-explore" data-title="Napkin 範例：主題探索"> 查看範例 </button> </div>
+                         </div>
+                    </div>
+                     <div class="mt-8 bg-gray-700 p-6 rounded-lg border border-gray-600 reveal" style="--stagger-index: 4;">
+                         <h5 class="font-semibold text-center text-gray-200">Napkin AI 的價值</h5>
+                         <p class="text-center text-gray-400 mt-2 text-sm md:text-base">它不直接生成教案或簡報，而是幫助老師<strong class="text-green-400">梳理思緒、發現洞見</strong>，更適合用於<strong class="text-orange-400">長期的知識管理與教學反思</strong>。</p>
+                         <div class="text-center mt-4">
+                            <a href="https://www.napkin.ai/" target="_blank" rel="noopener noreferrer" class="text-green-400 hover:text-green-300 font-medium underline underline-offset-4 transition-colors group inline-flex items-center">
+                                前往 Napkin AI 官網
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /> </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Case Study Section -->
-        <section id="case-study" class="section max-w-5xl mx-auto mb-16 md:mb-24 reveal section-bg-grad-1 rounded-2xl"> <!-- Dark gradient -->
+        <section id="case-study" class="section max-w-5xl mx-auto mb-16 md:mb-24 reveal section-bg-grad-1 rounded-2xl" role="region" aria-labelledby="case-study-title">
              <div class="section-header">
-                <h2 class="section-title text-3xl md:text-4xl font-bold gradient-text inline-block">教學案例分享</h2>
-                <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+                <h2 id="case-study-title" class="section-title text-3xl md:text-4xl font-bold gradient-text inline-block">教學案例分享</h2>
+                <button class="section-focus-trigger" aria-label="聚焦 教學案例分享 區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m7 1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v4m0 0h-4m4 0l-5-5"></path></svg> </button> <!-- Corrected Icon -->
              </div>
-             <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">雙劍合璧：Canva AI + EdCafe AI 設計一堂課</p>
-             <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-8 reveal" style="--stagger-index: 2;"> <!-- Dark transparent bg -->
-                 <h3 class="text-xl font-semibold text-center mb-6 text-indigo-300">主題：臺灣的多元文化與族群互動</h3>
+             <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">AI 組合拳：Canva + EdCafe + Napkin 設計一堂整合式社會課</p> <!-- Updated title -->
+             <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-8 reveal" style="--stagger-index: 2;">
+                 <h3 class="text-xl font-semibold text-center mb-6 text-indigo-300">主題：全球化下的文化衝突與融合</h3>
                  <ol class="list-decimal list-inside space-y-4 text-gray-300">
-                    <li> <strong><span class="text-purple-400">目標設定 (EdCafe AI 輔助):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>學生能說出臺灣主要族群及其文化特色。</li> <li>學生能分析不同族群互動的歷史經驗。</li> <li>學生能運用 AI 工具呈現對多元文化的理解。</li> <li>(使用 EdCafe AI 輸入課綱關鍵字，獲取教學目標建議並修改)</li> </ul> </li>
-                    <li> <strong><span class="text-indigo-400">引起動機 (Canva AI 輔助):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>使用 Canva AI (Text to Image) 生成「融合不同文化元素的臺灣街景」圖片，引發討論。</li> <li class="text-gray-500"><code class="text-xs">Prompt 範例: 臺灣夜市街景，融合原住民圖騰、閩南紅磚廟宇元素、客家藍染布料、現代霓虹燈招牌，風格：宮崎駿動畫風格</code></li> <li>提問：圖片中看到哪些文化元素？它們如何共存？</li> </ul> </li>
-                    <li> <strong><span class="text-purple-400">發展活動 (EdCafe AI + Canva AI):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>**分組研究：** 各組分配一個族群 (如：閩南、客家、外省、原住民各族、新住民)。</li> <li>**資料整理 (EdCafe AI):** 提供各族群相關文本，要求 EdCafe AI 摘要重點、生成閱讀理解問題，或提供關鍵詞彙表 (使用 `glossary` 功能)。</li> <li>**觀點呈現 (Canva AI):** 要求學生使用 Canva (Magic Write) 撰寫介紹文案，並用 (Text to Image) 生成代表性圖像，最後用 (Magic Design) 製作小組介紹海報或簡報。</li> <li>**多元觀點討論 (EdCafe AI / Magic Write):** 針對歷史上的族群衝突事件，使用 AI 生成不同立場的簡短論點 (參考 `perspectives` 範例)，引導學生討論。</li> </ul> </li>
-                    <li> <strong><span class="text-indigo-400">綜合活動與評量 (Canva AI + EdCafe AI):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>**成果分享：** 各組展示 Canva 製作的成果。</li> <li>**概念整合 (EdCafe AI):** 使用 EdCafe AI 生成學習單，包含配合題、簡答題，檢核學習成效 (參考 `assessment` 範例)。</li> <li>**創意延伸 (Canva AI):** 鼓勵學生用 Canva AI 設計一個象徵「臺灣多元文化融合」的標誌或圖像。</li> </ul> </li>
+                    <li> <strong><span class="text-green-400">前期準備 (Napkin AI):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>教師平時閱讀相關新聞、文章、看到有趣的紀錄片時，<strong class="text-green-500">隨手將想法或連結記錄到 Napkin</strong>。</li> <li>例如：「麥當勞在印度的在地化菜單」、「韓流 K-Pop 對東南亞青少年的影響」、「法國保護語言純潔性的政策」。</li> <li>備課時，檢視 Napkin 中關於「全球化」或「文化」的<strong class="text-orange-500">連結筆記</strong>，尋找教學切入點和案例。</li> </ul> </li>
+                    <li> <strong><span class="text-purple-400">目標與教案 (EdCafe AI):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>使用 EdCafe AI 輸入關鍵字「全球化 文化衝突 融合 國中教案」，獲取<strong class="text-purple-500">教學目標建議</strong>和<strong class="text-purple-500">基礎教案架構</strong>。</li> <li>修改目標為：(1) 學生能舉例說明全球化下的文化衝突與融合現象。(2) 學生能分析文化交流的正面與負面影響。(3) 學生能運用不同 AI 工具表達觀點。</li> </ul> </li>
+                    <li> <strong><span class="text-indigo-400">引起動機 (Canva AI):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>使用 Canva Text to Image 生成「<strong class="text-indigo-500">不同國家文化元素奇妙組合</strong>」的圖片 (如：穿和服喝可樂的機器人)。</li> <li class="text-gray-500"><code class="text-xs">Prompt 範例: 一個穿著傳統印度紗麗的女子正在使用最新的 iPhone 手機，背景是紐約時代廣場，超現實主義風格。</code></li> <li>提問：這張圖給你什麼感覺？看到了哪些文化的碰撞？</li> </ul> </li>
+                    <li> <strong><span class="text-pink-400">發展活動 (EdCafe + Canva):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>**案例分析 (EdCafe AI):** 使用 EdCafe AI 生成不同國家文化衝突/融合的<strong class="text-pink-500">案例摘要</strong>和<strong class="text-pink-500">討論題</strong> (例如：迪士尼動畫的文化挪用爭議、臺灣珍珠奶茶風靡全球)。</li> <li>**觀點呈現 (Canva AI):** 學生分組選擇一個案例，使用 Canva Magic Write <strong class="text-indigo-500">撰寫摘要與觀點</strong>，用 Text to Image <strong class="text-indigo-500">生成輔助圖片</strong>，用 Magic Design <strong class="text-indigo-500">製作簡報</strong>。</li> <li>**多元視角 (EdCafe/Magic Write):** 針對某個爭議案例，用 AI <strong class="text-pink-500">生成支持與反對的論點</strong>，引導辯論。</li> </ul> </li>
+                    <li> <strong><span class="text-teal-400">綜合與反思 (Napkin + EdCafe):</span></strong> <ul class="list-disc list-inside ml-6 mt-1 text-sm space-y-1 text-gray-400"> <li>**成果分享：** 各組展示 Canva 簡報。</li> <li>**學習單 (EdCafe AI):** 使用 EdCafe AI 生成<strong class="text-teal-500">評量學習單</strong>，檢核對衝突與融合概念的理解。</li> <li>**個人反思 (Napkin AI - 可選):** 鼓勵學生將課堂學習到的<strong class="text-green-500">新想法、疑問或案例記錄到自己的 Napkin (若有)</strong>，或教師將學生的精彩觀點記錄到自己的 Napkin 中，供未來教學參考。</li> </ul> </li>
                  </ol>
-                 <p class="mt-6 text-center text-sm text-gray-500">(以上為結合兩工具的教學流程構想)</p>
+                 <p class="mt-6 text-center text-sm text-gray-500">(以上為結合三工具的教學流程構想，Napkin 偏重教師前期積累與後期反思)</p>
              </div>
         </section>
 
         <!-- Ethics Section -->
-         <section id="ethics" class="section max-w-5xl mx-auto mb-16 md:mb-24 reveal section-bg-alt rounded-2xl shadow-xl"> <!-- Dark section bg -->
+         <section id="ethics" class="section max-w-5xl mx-auto mb-16 md:mb-24 reveal section-bg-alt rounded-2xl shadow-xl" role="region" aria-labelledby="ethics-title">
              <div class="section-header">
-                 <h2 class="section-title text-3xl md:text-4xl font-bold gradient-text inline-block">教學考量與倫理</h2>
-                  <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+                 <h2 id="ethics-title" class="section-title text-3xl md:text-4xl font-bold gradient-text inline-block">教學考量與倫理</h2>
+                  <button class="section-focus-trigger" aria-label="聚焦 教學考量與倫理 區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m7 1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v4m0 0h-4m4 0l-5-5"></path></svg> </button> <!-- Corrected Icon -->
              </div>
              <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal" style="--stagger-index: 1;">擁抱 AI，但保持清醒</p>
              <div class="p-6 md:p-8 space-y-5 reveal" style="--stagger-index: 2;">
@@ -968,27 +1107,27 @@
                          <p class="text-sm">AI 是輔助工具，非最終決策者。教師的專業判斷、課程設計理念和對學生的了解至關重要。</p>
                      </div>
                  </div>
-                 <!-- List items: Adjust text colors for contrast -->
+                 <!-- List items -->
                  <ul class="list-none space-y-4 text-gray-300 pl-2">
                      <li class="flex items-start"><span class="mr-3 text-red-400 font-bold text-xl">!</span><div><strong>內容準確性：</strong> AI 可能產生錯誤或有偏見的資訊 (Hallucination)，務必 <strong class="text-red-400 underline decoration-wavy">審核、查證、修改</strong>。特別是歷史事件、數據、法律條文等。</div></li>
                      <li class="flex items-start"><span class="mr-3 text-blue-400 font-bold text-xl">©</span><div><strong>版權問題：</strong> AI 生成圖像或文本的版權歸屬複雜，教學使用建議選擇<strong class="text-blue-400">明確授權</strong>的平臺或謹慎用於<strong class="text-blue-400">內部教學、非商業用途</strong>，並標註來源。</div></li>
-                     <li class="flex items-start"><span class="mr-3 text-red-400 font-bold text-xl">🔒</span><div><strong>學生數據隱私：</strong> 使用 AI 工具處理學生資料 (如批改作文、學習分析) 時，需遵守個資法規定，優先選擇<strong class="text-red-400">注重隱私保護</strong>、<strong class="text-red-400">資料不回傳訓練</strong>的平臺。</div></li>
-                     <li class="flex items-start"><span class="mr-3 text-green-400 font-bold text-xl">🤔</span><div><strong>過度依賴與思辨能力：</strong> 避免讓 AI 取代教師的思考與創造力，或學生的自主學習過程。應引導學生<strong class="text-green-400">學習如何下有效的指令 (Prompt Engineering)</strong>，並<strong class="text-green-400">批判性地評估</strong> AI 生成的結果。</div></li>
+                     <li class="flex items-start"><span class="mr-3 text-red-400 font-bold text-xl">🔒</span><div><strong>數據隱私：</strong> 使用 AI 工具處理個人筆記 (Napkin) 或學生資料時，需了解<strong class="text-red-400">平臺的隱私政策</strong>，遵守個資法規定。優先選擇<strong class="text-red-400">注重隱私保護</strong>、<strong class="text-red-400">資料不回傳訓練</strong>的平臺 (若處理敏感資料)。</div></li>
+                     <li class="flex items-start"><span class="mr-3 text-green-400 font-bold text-xl">🤔</span><div><strong>過度依賴與思辨能力：</strong> 避免讓 AI 取代教師的思考與創造力，或學生的自主學習過程。應引導學生<strong class="text-green-400">學習如何下有效的指令 (Prompt Engineering)</strong>，並<strong class="text-green-400">批判性地評估</strong> AI 生成的結果，或<strong class="text-green-400">反思 AI 連結的筆記 (Napkin)</strong>。</div></li>
                      <li class="flex items-start"><span class="mr-3 text-orange-400 font-bold text-xl">💻</span><div><strong>數位落差：</strong> 考慮 AI 工具的取得性 (軟硬體、網路、帳號付費)，規劃配套措施，避免加劇數位落差。</div></li>
-                     <li class="flex items-start"><span class="mr-3 text-purple-400 font-bold text-xl">Bias</span><div><strong>演算法偏見：</strong> 了解 AI 模型可能存在的偏見 (訓練資料造成)，並在教學中<strong class="text-purple-400">提醒學生注意</strong>，培養媒體素養。</div></li>
+                     <li class="flex items-start"><span class="mr-3 text-purple-400 font-bold text-xl">Bias</span><div><strong>演算法偏見：</strong> 了解 AI 模型可能存在的偏見 (訓練資料造成)，並在教學中<strong class="text-purple-400">提醒學生注意</strong>，培養媒體素養。Napkin 的連結也可能受其演算法影響。</div></li>
                  </ul>
              </div>
          </section>
 
         <!-- Summary & Q&A Section -->
-         <section id="summary-qa" class="section max-w-5xl mx-auto mb-16 md:mb-24 reveal section-bg-grad-2 rounded-2xl"> <!-- Dark gradient -->
+         <section id="summary-qa" class="section max-w-5xl mx-auto mb-16 md:mb-24 reveal section-bg-grad-2 rounded-2xl" role="region" aria-labelledby="summary-qa-title">
             <div class="section-header">
-                 <h2 class="section-title text-3xl md:text-4xl font-bold gradient-text inline-block">總結與 Q&A</h2>
-                 <button class="section-focus-trigger" aria-label="聚焦此區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5"></path></svg> </button>
+                 <h2 id="summary-qa-title" class="section-title text-3xl md:text-4xl font-bold gradient-text inline-block">總結與 Q&A</h2>
+                 <button class="section-focus-trigger" aria-label="聚焦 總結與 Q&A 區塊"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m7 1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v4m0 0h-4m4 0l-5-5"></path></svg> </button> <!-- Corrected Icon -->
              </div>
-              <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-8 space-y-6 reveal" style="--stagger-index: 1;"> <!-- Dark transparent bg -->
-                   <p class="text-lg text-center text-gray-200 leading-relaxed">AI 為社會領域教學帶來巨大潛力，能<span class="font-semibold text-indigo-400">提升效率</span>、<span class="font-semibold text-purple-400">激發創意</span>、<span class="font-semibold text-pink-400">輔助差異化教學</span>。關鍵在於<strong class="text-green-400">善用工具 (成為好的 Prompt 設計者)</strong>，並保有教師的<strong class="text-red-400">專業判斷、倫理意識</strong>與<strong class="text-blue-400">人文關懷</strong>。</p>
-                   <div class="text-center pt-6 border-t border-gray-700"> <!-- Dark border -->
+              <div class="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-xl p-6 md:p-8 space-y-6 reveal" style="--stagger-index: 1;">
+                   <p class="text-lg text-center text-gray-200 leading-relaxed">AI 為社會領域教學帶來巨大潛力，能<span class="font-semibold text-indigo-400">提升效率 (Canva/EdCafe)</span>、<span class="font-semibold text-purple-400">激發創意 (Canva)</span>、<span class="font-semibold text-pink-400">輔助差異化教學 (EdCafe)</span>，以及<span class="font-semibold text-green-400">連結與深化思考 (Napkin)</span>。關鍵在於<strong class="text-yellow-400">選擇合適工具、善下指令</strong>，並保有教師的<strong class="text-red-400">專業判斷、倫理意識</strong>與<strong class="text-blue-400">人文關懷</strong>。</p> <!-- Updated Summary -->
+                   <div class="text-center pt-6 border-t border-gray-700">
                        <h3 class="text-2xl font-semibold text-indigo-300 mb-4">Q&A 時間</h3>
                        <p class="text-gray-400 mb-6">感謝您的參與，歡迎提問交流！</p>
                         <svg class="w-16 h-16 mx-auto text-indigo-400 animate-pulse" style="animation-duration: 1.5s;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -998,16 +1137,16 @@
 
     </main>
 
-     <!-- Example Modal Structure (Handled by CSS Vars) -->
+     <!-- Example Modal Structure -->
     <div id="exampleModal" class="modal-overlay" aria-hidden="true"> <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle"> <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-700"> <h3 id="modalTitle" class="text-xl font-bold text-indigo-300">範例</h3> <button id="closeModal" class="text-gray-500 hover:text-gray-300 transition-colors p-1 rounded-full hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500" aria-label="關閉視窗"> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path> </svg> </button> </div> <div id="modalBody" class="mt-4 max-h-[65vh] overflow-y-auto text-gray-300 pr-3 text-sm md:text-base space-y-4"> <p>範例內容載入中...</p> </div> <div class="mt-6 pt-4 border-t border-gray-700 flex justify-end"> <button id="closeModalBtn" class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition-colors focus-visible:ring-4 focus-visible:ring-indigo-500 transform hover:scale-105 active:scale-95 duration-200"> 關閉 </button> </div> </div> </div>
 
-    <footer class="bg-gray-900 text-gray-400 py-10 mt-16 relative overflow-hidden"> <!-- Footer is already dark -->
-         <div class="absolute inset-0 opacity-5"> <!-- Reduced pattern opacity --> <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="footerPattern" patternUnits="userSpaceOnUse" width="60" height="60" patternTransform="scale(1) rotate(30)"><path d="M10 10h40v40h-40z" stroke="#fff" stroke-width="0.2" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100%" height="100%" fill="url(#footerPattern)"/></svg> </div>
+    <footer class="bg-gray-900 text-gray-400 py-10 mt-16 relative overflow-hidden">
+         <div class="absolute inset-0 opacity-5"> <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="footerPattern" patternUnits="userSpaceOnUse" width="60" height="60" patternTransform="scale(1) rotate(30)"><path d="M10 10h40v40h-40z" stroke="#fff" stroke-width="0.2" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100%" height="100%" fill="url(#footerPattern)"/></svg> </div>
          <div class="container mx-auto px-4 text-center relative z-10">
             <div class="mb-4 flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-8">
-                 <!-- Footer links use bright text -->
                  <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer" class="footer-link group inline-flex items-center"> Canva 官網 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg> </a>
                  <a href="https://www.edcafetw.com/" target="_blank" rel="noopener noreferrer" class="footer-link group inline-flex items-center"> EdCafe AI 臺灣 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg> </a>
+                 <a href="https://www.napkin.ai/" target="_blank" rel="noopener noreferrer" class="footer-link group inline-flex items-center"> Napkin AI 官網 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg> </a> <!-- Added Napkin Footer Link -->
             </div>
              <div class="my-6 flex justify-center items-center space-x-2">
                  <img src="image/LiyuChillGuy(W).svg" alt="Liyu Chill Guy Mascot Footer" class="w-8 h-8 footer-icon">
@@ -1036,11 +1175,13 @@
             const closeModalBtn = document.getElementById('closeModalBtn');
             const showExampleBtns = document.querySelectorAll('.show-example-btn');
             const edcafeFeatureBtns = document.querySelectorAll('.edcafe-feature-btn');
+            const napkinFeatureBtns = document.querySelectorAll('.napkin-feature-btn'); // Added Napkin buttons
             const canvaTabs = document.querySelectorAll('.canva-tab');
             const canvaTabContents = document.querySelectorAll('#canva-ai .tab-content');
             const promptExamples = document.querySelectorAll('.prompt-example');
             const imagePromptExamples = document.querySelectorAll('.image-prompt-example');
             const designExamples = document.querySelectorAll('.design-example');
+            const napkinExamples = document.querySelectorAll('.napkin-example'); // Added Napkin example divs
             const sectionFocusTriggers = document.querySelectorAll('.section-focus-trigger');
             const sectionFocusOverlay = document.getElementById('section-focus-overlay');
             const allSections = document.querySelectorAll('section');
@@ -1050,9 +1191,16 @@
             // --- Initialization Functions ---
             function initProgressBar() { window.addEventListener('scroll', updateProgressBar, { passive: true }); updateProgressBar(); }
             function initMobileMenu() { if (mobileMenuButton && mobileMenu) { mobileMenu.classList.add('transition-all', 'duration-300', 'ease-out', 'transform', 'origin-top'); mobileMenuButton.addEventListener('click', toggleMobileMenu); } }
-            function initSmoothScroll() { [exploreBtn, showToolsBtn].forEach(btn => { if (btn) { btn.addEventListener('click', (e) => { e.preventDefault(); smoothScrollTo(btn === exploreBtn ? 'agenda' : 'ai-potential'); }); } }); navLinks.forEach(link => { link.addEventListener('click', (e) => { const href = link.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); smoothScrollTo(href.substring(1)); } }); }); }
+            function initSmoothScroll() { [exploreBtn, showToolsBtn].forEach(btn => { if (btn) { btn.addEventListener('click', (e) => { e.preventDefault(); smoothScrollTo(btn === exploreBtn ? 'agenda' : 'ai-potential'); }); } }); navLinks.forEach(link => { link.addEventListener('click', (e) => { const href = link.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); smoothScrollTo(href.substring(1)); if (mobileMenu && mobileMenu.classList.contains('active')) { toggleMobileMenu(); } } }); }); }
             function initScrollReveal() { if (!prefersReducedMotion) { const revealElements = document.querySelectorAll('.reveal'); const staggerContainers = document.querySelectorAll('.reveal-stagger, .agenda-reveal'); const observerCallback = (entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); const parent = entry.target.closest('.reveal-stagger, .agenda-reveal'); if (parent && !parent.classList.contains('in-view')) { parent.classList.add('in-view'); parent.querySelectorAll(':scope > *').forEach((child, childIndex) => { child.style.setProperty('--stagger-index', childIndex); }); } else if (entry.target.matches('.reveal-stagger > *, .agenda-reveal > li')) { const childIndex = Array.from(entry.target.parentNode.children).indexOf(entry.target); entry.target.style.setProperty('--stagger-index', childIndex); } } }); }; const observerOptions = { threshold: 0.1 }; const observer = new IntersectionObserver(observerCallback, observerOptions); revealElements.forEach(el => observer.observe(el)); staggerContainers.forEach(el => observer.observe(el)); } else { document.querySelectorAll('.reveal, .reveal-stagger, .agenda-reveal, .reveal-stagger > *, .agenda-reveal > li').forEach(el => el.classList.add('in-view')); } }
-            function initModals() { [...showExampleBtns, ...edcafeFeatureBtns].forEach(btn => { btn.addEventListener('click', () => { const exampleKey = btn.dataset.example || btn.dataset.feature; const title = btn.dataset.title || '範例'; const content = exampleContent[exampleKey] || '<p>抱歉，找不到此範例內容。</p>'; openModal(title, content); }); }); if (closeModal) closeModal.addEventListener('click', closeModalAction); if (closeModalBtn) closeModalBtn.addEventListener('click', closeModalAction); if (modal) { modal.addEventListener('click', (e) => { if (e.target === modal) closeModalAction(); }); } window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal && modal.classList.contains('active')) closeModalAction(); }); }
+            function initModals() { [...showExampleBtns, ...edcafeFeatureBtns, ...napkinFeatureBtns].forEach(btn => { // Added Napkin buttons
+                 btn.addEventListener('click', () => {
+                    const exampleKey = btn.dataset.example || btn.dataset.feature;
+                    const title = btn.dataset.title || '範例';
+                    const content = exampleContent[exampleKey] || '<p>抱歉，找不到此範例內容。</p>';
+                    openModal(title, content);
+                 });
+             }); if (closeModal) closeModal.addEventListener('click', closeModalAction); if (closeModalBtn) closeModalBtn.addEventListener('click', closeModalAction); if (modal) { modal.addEventListener('click', (e) => { if (e.target === modal) closeModalAction(); }); } window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal && modal.classList.contains('active')) closeModalAction(); }); }
             function initCanvaTabs() {
                  canvaTabs.forEach(tab => {
                      tab.addEventListener('click', () => {
@@ -1065,44 +1213,107 @@
                      });
                  });
             }
-            function initDemoAreas() { promptExamples.forEach(btn => { btn.addEventListener('click', () => { const targetId = btn.dataset.target; const promptText = btn.dataset.prompt || btn.querySelector('code').textContent; let simulatedResponse = `<p><strong>模擬指令:</strong> ${promptText}</p><hr><p>這是根據指令「${promptText.substring(0, 30)}...」模擬生成的文字結果。實際由 AI 生成的內容會更完整和具體。</p>`; if (promptText.includes("選擇題")) { simulatedResponse += `<ol><li>題目一... (A)... (B)... (C)... (D)...</li><li>題目二...</li></ol>`; } else if (promptText.includes("探究式學習問題")) { simulatedResponse += `<ul><li>模擬問題 1?</li><li>模擬問題 2?</li><li>模擬問題 3?</li></ul>`; } showDemoResult(targetId, simulatedResponse, true); }); }); imagePromptExamples.forEach(btn => { btn.addEventListener('click', () => { const targetId = btn.dataset.target; const theme = btn.dataset.theme || 'default'; const promptText = btn.dataset.prompt || btn.querySelector('code').textContent; const svgHtml = generateSvgDemo(theme); const finalHtml = `${svgHtml}<p class="text-xs text-gray-500 mt-1 px-2">模擬自 Prompt: ${promptText}</p>`; showDemoResult(targetId, finalHtml); }); }); designExamples.forEach(btn => { btn.addEventListener('click', () => { const targetId = btn.dataset.target; const designType = btn.dataset.designType || 'default'; const promptText = btn.querySelector('code').textContent; const svgHtml = generateSvgDemo(designType); const finalHtml = `${svgHtml}<p class="text-xs text-gray-500 mt-1 px-2">模擬設計 for: ${promptText}</p>`; showDemoResult(targetId, finalHtml); }); }); }
+            function initDemoAreas() {
+                 promptExamples.forEach(div => { div.addEventListener('click', () => { const targetId = div.dataset.target; const promptText = div.dataset.prompt || div.querySelector('code').textContent; let simulatedResponse = `<p><strong>模擬指令:</strong> ${promptText}</p><hr><p>這是根據指令「${promptText.substring(0, 30)}...」模擬生成的文字結果。實際由 AI 生成的內容會更完整和具體。</p>`; if (promptText.includes("選擇題")) { simulatedResponse += `<ol><li>題目一... (A)... (B)... (C)... (D)...</li><li>題目二...</li></ol>`; } else if (promptText.includes("探究式學習問題")) { simulatedResponse += `<ul><li>模擬問題 1?</li><li>模擬問題 2?</li><li>模擬問題 3?</li></ul>`; } showDemoResult(targetId, simulatedResponse, true); }); });
+                 imagePromptExamples.forEach(div => { div.addEventListener('click', () => { const targetId = div.dataset.target; const theme = div.dataset.theme || 'default'; const promptText = div.dataset.prompt || div.querySelector('code').textContent; const svgHtml = generateSvgDemo(theme); const finalHtml = `${svgHtml}<p class="text-xs text-gray-500 mt-1 px-2">模擬自 Prompt: ${promptText}</p>`; showDemoResult(targetId, finalHtml); }); });
+                 designExamples.forEach(div => { div.addEventListener('click', () => { const targetId = div.dataset.target; const designType = div.dataset.designType || 'default'; const promptText = div.querySelector('code').textContent; const svgHtml = generateSvgDemo(designType); const finalHtml = `${svgHtml}<p class="text-xs text-gray-500 mt-1 px-2">模擬設計 for: ${promptText}</p>`; showDemoResult(targetId, finalHtml); }); });
+                 napkinExamples.forEach(div => { // Added Napkin example listener
+                    div.addEventListener('click', () => {
+                        const feature = div.dataset.feature;
+                        const title = div.dataset.title;
+                        if (feature && title && exampleContent[feature]) {
+                             openModal(title, exampleContent[feature]);
+                        }
+                    });
+                 });
+             }
             function initMascotAndConfetti() { if (fixedMascotContainer) { fixedMascotContainer.addEventListener('click', () => { fixedMascotContainer.classList.add('clicked'); triggerConfetti(fixedMascotContainer.getBoundingClientRect()); setTimeout(() => { fixedMascotContainer.classList.remove('clicked'); }, 500); }); } if (heroIcon) { heroIcon.addEventListener('click', () => { triggerConfetti(heroIcon.getBoundingClientRect()); heroIcon.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'; heroIcon.style.transform = 'scale(1.3) rotate(360deg)'; setTimeout(() => { heroIcon.style.transform = 'scale(1) rotate(0deg)'; }, 500); }); } }
-            function initSectionFocus() { sectionFocusTriggers.forEach(button => { button.addEventListener('click', (e) => { e.stopPropagation(); const section = button.closest('section'); if (section && !section.classList.contains('is-focused')) { focusSection(section); } }); }); if (sectionFocusOverlay) { sectionFocusOverlay.addEventListener('click', unfocusAllSections); } window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('section-focused')) { unfocusAllSections(); } }); }
+            function initSectionFocus() { sectionFocusTriggers.forEach(button => { button.addEventListener('click', (e) => { e.stopPropagation(); // Prevent triggering clicks on underlying elements
+                const section = button.closest('section');
+                if (section && !document.body.classList.contains('section-focused')) { // Only focus if not already focused
+                     focusSection(section);
+                }
+            }); }); if (sectionFocusOverlay) { sectionFocusOverlay.addEventListener('click', unfocusAllSections); } window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('section-focused')) { unfocusAllSections(); } }); }
 
             // --- Helper Functions ---
             function updateProgressBar() { const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight; const scrolled = window.scrollY; progressBar.style.width = scrollableHeight > 0 ? `${(scrolled / scrollableHeight) * 100}%` : '0%'; }
             function toggleMobileMenu() { const isExpanded = mobileMenu.classList.contains('active'); if (!isExpanded) { mobileMenu.classList.remove('hidden'); requestAnimationFrame(() => { mobileMenu.classList.add('active', 'scale-y-100', 'opacity-100'); mobileMenu.classList.remove('scale-y-0', 'opacity-0'); }); } else { mobileMenu.classList.remove('active', 'scale-y-100', 'opacity-100'); mobileMenu.classList.add('scale-y-0', 'opacity-0'); mobileMenu.addEventListener('transitionend', () => { if (!mobileMenu.classList.contains('active')) mobileMenu.classList.add('hidden'); }, { once: true }); } mobileMenuButton.setAttribute('aria-expanded', !isExpanded); mobileMenuButton.innerHTML = !isExpanded ? `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>` : `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>`; mobileMenuButton.setAttribute('aria-label', !isExpanded ? '關閉選單' : '開啟選單'); }
-            function smoothScrollTo(elementId) { const targetElement = document.getElementById(elementId); if (targetElement) { targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); if (mobileMenu && mobileMenu.classList.contains('active')) { toggleMobileMenu(); } } }
-            function openModal(title, content) { if (modal && modalTitle && modalBody) { lastFocusedElement = document.activeElement; modalTitle.textContent = title; modalBody.innerHTML = content; modal.classList.add('active'); modal.removeAttribute('aria-hidden'); document.body.style.overflow = 'hidden'; const focusableContent = modal.querySelector('h3, h5, p, button:not(#closeModalBtn)'); if (focusableContent) { focusableContent.focus(); } else { closeModal.focus(); } } }
-            function closeModalAction() { if (modal) { modal.classList.remove('active'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; setTimeout(() => { modalBody.innerHTML = '<p>範例內容載入中...</p>'; if (lastFocusedElement) { lastFocusedElement.focus(); lastFocusedElement = null; } }, 300); } }
+            function smoothScrollTo(elementId) { const targetElement = document.getElementById(elementId); if (targetElement) { targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); } } // Mobile menu close moved to nav link listener
+            function openModal(title, content) { if (modal && modalTitle && modalBody) { lastFocusedElement = document.activeElement; modalTitle.textContent = title; modalBody.innerHTML = content; modal.classList.add('active'); modal.removeAttribute('aria-hidden'); document.body.style.overflow = 'hidden'; // Prevent body scroll
+                 // Focus first focusable element in modal or close button
+                 const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                 const firstFocusable = focusableElements.length > 0 ? focusableElements[0] : closeModal;
+                 if (firstFocusable) { setTimeout(() => firstFocusable.focus(), 100); } // Delay focus slightly
+             } }
+            function closeModalAction() { if (modal) { modal.classList.remove('active'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; // Restore body scroll
+                 setTimeout(() => { modalBody.innerHTML = '<p>範例內容載入中...</p>'; if (lastFocusedElement) { lastFocusedElement.focus(); lastFocusedElement = null; } }, 350); } } // Match transition duration
             function generateSvgDemo(themeOrType) {
                 let svgContent = ''; const width = 250; const height = 150;
-                const darkFill = '#4b5563'; // gray-600
-                const midFill = '#6b7280'; // gray-500
-                const lightFill = '#9ca3af'; // gray-400
-                const textFill = '#e5e7eb'; // gray-200
+                const darkFill = '#4b5563'; const midFill = '#6b7280'; const lightFill = '#9ca3af'; const textFill = '#e5e7eb';
                 const accent1 = getComputedStyle(document.documentElement).getPropertyValue('--brand-indigo').trim();
                 const accent2 = getComputedStyle(document.documentElement).getPropertyValue('--brand-purple').trim();
                 const accent3 = getComputedStyle(document.documentElement).getPropertyValue('--brand-teal').trim();
+                const accent4 = getComputedStyle(document.documentElement).getPropertyValue('--brand-green').trim(); // Napkin color
+                const accent5 = getComputedStyle(document.documentElement).getPropertyValue('--brand-orange').trim(); // Napkin color
 
                 switch (themeOrType) {
                     case 'history': svgContent = `<rect width="${width}" height="${height}" fill="${darkFill}"/><rect x="30" y="50" width="40" height="100" fill="${midFill}"/><rect x="90" y="70" width="50" height="80" fill="${lightFill}"/><rect x="160" y="40" width="30" height="110" fill="${midFill}"/><line x1="0" y1="${height - 10}" x2="${width}" y2="${height - 10}" stroke="#111827" stroke-width="5"/><circle cx="200" cy="30" r="15" fill="${lightFill}" opacity="0.5"/><text x="${width/2}" y="20" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">歷史場景</text>`; break;
                     case 'concept': svgContent = `<rect width="${width}" height="${height}" fill="${midFill}"/><circle cx="${width/2}" cy="${height/2}" r="40" fill="${accent2}" opacity="0.6"/><circle cx="50" cy="40" r="10" fill="${accent1}" opacity="0.8"/><rect x="180" y="100" width="20" height="20" fill="${accent3}" opacity="0.7"/><polygon points="100,120 120,140 80,140" fill="${lightFill}"/><text x="${width/2}" y="20" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">抽象概念</text>`; break;
                     case 'geography': svgContent = `<rect width="${width}" height="${height}" fill="${darkFill}"/><polygon points="30,120 70,50 110,120" fill="${midFill}"/><polygon points="100,120 140,60 180,120" fill="#52525b"/><polygon points="170,120 200,70 230,120" fill="${midFill}"/><path d="M0 ${height-20} C 80 ${height-40}, 170 ${height}, ${width} ${height-15}" stroke="${accent3}" stroke-width="8" fill="none" opacity="0.7"/><text x="${width/2}" y="20" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">地理景觀</text>`; break;
                     case 'presentation': svgContent = `<rect width="${width}" height="${height}" fill="${darkFill}"/><rect x="20" y="20" width="${width - 40}" height="20" fill="${accent1}"/><rect x="20" y="50" width="${width * 0.6}" height="10" fill="${lightFill}"/><rect x="20" y="70" width="${width * 0.7}" height="10" fill="${lightFill}"/><rect x="20" y="90" width="${width * 0.5}" height="10" fill="${lightFill}"/><text x="${width/2}" y="${height - 15}" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">簡報模板</text>`; break;
-                    case 'poster': const posterWidth = 180; const posterHeight = 250; svgContent = `<rect width="${posterWidth}" height="${posterHeight}" fill="${darkFill}"/><rect x="20" y="20" width="${posterWidth - 40}" height="30" fill="${accent2}"/><circle cx="${posterWidth/2}" cy="100" r="30" fill="${accent3}" opacity="0.6"/><rect x="30" y="150" width="${posterWidth - 60}" height="15" fill="${lightFill}"/><rect x="30" y="175" width="${posterWidth - 60}" height="15" fill="${lightFill}"/> <text x="${posterWidth/2}" y="${posterHeight - 15}" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">海報模板</text>`; return `<svg viewBox="0 0 ${posterWidth} ${posterHeight}" width="${posterWidth}" height="${posterHeight}" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`;
+                    case 'poster': const posterWidth = 180; const posterHeight = 250; svgContent = `<rect width="${posterWidth}" height="${posterHeight}" fill="${darkFill}"/><rect x="20" y="20" width="${posterWidth - 40}" height="30" fill="${accent2}"/><circle cx="${posterWidth/2}" cy="100" r="30" fill="${accent3}" opacity="0.6"/><rect x="30" y="150" width="${posterWidth - 60}" height="15" fill="${lightFill}"/><rect x="30" y="175" width="${posterWidth - 60}" height="15" fill="${lightFill}"/> <text x="${posterWidth/2}" y="${posterHeight - 15}" font-family="sans-serif" font-size="10" fill="${textFill}" text-anchor="middle">海報模板</text>`; return `<svg viewBox="0 0 ${posterWidth} ${posterHeight}" width="${posterWidth}" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-height: 250px;">${svgContent}</svg>`; // Added max-height
+                    case 'napkin-link': // Simulate linked notes for Napkin demo
+                        const nWidth = 200; const nHeight = 120;
+                        svgContent = `<rect width="${nWidth}" height="${nHeight}" fill="${darkFill}"/>
+                           <rect x="20" y="20" width="60" height="30" rx="5" fill="${midFill}" stroke="${accent4}" stroke-width="1"/>
+                           <text x="50" y="38" font-size="8" text-anchor="middle" fill="${textFill}">Note A</text>
+                           <rect x="120" y="70" width="60" height="30" rx="5" fill="${midFill}" stroke="${accent5}" stroke-width="1"/>
+                           <text x="150" y="88" font-size="8" text-anchor="middle" fill="${textFill}">Note B</text>
+                           <rect x="70" y="75" width="50" height="25" rx="5" fill="${lightFill}" stroke="${accent3}" stroke-width="1"/>
+                           <text x="95" y="90" font-size="8" text-anchor="middle" fill="${darkFill}">Note C</text>
+                           <line x1="50" y1="50" x2="145" y2="70" stroke="${accent5}" stroke-width="1.5" stroke-dasharray="3 2"/>
+                           <line x1="50" y1="50" x2="95" y2="75" stroke="${accent3}" stroke-width="1.5" stroke-dasharray="3 2"/>
+                           <text x="${nWidth/2}" y="${nHeight - 5}" font-family="sans-serif" font-size="9" fill="${textFill}" text-anchor="middle">連結筆記模擬</text>`;
+                         return `<svg viewBox="0 0 ${nWidth} ${nHeight}" width="80%" height="auto" xmlns="http://www.w3.org/2000/svg" style="max-height: 120px;">${svgContent}</svg>`;
                     default: svgContent = `<rect width="${width}" height="${height}" fill="${darkFill}"/><line x1="0" y1="0" x2="${width}" y2="${height}" stroke="${midFill}" stroke-width="2"/><line x1="0" y1="${height}" x2="${width}" y2="0" stroke="${midFill}" stroke-width="2"/><text x="${width/2}" y="${height/2}" font-family="sans-serif" font-size="12" fill="${textFill}" text-anchor="middle" dy=".3em">模擬 SVG</text>`;
                 }
                  return `<svg viewBox="0 0 ${width} ${height}" width="90%" height="auto" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`;
             }
-            function showDemoResult(targetId, contentHtml, isText = false) { const demoArea = document.getElementById(targetId); if (demoArea) { demoArea.classList.add('loading'); demoArea.innerHTML = ''; setTimeout(() => { demoArea.innerHTML = isText ? `<div class="simulated-text">${contentHtml}</div>` : contentHtml; demoArea.classList.remove('loading'); }, 600 + Math.random() * 400); } }
-            function triggerConfetti(elementRect) { if (!confettiContainer || prefersReducedMotion) return; const colors = ['#818cf8', '#a78bfa', '#f472b6', '#fb7185', '#c084fc', '#fde047', '#5eead4']; const numConfetti = 40; const startX = elementRect.left + elementRect.width / 2; const startY = elementRect.top + elementRect.height / 2; for (let i = 0; i < numConfetti; i++) { const confetti = document.createElement('div'); const shape = Math.random() > 0.7 ? 'triangle' : (Math.random() > 0.5 ? 'circle' : ''); confetti.className = `confetti ${shape}`; const color = colors[Math.floor(Math.random() * colors.length)]; confetti.style.setProperty('--color', color); confetti.style.left = `${startX + (Math.random() - 0.5) * 60}px`; confetti.style.top = `${startY + (Math.random() - 0.5) * 40}px`; const delay = Math.random() * 0.3; const duration = Math.random() * 1 + 1.5; confetti.style.animationDelay = `${delay}s`; confetti.style.animationDuration = `${duration}s`; confetti.style.transform = `rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.5 + 0.5})`; confettiContainer.appendChild(confetti); setTimeout(() => { confetti.remove(); }, (delay + duration) * 1000 + 200); } }
-            function focusSection(sectionElement) { if (!sectionElement || document.body.classList.contains('section-focused')) return; const offset = 50; const bodyRect = document.body.getBoundingClientRect().top; const elementRect = sectionElement.getBoundingClientRect().top; const elementPosition = elementRect - bodyRect; const offsetPosition = elementPosition - offset; window.scrollTo({ top: offsetPosition, behavior: 'smooth' }); setTimeout(() => { document.body.classList.add('section-focused'); sectionElement.classList.add('is-focused'); }, 300); }
-            function unfocusAllSections() { document.body.classList.remove('section-focused'); allSections.forEach(sec => { sec.classList.remove('is-focused'); }); }
+            function showDemoResult(targetId, contentHtml, isText = false) { const demoArea = document.getElementById(targetId); if (demoArea) { demoArea.classList.add('loading'); demoArea.innerHTML = `<p class="text-gray-400 px-4">模擬效果生成中...</p>`; // Placeholder during load
+                 setTimeout(() => { demoArea.innerHTML = isText ? `<div class="simulated-text">${contentHtml}</div>` : contentHtml; demoArea.classList.remove('loading'); }, 600 + Math.random() * 400); } }
+            function triggerConfetti(elementRect) { if (!confettiContainer || prefersReducedMotion) return; const colors = ['#818cf8', '#a78bfa', '#f472b6', '#fb7185', '#c084fc', '#fde047', '#5eead4', '#4ade80', '#fb923c']; const numConfetti = 40; const startX = elementRect.left + elementRect.width / 2; const startY = elementRect.top + elementRect.height / 2; for (let i = 0; i < numConfetti; i++) { const confetti = document.createElement('div'); const shape = Math.random() > 0.7 ? 'triangle' : (Math.random() > 0.5 ? 'circle' : ''); confetti.className = `confetti ${shape}`; const color = colors[Math.floor(Math.random() * colors.length)]; confetti.style.setProperty('--color', color); confetti.style.left = `${startX + (Math.random() - 0.5) * 60}px`; confetti.style.top = `${startY + (Math.random() - 0.5) * 40}px`; const delay = Math.random() * 0.3; const duration = Math.random() * 1 + 1.5; confetti.style.animationDelay = `${delay}s`; confetti.style.animationDuration = `${duration}s`; confetti.style.transform = `rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.5 + 0.5})`; confettiContainer.appendChild(confetti); setTimeout(() => { confetti.remove(); }, (delay + duration) * 1000 + 200); } }
+            function focusSection(sectionElement) {
+                if (!sectionElement || document.body.classList.contains('section-focused')) return;
+                lastFocusedElement = document.activeElement; // Store focus before scroll
 
-             // --- Example Content Definition (Continued) ---
+                const offset = 60; // Adjust as needed, considering sticky nav height
+                const elementRect = sectionElement.getBoundingClientRect();
+                const elementTop = elementRect.top + window.scrollY;
+                const targetScrollPosition = elementTop - offset;
+
+                window.scrollTo({ top: targetScrollPosition, behavior: 'smooth' });
+
+                // Wait for scrolling to likely finish + buffer
+                setTimeout(() => {
+                    document.body.classList.add('section-focused');
+                    sectionElement.classList.add('is-focused');
+                    sectionFocusOverlay.classList.add('active'); // Show overlay
+                    sectionElement.focus(); // Set focus to the section container
+                }, 400); // Adjust timing if smooth scroll takes longer/shorter
+             }
+             function unfocusAllSections() {
+                document.body.classList.remove('section-focused');
+                sectionFocusOverlay.classList.remove('active'); // Hide overlay
+                allSections.forEach(sec => { sec.classList.remove('is-focused'); });
+                if (lastFocusedElement) { // Restore focus
+                     lastFocusedElement.focus();
+                     lastFocusedElement = null;
+                }
+            }
+
+             // --- Example Content Definition ---
             const exampleContent = {
-                // ... (content, data, visual, personalized, teaching, efficiency, perspectives, roleplay examples from previous step) ...
+                // Canva & EdCafe examples (content, data, visual, personalized, teaching, efficiency, perspectives, roleplay, lesson-plan, assessment, differentiation, glossary) are kept from previous steps...
                 content: `<h5>指令範例 1：生成探究問題</h5><code>請針對國中社會科「臺灣清治時期的社會生活」單元，生成 5 個不同層次的探究式學習問題 (包含事實、比較、因果、評價等層次)。</code><hr><h5>AI 可能的回應：</h5><ol><li><strong>事實：</strong>清代臺灣有哪些主要的移民族群？他們主要分布在哪裡？</li><li><strong>比較：</strong>比較「漳泉械鬥」與「原漢衝突」的發生原因與影響有何異同？</li><li><strong>因果：</strong>「開港通商」對臺灣的經濟與社會結構帶來哪些主要的改變？</li><li><strong>假設：</strong>如果清廷沒有實施「渡臺禁令」，臺灣的社會發展可能會有什麼不同？</li><li><strong>評價：</strong>你認為清代臺灣社會的「分類械鬥」現象，反映了當時社會的哪些問題？應如何評價？</li></ol><p class="mt-3 text-xs text-gray-500">(此為模擬回應，實際輸出會更詳細)</p>`,
                 data: `<h5>指令範例 1：摘要與改寫</h5><code>請將以下這段關於「權力分立」的學術文字，改寫成適合國中生理解的 100 字摘要：<br/>[貼入原始文字...]</code><hr><h5>AI 可能的回應：</h5><p>「權力分立」就像把政府的大權力分成三份：立法（制定法律）、行政（執行法律和政策）、司法（審理案件），由不同部門負責。這樣可以互相監督、限制，防止任何一個部門權力過大、亂來，保障人民的權利和自由。這也是現代民主國家重要的制度設計。</p><hr><h5>指令範例 2：比較文件</h5><code>請比較《世界人權宣言》第 1 條與《中華民國憲法》第 7 條，在內容上有何相似之處？</code><hr><h5>AI 可能的回應：</h5><p>兩者都強調了「人生而平等」的核心概念。《世界人權宣言》第 1 條指出「人人生而自由，在尊嚴和權利上一律平等」；《中華民國憲法》第 7 條規定「中華民國人民，無分男女、宗教、種族、階級、黨派，在法律上一律平等」。雖然文字表述不同，但都揭示了普世的平等價值觀。</p><p class="mt-3 text-xs text-gray-500">(此為模擬回應)</p>`,
                 visual: `<h5>指令範例 (Text-to-Image)：</h5><code>畫一個臺灣高山茶園的景象，有採茶人在霧氣繚繞的山坡上工作，背景是層疊的山巒，風格：水彩畫</code><hr><h5>AI 可能的回應：</h5><p>(此處應顯示由 AI 生成的圖片，目前以 SVG 模擬替代)</p><div class="flex justify-center my-4 bg-gray-700 p-2 rounded">${generateSvgDemo('geography')}</div><p class="mt-3 text-xs text-gray-500">(此為 SVG 模擬回應，實際圖片需由 Canva AI 等工具生成)</p>`,
@@ -1111,11 +1322,14 @@
                 efficiency: `<h5>情境：</h5><p>老師需要快速製作一份關於「臺灣常見的自然災害」的圖文簡報，包含颱風、地震、土石流。</p><hr><h5>AI 的幫助：</h5><ol class="list-decimal list-inside space-y-1"><li><strong>(EdCafe AI / Magic Write) 生成大綱/內容：</strong> 指令 <code>生成一份關於臺灣常見自然災害(颱風、地震、土石流)的簡報大綱，包含成因、影響、防災措施。</code> AI 生成結構化內容。</li><li><strong>(Canva Magic Design) 生成簡報：</strong> 將 AI 生成的文字內容貼入 Canva Magic Design，或直接輸入主題 <code>臺灣常見自然災害與防災</code>，AI 自動生成多款包含相關圖片和版面的簡報模板。</li><li><strong>(Canva Text to Image) 補充圖片：</strong> 若模板圖片不夠，可用 Text to Image 生成特定災害場景圖片，如 <code>土石流沖毀道路的畫面，寫實風格</code>。</li></ol><p class="mt-2"><strong>結果：</strong> 老師只需進行內容審閱、圖片微調和設計風格選擇，即可在短時間內完成一份視覺豐富的簡報，節省大量搜尋圖片和排版的時間。</p><p class="mt-3 text-xs text-gray-500">(此為模擬回應)</p>`,
                 perspectives: `<h5>指令範例：</h5><code>針對「是否應對進口奢侈品課徵更高的關稅」此議題，分別生成支持與反對立場的主要論點各三項。</code><hr><h5>AI 可能的回應：</h5><p class="font-semibold text-green-400">支持提高關稅：</p><ul class="list-disc list-inside space-y-1 mb-3"><li><strong>保護國內產業：</strong> 提高進口成本，鼓勵消費者購買國貨，促進本土品牌發展。</li><li><strong>增加國家稅收：</strong> 關稅收入可用於公共建設或社會福利。</li><li><strong>縮小貧富差距：</strong> 奢侈品多為富人消費，高關稅可抑制過度消費，具財富重分配效果。</li></ul><p class="font-semibold text-red-400">反對提高關稅：</p><ul class="list-disc list-inside space-y-1"><li><strong>引發貿易報復：</strong> 可能導致他國也對我國出口商品提高關稅，損害出口產業。</li><li><strong>損害消費者選擇：</strong> 限制消費者購買外國商品的自由，選擇變少。</li><li><strong>走私問題惡化：</strong> 過高關稅可能刺激走私行為，反而減少稅收。</li></ul><p class="mt-3 text-xs text-gray-500">(此為模擬回應，可用於課堂討論或辯論準備)</p>`,
                 roleplay: `<h5>指令範例 1：歷史人物對話</h5><code>請生成一段鄭成功與荷蘭長官揆一在熱蘭遮城談判投降條件的模擬對話，體現雙方立場與當時情境。</code><hr><h5>指令範例 2：模擬法庭</h5><code>設定一個模擬法庭場景：原告是一位因工廠排放廢水導致農田受汙染的農民，被告是工廠老闆。請分別生成原告律師和被告律師的主要辯護論點概要。</code><hr><h5>指令範例 3：國際會議</h5><code>模擬一場聯合國氣候變遷會議，請生成代表「已開發國家」和「開發中國家」的代表，針對減碳責任分配的發言稿概要。</code><hr><p class="mt-3 text-xs text-gray-500">(AI 可根據指令生成相應的角色劇本或論點，增加學習代入感)</p>`,
-
-                'lesson-plan': `<h5>指令範例 (EdCafe AI)：</h5><code>請為國中社會設計一節 45 分鐘教案，主題是「臺灣的選舉制度」，教學目標包含認識選舉原則、了解主要選舉類型，並設計一個課堂活動。</code><hr><h5>AI 可能的回應 (摘要)：</h5><ul class="list-disc list-inside space-y-1"><li><strong>主題：</strong> 臺灣的選舉制度</li><li><strong>適用年級：</strong> 國中</li><li><strong>教學目標：</strong><br> 1. 學生能說出選舉的四大原則(普通、平等、直接、無記名)。<br> 2. 學生能列舉臺灣常見的公職人員選舉類型(總統、立委、地方首長/民代)。<br> 3. 學生能體會公平選舉的重要性。</li><li><strong>教學流程建議：</strong><br> - <strong>引起動機 (5min)：</strong> 提問學生是否看過投票？或展示選舉新聞圖片，引導思考「選賢與能」。<br> - <strong>發展活動 (30min)：</strong><br>   (1) <span class="text-indigo-400">選舉原則講解：</span> 教師透過舉例說明四原則。(AI 可提供範例)<br>   (2) <span class="text-purple-400">選舉類型介紹：</span> 簡介總統、立委、縣市長等選舉。(AI 可生成簡介卡)<br>   (3) <span class="text-pink-400">模擬投票活動：</span> 設計一個簡單的班級事務投票(如：午餐水果選擇)，讓學生實際體驗投票流程，強調秘密投票。</li><li><strong>綜合活動 (10min)：</strong> 討論模擬投票的發現，教師總結選舉制度的功能與重要性。 EdCafe AI 可生成隨堂測驗題。</li></ul><p class="mt-3 text-xs text-gray-500">(此為 EdCafe AI 可能產出的內容概要)</p>`, // Completing this entry
+                'lesson-plan': `<h5>指令範例 (EdCafe AI)：</h5><code>請為國中社會設計一節 45 分鐘教案，主題是「臺灣的選舉制度」，教學目標包含認識選舉原則、了解主要選舉類型，並設計一個課堂活動。</code><hr><h5>AI 可能的回應 (摘要)：</h5><ul class="list-disc list-inside space-y-1"><li><strong>主題：</strong> 臺灣的選舉制度</li><li><strong>適用年級：</strong> 國中</li><li><strong>教學目標：</strong><br> 1. 學生能說出選舉的四大原則(普通、平等、直接、無記名)。<br> 2. 學生能列舉臺灣常見的公職人員選舉類型(總統、立委、地方首長/民代)。<br> 3. 學生能體會公平選舉的重要性。</li><li><strong>教學流程建議：</strong><br> - <strong>引起動機 (5min)：</strong> 提問學生是否看過投票？或展示選舉新聞圖片，引導思考「選賢與能」。<br> - <strong>發展活動 (30min)：</strong><br>   (1) <span class="text-indigo-400">選舉原則講解：</span> 教師透過舉例說明四原則。(AI 可提供範例)<br>   (2) <span class="text-purple-400">選舉類型介紹：</span> 簡介總統、立委、縣市長等選舉。(AI 可生成簡介卡)<br>   (3) <span class="text-pink-400">模擬投票活動：</span> 設計一個簡單的班級事務投票(如：午餐水果選擇)，讓學生實際體驗投票流程，強調秘密投票。</li><li><strong>綜合活動 (10min)：</strong> 討論模擬投票的發現，教師總結選舉制度的功能與重要性。 EdCafe AI 可生成隨堂測驗題。</li></ul><p class="mt-3 text-xs text-gray-500">(此為 EdCafe AI 可能產出的內容概要)</p>`,
                 'assessment': `<h5>指令範例 (EdCafe AI)：</h5><code>針對國中公民「法律基本概念」單元，生成包含 3 題選擇題、2 題是非題、1 題簡答題的隨堂評量卷。</code><hr><h5>AI 可能的回應 (摘要)：</h5><p><strong>選擇題：</strong></p><ol class="list-decimal list-inside space-y-1"><li>下列何者是規範人與人之間權利義務關係最主要的法律？ (A)憲法 <span class="text-teal-400">(B)民法</span> (C)刑法 (D)行政法。</li><li>國家制定用以處罰犯罪行為的法律稱為？ (A)民法 (B)行政法 <span class="text-teal-400">(C)刑法</span> (D)憲法。</li><li>(更多選擇題...)</li></ol><p class="mt-2"><strong>是非題：</strong></p><ol class="list-decimal list-inside space-y-1"><li>( <span class="text-teal-400">O</span> ) 我國法律規定，年滿 18 歲即為成年。</li><li>( <span class="text-teal-400">O</span> ) 在法院判決確定前，應推定被告無罪。</li></ol><p class="mt-2"><strong>簡答題：</strong></p><p>請簡述「法律之前人人平等」的意義。(AI 提供參考答案...)</p><hr><h5>指令範例 2：學習單</h5><code>設計一份關於「全球暖化」的學習單，包含事實查找、原因分析、影響評估、解決方案思考等區塊。</code><p class="mt-3 text-xs text-gray-500">(AI 可快速生成多種類型的評量工具)</p>`,
                 'differentiation': `<h5>情境：</h5><p>教授「美國獨立戰爭」時，班級學生程度差異較大。</p><hr><h5>AI 可能的輔助 (EdCafe AI)：</h5><ul class="list-disc list-inside space-y-2"><li><strong>文本分級：</strong> 輸入獨立宣言段落，要求 AI 產生三種不同閱讀水平的版本：<br> - <span class="text-teal-400">基礎版：</span> 使用更簡單詞彙，句子較短。<br> - <span class="text-gray-300">標準版：</span> 符合課本程度。<br> - <span class="text-orange-400">進階版：</span> 加入更多背景知識或註釋。</li><li><strong>任務分層：</strong><br> - <span class="text-teal-400">A組 (基礎)：</span> 繪製獨立戰爭時間線，標示關鍵事件。<br> - <span class="text-gray-300">B組 (標準)：</span> 分析獨立戰爭爆發的主要原因 (至少三點)。<br> - <span class="text-orange-400">C組 (進階)：</span> 比較美國獨立宣言與法國人權宣言的異同，並評價其歷史意義。</li><li><strong>評量調整：</strong> 針對不同程度學生，生成不同難度的測驗題目。</li></ul><p class="mt-3 text-xs text-gray-500">(AI 能協助教師快速產生差異化的教學材料與活動)</p>`,
-                 'glossary': `<h5>指令範例 (EdCafe AI)：</h5><code>請針對國中社會科「經濟學基礎」單元，生成包含 5 個關鍵詞彙及其簡要解釋的詞彙表。</code><hr><h5>AI 可能的回應：</h5><ol class="list-decimal list-inside space-y-2"><li><strong class="text-indigo-400">稀少性 (Scarcity)：</strong> 指人類的慾望無窮，但用來滿足慾望的資源(如時間、金錢、天然資源)卻是有限的狀況。這是經濟學研究的基本前提。</li><li><strong class="text-purple-400">機會成本 (Opportunity Cost)：</strong> 當你為了做某個選擇而必須放棄的其他選擇中，價值最高的那一個。例如，選擇看電影的機會成本可能是放棄念書的時間。</li><li><strong class="text-pink-400">供給 (Supply)：</strong> 在特定時間和價格下，生產者願意且能夠提供 商品或服務的數量。通常價格越高，供給量越多。</li><li><strong class="text-teal-400">需求 (Demand)：</strong> 在特定時間和價格下，消費者願意且能夠購買 商品或服務的數量。通常價格越高，需求量越少。</li><li><strong class="text-yellow-400">市場均衡 (Market Equilibrium)：</strong> 市場上的供給量等於需求量的狀態，此時決定的價格稱為均衡價格，數量稱為均衡數量。</li></ol><p class="mt-3 text-xs text-gray-500">(AI 可快速整理特定主題的關鍵概念)</p>`
+                'glossary': `<h5>指令範例 (EdCafe AI)：</h5><code>請針對國中社會科「經濟學基礎」單元，生成包含 5 個關鍵詞彙及其簡要解釋的詞彙表。</code><hr><h5>AI 可能的回應：</h5><ol class="list-decimal list-inside space-y-2"><li><strong class="text-indigo-400">稀少性 (Scarcity)：</strong> 指人類的慾望無窮，但用來滿足慾望的資源(如時間、金錢、天然資源)卻是有限的狀況。這是經濟學研究的基本前提。</li><li><strong class="text-purple-400">機會成本 (Opportunity Cost)：</strong> 當你為了做某個選擇而必須放棄的其他選擇中，價值最高的那一個。例如，選擇看電影的機會成本可能是放棄念書的時間。</li><li><strong class="text-pink-400">供給 (Supply)：</strong> 在特定時間和價格下，生產者願意且能夠提供 商品或服務的數量。通常價格越高，供給量越多。</li><li><strong class="text-teal-400">需求 (Demand)：</strong> 在特定時間和價格下，消費者願意且能夠購買 商品或服務的數量。通常價格越高，需求量越少。</li><li><strong class="text-yellow-400">市場均衡 (Market Equilibrium)：</strong> 市場上的供給量等於需求量的狀態，此時決定的價格稱為均衡價格，數量稱為均衡數量。</li></ol><p class="mt-3 text-xs text-gray-500">(AI 可快速整理特定主題的關鍵概念)</p>`,
+                // Napkin AI Examples
+                'napkin-capture': `<h5>應用情境：隨手捕捉</h5><p>老師在通勤時想到一個關於「羅馬水道工程」的有趣教學活動點子。</p><hr><h5>Napkin 操作：</h5><p>打開 Napkin App 或網頁，快速輸入：</p><code class="napkin-node">教學點子：讓學生用樂高或紙杯模擬搭建羅馬水道，討論其工程原理與對城市的影響。#羅馬 #工程 #教學活動 #社會科</code><p class="mt-2">Napkin 會自動保存這則筆記，並可能將其與其他含有 #羅馬 或 #教學活動 標籤的筆記初步連結。</p><p class="mt-3 text-xs text-gray-500">(重點在於快速、無壓力地記錄)</p>`,
+                'napkin-connect': `<h5>應用情境：發現連結</h5><p>老師之前記錄了多則關於「公民權利」的筆記，包括：</p><ul class="list-none space-y-1 text-sm"><li class="napkin-node">美國民權運動中的靜坐抗議 #公民不服從 #非暴力</li><li class="napkin-node">甘地的食鹽長征 #公民不服從 #印度獨立</li><li class="napkin-node">臺灣的野百合學運 #學生運動 #民主化</li></ul><hr><h5>Napkin 的作用：</h5><p>當老師回顧其中一則筆記，或輸入新的相關筆記 (例如關於 #言論自由) 時，Napkin 的 AI 會分析語意和標籤，將這些相關的筆記<strong class="text-orange-400">自動顯示在旁邊或連結起來</strong>。</p><div class="flex justify-center my-4">${generateSvgDemo('napkin-link')}</div><p>這讓老師可以輕易地看到「公民不服從」這個概念如何在不同歷史時空背景下體現，或許能啟發新的教學角度，例如比較不同運動的策略與影響。</p><p class="mt-3 text-xs text-gray-500">(AI 自動建立連結是 Napkin 的核心特色)</p>`,
+                'napkin-explore': `<h5>應用情境：主題探索與反思</h5><p>學期末，老師想回顧這學期在「環境議題」教學上的心得。</p><hr><h5>Napkin 的作用：</h5><p>老師可以在 Napkin 中搜尋 #環境議題 或相關關鍵字。Napkin 會將所有相關的筆記以<strong class="text-green-400">視覺化網絡</strong>的方式呈現，例如：</p><ul class="list-none space-y-1 text-sm"><li class="napkin-node">課堂討論：學生對核能議題反應兩極 #能源政策</li><li class="napkin-node">教學活動：帶學生參觀濕地公園，效果不錯 #生態保育 #戶外教學</li><li class="napkin-node">新聞剪報：亞馬遜雨林大火 #全球暖化 #生物多樣性</li><li class="napkin-node">學生提問：塑膠微粒如何進入食物鏈？ #環境汙染</li></ul><p>透過瀏覽這些<strong class="text-orange-400">相互連結的筆記</strong>，老師可以：</p><ul class="list-disc list-inside space-y-1 text-sm"><li><strong>評估教學成效：</strong> 哪些活動迴響好？哪些概念學生較難理解？</li><li><strong>發現教學盲點：</strong> 是否忽略了某些面向 (如環境倫理)？</li><li><strong>產生新課綱：</strong> 看到「能源政策」和「全球暖化」的連結，下學期或許可設計一個整合單元。</li></ul><p class="mt-3 text-xs text-gray-500">(透過連結網絡進行反思與發想)</p>`
             };
 
             // --- Run Initializations ---
